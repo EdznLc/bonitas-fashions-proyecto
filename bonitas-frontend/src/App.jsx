@@ -50,6 +50,7 @@ export default function App() {
 // Estilos premium
 const styles = {
   contenedor: { 
+    width: '100%',
     padding: '40px', 
     fontFamily: "'Outfit', 'Inter', sans-serif", 
     maxWidth: '1000px', 

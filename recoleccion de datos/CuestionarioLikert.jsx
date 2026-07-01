@@ -169,6 +169,7 @@ export default function CuestionarioLikert() {
       {/* Estilos CSS premium y colores cálidos, con alineación simétrica absoluta */}
       <style>{`
         .likert-card-container {
+          width: 100%;
           max-width: 900px;
           margin: 30px auto;
           background-color: #faf9f6;

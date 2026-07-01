@@ -204,6 +204,7 @@ export default function FichaTecnica() {
       {/* Estilos CSS premium y colores cálidos (Slate y Arena), con alineación simétrica absoluta */}
       <style>{`
         .ficha-card-container {
+          width: 100%;
           max-width: 900px;
           margin: 30px auto;
           background-color: #faf9f6;
@@ -437,6 +438,66 @@ export default function FichaTecnica() {
           border-radius: 4px;
           font-weight: bold;
           font-size: 12px;
+        }
+        .ficha-grid-cols {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+          gap: 20px;
+          margin-bottom: 25px;
+        }
+        .ficha-panel-card {
+          background-color: #ffffff;
+          border: 1.5px solid #cbd5e1;
+          border-radius: 8px;
+          padding: 24px;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+          display: flex;
+          flex-direction: column;
+          margin-bottom: 25px;
+          box-sizing: border-box;
+        }
+        .ficha-panel-title {
+          margin: 0 0 16px 0;
+          font-size: 14px;
+          font-weight: 700;
+          color: #1e293b;
+          border-bottom: 1.5px solid #cbd5e1;
+          padding-bottom: 8px;
+          text-transform: uppercase;
+          letter-spacing: 0.02em;
+        }
+        .ficha-input-group {
+          display: flex;
+          flex-direction: column;
+          gap: 6px;
+        }
+        .ficha-label {
+          font-size: 13px;
+          font-weight: 700;
+          color: #1e293b;
+        }
+        .ficha-label-sub {
+          font-size: 11px;
+          color: #475569;
+          font-style: italic;
+          margin-bottom: 4px;
+        }
+        .ficha-input {
+          padding: 10px 14px;
+          border: 1.5px solid #cbd5e1;
+          border-radius: 6px;
+          font-size: 14px;
+          outline: none;
+          background-color: #ffffff;
+          color: #1e293b;
+          box-sizing: border-box;
+          width: 100%;
+          transition: all 0.2s ease;
+          height: 40px;
+        }
+        .ficha-input:focus {
+          border-color: #475569;
+          box-shadow: 0 0 0 3px rgba(71, 85, 105, 0.15);
         }
         .timer-display-box {
           background-color: #2c3539;
