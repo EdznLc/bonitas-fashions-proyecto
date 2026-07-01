@@ -212,7 +212,7 @@ export default function FichaTecnica() {
           overflow: hidden;
           font-family: 'Outfit', 'Inter', system-ui, sans-serif;
           border: 1px solid #e7e5e4;
-          color: #2c3539;
+          color: #1e293b;
         }
         .ficha-header {
           background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
@@ -257,7 +257,7 @@ export default function FichaTecnica() {
         .panel-title {
           margin: 0 0 16px 0;
           font-size: 13px;
-          color: #78716c;
+          color: #1e293b;
           font-weight: 700;
           text-transform: uppercase;
           letter-spacing: 0.05em;
@@ -283,17 +283,17 @@ export default function FichaTecnica() {
         }
         .input-label {
           font-size: 12px;
-          color: #78716c;
-          font-weight: 600;
+          color: #2c3539;
+          font-weight: 700;
         }
         .input-field {
           padding: 10px 14px;
-          border: 1.5px solid #d6d3d1;
+          border: 1.5px solid #cbd5e1;
           border-radius: 6px;
           font-size: 14px;
           outline: none;
           background-color: #ffffff;
-          color: #2c3539;
+          color: #1e293b;
           box-sizing: border-box;
           width: 100%;
           transition: all 0.2s ease;
@@ -301,22 +301,22 @@ export default function FichaTecnica() {
         }
         .input-field:focus {
           border-color: #475569;
-          box-shadow: 0 0 0 3px rgba(71, 85, 105, 0.1);
+          box-shadow: 0 0 0 3px rgba(71, 85, 105, 0.15);
         }
         
         /* Custom styled Combobox */
         .select-styled {
           appearance: none;
-          background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2378716c' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+          background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231e293b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
           background-repeat: no-repeat;
           background-position: right 14px center;
           background-size: 14px;
           padding: 10px 36px 10px 14px;
-          border: 1.5px solid #d6d3d1;
+          border: 1.5px solid #cbd5e1;
           border-radius: 6px;
           font-size: 14px;
           background-color: #ffffff;
-          color: #2c3539;
+          color: #1e293b;
           outline: none;
           cursor: pointer;
           box-sizing: border-box;
@@ -326,7 +326,7 @@ export default function FichaTecnica() {
         }
         .select-styled:focus {
           border-color: #475569;
-          box-shadow: 0 0 0 3px rgba(71, 85, 105, 0.1);
+          box-shadow: 0 0 0 3px rgba(71, 85, 105, 0.15);
         }
 
         .btn-action {
@@ -350,18 +350,18 @@ export default function FichaTecnica() {
         }
         .btn-action-secondary {
           background-color: #ffffff;
-          color: #57524e;
-          border: 1.5px solid #d6d3d1;
+          color: #1e293b;
+          border: 1.5px solid #cbd5e1;
         }
         .btn-action-secondary:hover {
           background-color: #faf9f6;
-          border-color: #a8a29e;
+          border-color: #4b5563;
         }
 
         /* Cuadros de información y consentimiento con alturas igualadas */
         .info-box-card {
           background-color: #ffffff;
-          border: 1.5px dashed #cbd5e1;
+          border: 1.5px dashed #94a3b8;
           border-radius: 6px;
           padding: 14px;
           box-sizing: border-box;
@@ -373,15 +373,15 @@ export default function FichaTecnica() {
         .info-box-title {
           font-size: 12px;
           font-weight: 700;
-          color: #2c3539;
+          color: #1e293b;
           margin: 0 0 6px 0;
           text-transform: uppercase;
           letter-spacing: 0.02em;
         }
         .info-box-text {
           font-size: 11px;
-          color: #57524e;
-          line-height: 1.4;
+          color: #334155;
+          line-height: 1.45;
           margin: 0 0 10px 0;
         }
         .consent-check-row {
@@ -503,14 +503,14 @@ export default function FichaTecnica() {
           display: flex;
           border-radius: 6px;
           overflow: hidden;
-          border: 1.5px solid #d6d3d1;
+          border: 1.5px solid #cbd5e1;
           width: 100%;
         }
         .toggle-btn {
           flex: 1;
           padding: 12px;
           background-color: #ffffff;
-          color: #78716c;
+          color: #1e293b;
           border: none;
           cursor: pointer;
           font-size: 13px;
@@ -530,7 +530,7 @@ export default function FichaTecnica() {
           align-items: center;
           justify-content: center;
           gap: 20px;
-          border: 1.5px solid #d6d3d1;
+          border: 1.5px solid #cbd5e1;
           border-radius: 6px;
           padding: 6px;
           background-color: #ffffff;
@@ -539,7 +539,7 @@ export default function FichaTecnica() {
           width: 34px;
           height: 34px;
           border-radius: 50%;
-          border: 1.5px solid #d6d3d1;
+          border: 1.5px solid #cbd5e1;
           background-color: #f5f5f4;
           font-size: 18px;
           font-weight: 700;
@@ -547,24 +547,24 @@ export default function FichaTecnica() {
           display: flex;
           align-items: center;
           justify-content: center;
-          color: #57524e;
+          color: #334155;
           transition: all 0.2s ease;
         }
         .counter-btn:hover {
           background-color: #faf9f6;
-          border-color: #a8a29e;
+          border-color: #4b5563;
         }
         .counter-value {
           font-size: 20px;
           font-weight: 800;
-          color: #2c3539;
+          color: #1e293b;
           min-width: 30px;
           text-align: center;
         }
         .ficha-textarea {
           width: 100%;
           padding: 10px 12px;
-          border: 1.5px solid #d6d3d1;
+          border: 1.5px solid #cbd5e1;
           border-radius: 6px;
           font-size: 14px;
           outline: none;
@@ -573,6 +573,7 @@ export default function FichaTecnica() {
           font-family: inherit;
           min-height: 60px;
           transition: all 0.2s ease;
+          color: #1e293b;
         }
         .ficha-textarea:focus {
           border-color: #3b82f6;
@@ -621,20 +622,22 @@ export default function FichaTecnica() {
         .ficha-empty-state {
           padding: 50px 30px;
           text-align: center;
-          color: #78716c;
-          border: 2px dashed #cbd5e1;
+          color: #1e293b;
+          border: 2px dashed #94a3b8;
           border-radius: 8px;
           font-size: 15px;
           background-color: #f5f5f4;
+          font-weight: 600;
         }
         .iso-disclaimer {
           margin-top: 25px;
           font-size: 11px;
-          color: #78716c;
+          color: #475569;
           line-height: 1.4;
           border-top: 1.5px solid #e7e5e4;
           padding-top: 15px;
           text-align: center;
+          font-weight: 500;
         }
       `}</style>
 

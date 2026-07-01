@@ -182,7 +182,7 @@ export default function CuestionarioLikert() {
           overflow: hidden;
           font-family: 'Outfit', 'Inter', system-ui, sans-serif;
           border: 1px solid #e7e5e4;
-          color: #2c3539;
+          color: #1e293b;
         }
         .likert-header {
           background: linear-gradient(135deg, #115e59 0%, #0f766e 100%);
@@ -227,7 +227,7 @@ export default function CuestionarioLikert() {
         .panel-title {
           margin: 0 0 16px 0;
           font-size: 13px;
-          color: #78716c;
+          color: #1e293b;
           font-weight: 700;
           text-transform: uppercase;
           letter-spacing: 0.05em;
@@ -253,17 +253,17 @@ export default function CuestionarioLikert() {
         }
         .input-label {
           font-size: 12px;
-          color: #78716c;
-          font-weight: 600;
+          color: #2c3539;
+          font-weight: 700;
         }
         .input-field {
           padding: 10px 14px;
-          border: 1.5px solid #d6d3d1;
+          border: 1.5px solid #cbd5e1;
           border-radius: 6px;
           font-size: 14px;
           outline: none;
           background-color: #ffffff;
-          color: #2c3539;
+          color: #1e293b;
           box-sizing: border-box;
           width: 100%;
           transition: all 0.2s ease;
@@ -271,22 +271,22 @@ export default function CuestionarioLikert() {
         }
         .input-field:focus {
           border-color: #115e59;
-          box-shadow: 0 0 0 3px rgba(17, 94, 89, 0.1);
+          box-shadow: 0 0 0 3px rgba(17, 94, 89, 0.15);
         }
         
         /* Custom styled Combobox */
         .select-styled {
           appearance: none;
-          background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2378716c' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+          background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231e293b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
           background-repeat: no-repeat;
           background-position: right 14px center;
           background-size: 14px;
           padding: 10px 36px 10px 14px;
-          border: 1.5px solid #d6d3d1;
+          border: 1.5px solid #cbd5e1;
           border-radius: 6px;
           font-size: 14px;
           background-color: #ffffff;
-          color: #2c3539;
+          color: #1e293b;
           outline: none;
           cursor: pointer;
           box-sizing: border-box;
@@ -296,7 +296,7 @@ export default function CuestionarioLikert() {
         }
         .select-styled:focus {
           border-color: #115e59;
-          box-shadow: 0 0 0 3px rgba(17, 94, 89, 0.1);
+          box-shadow: 0 0 0 3px rgba(17, 94, 89, 0.15);
         }
 
         .btn-action {
@@ -320,18 +320,18 @@ export default function CuestionarioLikert() {
         }
         .btn-action-secondary {
           background-color: #ffffff;
-          color: #57524e;
-          border: 1.5px solid #d6d3d1;
+          color: #1e293b;
+          border: 1.5px solid #cbd5e1;
         }
         .btn-action-secondary:hover {
           background-color: #faf9f6;
-          border-color: #a8a29e;
+          border-color: #4b5563;
         }
 
         /* Cuadros de información y consentimiento con alturas igualadas */
         .info-box-card {
           background-color: #ffffff;
-          border: 1.5px dashed #cbd5e1;
+          border: 1.5px dashed #94a3b8;
           border-radius: 6px;
           padding: 14px;
           box-sizing: border-box;
@@ -343,15 +343,15 @@ export default function CuestionarioLikert() {
         .info-box-title {
           font-size: 12px;
           font-weight: 700;
-          color: #2c3539;
+          color: #115e59;
           margin: 0 0 6px 0;
           text-transform: uppercase;
           letter-spacing: 0.02em;
         }
         .info-box-text {
           font-size: 11px;
-          color: #57524e;
-          line-height: 1.4;
+          color: #334155;
+          line-height: 1.45;
           margin: 0 0 10px 0;
         }
         .consent-check-row {
@@ -409,14 +409,14 @@ export default function CuestionarioLikert() {
         .likert-question-text {
           margin: 0 0 4px 0;
           font-size: 15.5px;
-          color: #2c3539;
-          font-weight: 600;
+          color: #1e293b;
+          font-weight: 700;
           line-height: 1.4;
         }
         .likert-question-sub {
           margin: 0 0 16px 0;
           font-size: 11px;
-          color: #78716c;
+          color: #475569;
           font-style: italic;
           font-weight: 450;
         }
@@ -451,14 +451,14 @@ export default function CuestionarioLikert() {
         .likert-option-number {
           font-size: 18px;
           font-weight: 800;
-          color: #57524e;
+          color: #334155;
         }
         .likert-option-btn.selected .likert-option-number {
           color: #c2410c;
         }
         .likert-option-label-short {
           font-size: 10px;
-          color: #78716c;
+          color: #475569;
           margin-top: 4px;
           font-weight: 600;
           text-transform: uppercase;
@@ -470,14 +470,14 @@ export default function CuestionarioLikert() {
           display: flex;
           justify-content: space-between;
           font-size: 11px;
-          color: #78716c;
-          font-weight: 500;
+          color: #475569;
+          font-weight: 600;
           margin-top: 8px;
         }
         .likert-textarea {
           width: 100%;
           padding: 12px 14px;
-          border: 1.5px solid #d6d3d1;
+          border: 1.5px solid #cbd5e1;
           border-radius: 6px;
           font-size: 14px;
           outline: none;
@@ -534,20 +534,22 @@ export default function CuestionarioLikert() {
         .likert-empty-state {
           padding: 50px 30px;
           text-align: center;
-          color: #78716c;
-          border: 2px dashed #cbd5e1;
+          color: #1e293b;
+          border: 2px dashed #94a3b8;
           border-radius: 8px;
           font-size: 15px;
           background-color: #f5f5f4;
+          font-weight: 600;
         }
         .iso-disclaimer {
           margin-top: 25px;
           font-size: 11px;
-          color: #78716c;
+          color: #475569;
           line-height: 1.4;
           border-top: 1.5px solid #e7e5e4;
           padding-top: 15px;
           text-align: center;
+          font-weight: 500;
         }
       `}</style>
 
