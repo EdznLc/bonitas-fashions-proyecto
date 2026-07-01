@@ -1,6 +1,11 @@
 import { useState, useEffect } from 'react';
+import CuestionarioLikert from '../../recoleccion de datos/CuestionarioLikert.jsx';
+import FichaTecnica from '../../recoleccion de datos/FichaTecnica.jsx';
+
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
 function App() {
+  const [vista, setVista] = useState('catalogo'); // 'catalogo' | 'likert' | 'ficha'
   const [productos, setProductos] = useState([]);
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState(null);
@@ -15,7 +20,7 @@ function App() {
 
   // Efecto para consultar los datos de la API en cuanto carga la página
   useEffect(() => {
-    fetch('http://localhost:5000/api/productos')
+    fetch(`${API_BASE_URL}/api/productos`)
       .then((response) => {
         if (!response.ok) {
           throw new Error('No se pudo conectar con la API del servidor');
@@ -42,7 +47,7 @@ function App() {
     }
 
     try {
-      const res = await fetch('http://localhost:5000/api/productos', {
+      const res = await fetch(`${API_BASE_URL}/api/productos`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(nuevoProd)
@@ -54,7 +59,7 @@ function App() {
         setNuevoProd({ categoria: '', descripcion: '', precio: '', url_imagen: '' });
         
         // Volver a consultar los productos para que aparezca el nuevo sin recargar toda la página
-        const resProductos = await fetch('http://localhost:5000/api/productos');
+        const resProductos = await fetch(`${API_BASE_URL}/api/productos`);
         const data = await resProductos.json();
         setProductos(data);
       } else {
@@ -66,100 +71,146 @@ function App() {
     }
   };
 
-  if (cargando) return <div style={styles.centrado}>Cargando catálogo de ropa...</div>;
-  if (error) return <div style={styles.error}>Error: {error}</div>;
-
   return (
     <div style={styles.contenedor}>
       <header style={styles.header}>
-        <h1>Bonitas Fashions 👗</h1>
-        <p>Catálogo de prendas disponibles (Piezas Únicas)</p>
+        <h1 style={{ margin: '0 0 10px 0', fontFamily: "'Outfit', sans-serif" }}>Bonitas Fashions</h1>
+        <p style={{ margin: 0, color: '#666' }}>Sistema de Investigacion de Interfaces y Catalogo de Ropa</p>
       </header>
 
-      {/* Formulario simple para agregar productos */}
-      <div style={styles.seccionForm}>
-        <h2 style={{ marginTop: 0, marginBottom: '15px', fontSize: '18px' }}>Registrar Nueva Prenda</h2>
-        <form onSubmit={guardarProducto} style={styles.formulario}>
-          <input 
-            type="text"
-            placeholder="Categoría (ej: Vestido, Blusa)" 
-            value={nuevoProd.categoria}
-            onChange={e => setNuevoProd({...nuevoProd, categoria: e.target.value})} 
-            style={styles.input}
-          />
-          <input 
-            type="text"
-            placeholder="Descripción de la prenda" 
-            value={nuevoProd.descripcion}
-            onChange={e => setNuevoProd({...nuevoProd, descripcion: e.target.value})} 
-            style={styles.input}
-          />
-          <input 
-            type="number"
-            step="0.01"
-            placeholder="Precio ($)" 
-            value={nuevoProd.precio}
-            onChange={e => setNuevoProd({...nuevoProd, precio: e.target.value})} 
-            style={styles.input}
-          />
-          <input 
-            type="text"
-            placeholder="URL de la imagen (Opcional)" 
-            value={nuevoProd.url_imagen}
-            onChange={e => setNuevoProd({...nuevoProd, url_imagen: e.target.value})} 
-            style={styles.input}
-          />
-          <button type="submit" style={styles.botonGuardar}>Guardar en Catálogo</button>
-        </form>
-      </div>
+      {/* Barra de Navegación de Vistas */}
+      <nav style={styles.navbar}>
+        <button
+          onClick={() => setVista('catalogo')}
+          style={{
+            ...styles.navLink,
+            ...(vista === 'catalogo' ? styles.navLinkActive : {})
+          }}
+        >
+          Catálogo de Tienda
+        </button>
+        <button
+          onClick={() => setVista('likert')}
+          style={{
+            ...styles.navLink,
+            ...(vista === 'likert' ? styles.navLinkActive : {})
+          }}
+        >
+          Cuestionario Likert (Usuario)
+        </button>
+        <button
+          onClick={() => setVista('ficha')}
+          style={{
+            ...styles.navLink,
+            ...(vista === 'ficha' ? styles.navLinkActive : {})
+          }}
+        >
+          Ficha Técnica (Investigador)
+        </button>
+      </nav>
 
-      <hr style={{ margin: '40px 0', border: '0', borderTop: '1px solid #eaeaea' }} />
-
-      {/* Renderizado de la cuadrícula de productos */}
-      {productos.length === 0 ? (
-        <p style={styles.sinProductos}>No hay prendas disponibles en este momento.</p>
-      ) : (
-        <div style={styles.cuadricula}>
-          {productos.map((producto) => (
-            <div key={producto.id_producto} style={styles.tarjeta}>
-              <img 
-                src={producto.url_imagen || 'https://via.placeholder.com/200'} 
-                alt={producto.descripcion} 
-                style={styles.imagen}
+      {/* Vista: Catálogo */}
+      {vista === 'catalogo' && (
+        <div>
+          {/* Formulario simple para agregar productos */}
+          <div style={styles.seccionForm}>
+            <h2 style={{ marginTop: 0, marginBottom: '15px', fontSize: '18px' }}>Registrar Nueva Prenda</h2>
+            <form onSubmit={guardarProducto} style={styles.formulario}>
+              <input 
+                type="text"
+                placeholder="Categoría (ej: Vestido, Blusa)" 
+                value={nuevoProd.categoria}
+                onChange={e => setNuevoProd({...nuevoProd, categoria: e.target.value})} 
+                style={styles.input}
               />
-              <div style={styles.info}>
-                <span style={styles.categoria}>{producto.categoria}</span>
-                <p style={styles.descripcion}>{producto.descripcion}</p>
-                <div style={styles.precio}>${producto.precio}</div>
-                <button style={styles.boton}>Comprar Pieza Única</button>
-              </div>
+              <input 
+                type="text"
+                placeholder="Descripción de la prenda" 
+                value={nuevoProd.descripcion}
+                onChange={e => setNuevoProd({...nuevoProd, descripcion: e.target.value})} 
+                style={styles.input}
+              />
+              <input 
+                type="number"
+                step="0.01"
+                placeholder="Precio ($)" 
+                value={nuevoProd.precio}
+                onChange={e => setNuevoProd({...nuevoProd, precio: e.target.value})} 
+                style={styles.input}
+              />
+              <input 
+                type="text"
+                placeholder="URL de la imagen (Opcional)" 
+                value={nuevoProd.url_imagen}
+                onChange={e => setNuevoProd({...nuevoProd, url_imagen: e.target.value})} 
+                style={styles.input}
+              />
+              <button type="submit" style={styles.botonGuardar}>Guardar en Catálogo</button>
+            </form>
+          </div>
+
+          <hr style={{ margin: '40px 0', border: '0', borderTop: '1px solid #eaeaea' }} />
+
+          {/* Renderizado de la cuadrícula o estados de carga */}
+          {cargando ? (
+            <div style={styles.centrado}>Cargando catálogo de ropa...</div>
+          ) : error ? (
+            <div style={styles.error}>Catálogo no disponible temporalmente. Error: {error}</div>
+          ) : productos.length === 0 ? (
+            <p style={styles.sinProductos}>No hay prendas disponibles en este momento.</p>
+          ) : (
+            <div style={styles.cuadricula}>
+              {productos.map((producto) => (
+                <div key={producto.id_producto} style={styles.tarjeta}>
+                  <img 
+                    src={producto.url_imagen || 'https://via.placeholder.com/200'} 
+                    alt={producto.descripcion} 
+                    style={styles.imagen}
+                  />
+                  <div style={styles.info}>
+                    <span style={styles.categoria}>{producto.categoria}</span>
+                    <p style={styles.descripcion}>{producto.descripcion}</p>
+                    <div style={styles.precio}>${producto.precio}</div>
+                    <button style={styles.boton}>Comprar Pieza Única</button>
+                  </div>
+                </div>
+              ))}
             </div>
-          ))}
+          )}
         </div>
       )}
+
+      {/* Vista: Cuestionario Likert */}
+      {vista === 'likert' && <CuestionarioLikert />}
+
+      {/* Vista: Ficha Técnica */}
+      {vista === 'ficha' && <FichaTecnica />}
     </div>
   );
 }
 
-// Estilos agregando la sección del formulario de manera básica pero ordenada
+// Estilos ordenados y adaptados para la navegación
 const styles = {
-  contenedor: { padding: '20px', fontFamily: 'Arial, sans-serif', maxWidth: '1200px', margin: '0 auto' },
-  header: { textAlign: 'center', marginBottom: '30px', borderBottom: '2px solid #eaeaea', paddingBottom: '20px' },
+  contenedor: { padding: '20px', fontFamily: "'Outfit', 'Inter', sans-serif", maxWidth: '1200px', margin: '0 auto', color: '#2c3539' },
+  header: { textAlign: 'center', marginBottom: '25px', borderBottom: '2px solid #eaeaea', paddingBottom: '20px' },
+  navbar: { display: 'flex', justifyContent: 'center', gap: '15px', marginBottom: '30px', borderBottom: '1px solid #eaeaea', paddingBottom: '15px' },
+  navLink: { padding: '10px 20px', borderRadius: '8px', border: '1.5px solid #d6d3d1', backgroundColor: '#f5f5f4', color: '#57524e', fontSize: '14px', fontWeight: '600', cursor: 'pointer', transition: 'all 0.2s' },
+  navLinkActive: { backgroundColor: '#115e59', color: '#faf9f6', borderColor: '#115e59', boxShadow: '0 4px 12px rgba(17, 94, 89, 0.15)' },
   centrado: { textAlign: 'center', marginTop: '50px', fontSize: '18px' },
-  error: { color: 'red', textAlign: 'center', marginTop: '50px', fontWeight: 'bold' },
+  error: { color: '#dc2626', textAlign: 'center', marginTop: '30px', fontWeight: 'bold' },
   sinProductos: { textAlign: 'center', color: '#666' },
-  seccionForm: { background: '#f5f5f5', padding: '20px', borderRadius: '8px', border: '1px solid #e0e0e0' },
+  seccionForm: { background: '#f5f5f4', padding: '20px', borderRadius: '8px', border: '1px solid #e7e5e4' },
   formulario: { display: 'flex', flexWrap: 'wrap', gap: '10px' },
-  input: { padding: '8px 12px', borderRadius: '4px', border: '1px solid #ccc', fontSize: '14px', flex: '1 1 200px' },
-  botonGuardar: { background: '#2e7d32', color: '#fff', border: 'none', padding: '8px 16px', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold', fontSize: '14px' },
+  input: { padding: '8px 12px', borderRadius: '4px', border: '1px solid #d6d3d1', fontSize: '14px', flex: '1 1 200px', backgroundColor: '#ffffff', color: '#2c3539' },
+  botonGuardar: { background: '#115e59', color: '#fff', border: 'none', padding: '8px 16px', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold', fontSize: '14px' },
   cuadricula: { display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', gap: '25px' },
-  tarjeta: { border: '1px solid #ddd', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 2px 5px rgba(0,0,0,0.1)', display: 'flex', flexDirection: 'column' },
+  tarjeta: { border: '1px solid #e7e5e4', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 2px 5px rgba(0,0,0,0.05)', display: 'flex', flexDirection: 'column', backgroundColor: '#ffffff' },
   imagen: { width: '100%', height: '250px', objectFit: 'cover' },
   info: { padding: '15px', display: 'flex', flexDirection: 'column', flexGrow: 1 },
-  categoria: { background: '#ff4081', color: '#fff', padding: '3px 8px', borderRadius: '4px', fontSize: '12px', alignSelf: 'flex-start', fontWeight: 'bold', marginBottom: '10px' },
-  descripcion: { fontSize: '14px', color: '#333', margin: '0 0 15px 0', flexGrow: 1 },
-  precio: { fontSize: '20px', fontWeight: 'bold', color: '#2e7d32', marginBottom: '15px' },
-  boton: { background: '#000', color: '#fff', border: 'none', padding: '10px', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold', transition: 'background 0.2s' }
+  categoria: { background: '#c2410c', color: '#fff', padding: '3px 8px', borderRadius: '4px', fontSize: '12px', alignSelf: 'flex-start', fontWeight: 'bold', marginBottom: '10px' },
+  descripcion: { fontSize: '14px', color: '#57524e', margin: '0 0 15px 0', flexGrow: 1 },
+  precio: { fontSize: '20px', fontWeight: 'bold', color: '#115e59', marginBottom: '15px' },
+  boton: { background: '#2c3539', color: '#faf9f6', border: 'none', padding: '10px', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold', transition: 'background 0.2s' }
 };
 
 export default App;
