@@ -191,26 +191,26 @@ function App() {
 
 // Estilos ordenados y adaptados para la navegación
 const styles = {
-  contenedor: { padding: '20px', fontFamily: "'Outfit', 'Inter', sans-serif", maxWidth: '1200px', margin: '0 auto', color: '#2c3539' },
-  header: { textAlign: 'center', marginBottom: '25px', borderBottom: '2px solid #eaeaea', paddingBottom: '20px' },
-  navbar: { display: 'flex', justifyContent: 'center', gap: '15px', marginBottom: '30px', borderBottom: '1px solid #eaeaea', paddingBottom: '15px' },
-  navLink: { padding: '10px 20px', borderRadius: '8px', border: '1.5px solid #d6d3d1', backgroundColor: '#f5f5f4', color: '#57524e', fontSize: '14px', fontWeight: '600', cursor: 'pointer', transition: 'all 0.2s' },
+  contenedor: { padding: '20px', fontFamily: "'Outfit', 'Inter', sans-serif", maxWidth: '1200px', margin: '0 auto', color: '#1e293b' },
+  header: { textAlign: 'center', marginBottom: '25px', borderBottom: '2px solid #cbd5e1', paddingBottom: '20px' },
+  navbar: { display: 'flex', justifyContent: 'center', gap: '15px', marginBottom: '30px', borderBottom: '1px solid #cbd5e1', paddingBottom: '15px' },
+  navLink: { padding: '10px 20px', borderRadius: '8px', border: '1.5px solid #cbd5e1', backgroundColor: '#faf9f6', color: '#1e293b', fontSize: '14px', fontWeight: '600', cursor: 'pointer', transition: 'all 0.2s' },
   navLinkActive: { backgroundColor: '#115e59', color: '#faf9f6', borderColor: '#115e59', boxShadow: '0 4px 12px rgba(17, 94, 89, 0.15)' },
   centrado: { textAlign: 'center', marginTop: '50px', fontSize: '18px' },
   error: { color: '#dc2626', textAlign: 'center', marginTop: '30px', fontWeight: 'bold' },
-  sinProductos: { textAlign: 'center', color: '#666' },
-  seccionForm: { background: '#f5f5f4', padding: '20px', borderRadius: '8px', border: '1px solid #e7e5e4' },
+  sinProductos: { textAlign: 'center', color: '#1e293b' },
+  seccionForm: { background: '#faf9f6', padding: '20px', borderRadius: '8px', border: '1.5px solid #e7e5e4' },
   formulario: { display: 'flex', flexWrap: 'wrap', gap: '10px' },
-  input: { padding: '8px 12px', borderRadius: '4px', border: '1px solid #d6d3d1', fontSize: '14px', flex: '1 1 200px', backgroundColor: '#ffffff', color: '#2c3539' },
+  input: { padding: '8px 12px', borderRadius: '4px', border: '1.5px solid #cbd5e1', fontSize: '14px', flex: '1 1 200px', backgroundColor: '#ffffff', color: '#1e293b' },
   botonGuardar: { background: '#115e59', color: '#fff', border: 'none', padding: '8px 16px', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold', fontSize: '14px' },
   cuadricula: { display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', gap: '25px' },
   tarjeta: { border: '1px solid #e7e5e4', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 2px 5px rgba(0,0,0,0.05)', display: 'flex', flexDirection: 'column', backgroundColor: '#ffffff' },
   imagen: { width: '100%', height: '250px', objectFit: 'cover' },
   info: { padding: '15px', display: 'flex', flexDirection: 'column', flexGrow: 1 },
   categoria: { background: '#c2410c', color: '#fff', padding: '3px 8px', borderRadius: '4px', fontSize: '12px', alignSelf: 'flex-start', fontWeight: 'bold', marginBottom: '10px' },
-  descripcion: { fontSize: '14px', color: '#57524e', margin: '0 0 15px 0', flexGrow: 1 },
+  descripcion: { fontSize: '14px', color: '#1e293b', margin: '0 0 15px 0', flexGrow: 1 },
   precio: { fontSize: '20px', fontWeight: 'bold', color: '#115e59', marginBottom: '15px' },
-  boton: { background: '#2c3539', color: '#faf9f6', border: 'none', padding: '10px', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold', transition: 'background 0.2s' }
+  boton: { background: '#1e293b', color: '#faf9f6', border: 'none', padding: '10px', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold', transition: 'background 0.2s' }
 };
 
 export default App;
