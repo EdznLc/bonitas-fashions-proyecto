@@ -225,6 +225,7 @@ export default function FichaTecnica() {
           font-size: 24px;
           font-weight: 700;
           letter-spacing: -0.01em;
+          color: #faf9f6;
         }
         .ficha-header p {
           margin: 8px 0 0 0;
@@ -642,8 +643,8 @@ export default function FichaTecnica() {
       `}</style>
 
       <div className="ficha-header">
-        <h2>Ficha Tecnica de Observacion (Investigadores)</h2>
-        <p>Registro de Metricas de Usabilidad - Evaluacion de Calidad en el Proceso de Software</p>
+        <h2>Ficha Tecnica de Monitoreo (Soporte y Ventas)</h2>
+        <p>Registro de Metricas de Rendimiento - Control de Calidad en el Proceso de Venta</p>
       </div>
 
       <div className="ficha-body">
@@ -692,9 +693,9 @@ export default function FichaTecnica() {
 
               {/* Consentimiento */}
               <div className="info-box-card">
-                <h5 className="info-box-title">Verificación Ética</h5>
+                <h5 className="info-box-title">Validación del Monitoreo</h5>
                 <p className="info-box-text">
-                  Confirmo que el participante ha firmado de conformidad el Consentimiento Informado antes de comenzar la sesión y que se han salvaguardado las pautas éticas.
+                  Confirmo que el cliente ha otorgado su autorización para registrar estas métricas de interacción con fines de mejora del servicio de ventas de Bonitas Fashions.
                 </p>
                 <div className="consent-check-row">
                   <input
@@ -705,7 +706,7 @@ export default function FichaTecnica() {
                     className="consent-checkbox"
                   />
                   <label htmlFor="consentVerify" className="input-label" style={{ cursor: 'pointer' }}>
-                    Confirmar consentimiento del participante
+                    Confirmar autorización del cliente
                   </label>
                 </div>
               </div>
@@ -739,9 +740,9 @@ export default function FichaTecnica() {
 
               {/* Informacion de ISO */}
               <div className="info-box-card">
-                <h5 className="info-box-title">Marco de Evaluación ISO</h5>
+                <h5 className="info-box-title">Monitoreo Interno</h5>
                 <p className="info-box-text" style={{ marginBottom: 0 }}>
-                  Esta investigacion evalua la usabilidad segun la norma ISO 9241-11 (Eficacia, Eficiencia, Satisfaccion) y la calidad de producto bajo la norma ISO/IEC 25010 (Operabilidad y Estetica de Interfaz).
+                  Evaluación continua del rendimiento del proceso de compra (eficacia, velocidad de carga y satisfacción de checkout) para asegurar un estándar óptimo de servicio al cliente.
                 </p>
               </div>
             </div>
@@ -789,8 +790,8 @@ export default function FichaTecnica() {
                 </div>
 
                 <div className="ficha-input-group" style={{ marginTop: '16px' }}>
-                  <label className="ficha-label">Tiempo Final (Segundos):</label>
-                  <span className="ficha-label-sub">Metrica de eficiencia segun ISO 9241-11</span>
+                  <label className="ficha-label">Tiempo de Compra (Segundos):</label>
+                  <span className="ficha-label-sub">Métrica de velocidad y eficiencia del cliente</span>
                   <input
                     type="number"
                     min="1"
@@ -808,8 +809,8 @@ export default function FichaTecnica() {
                 <h4 className="ficha-panel-title">Eficacia y Errores</h4>
                 
                 <div className="ficha-input-group" style={{ marginBottom: '20px' }}>
-                  <label className="ficha-label">Tasa de Exito (Eficacia):</label>
-                  <span className="ficha-label-sub">Porcentaje de tareas completadas (ISO 9241-11)</span>
+                  <label className="ficha-label">Resolución de Compra (Éxito):</label>
+                  <span className="ficha-label-sub">Porcentaje de transacciones completadas con éxito</span>
                   <div className="toggle-box" style={{ marginTop: '5px' }}>
                     <button
                       type="button"
@@ -829,8 +830,8 @@ export default function FichaTecnica() {
                 </div>
 
                 <div className="ficha-input-group">
-                  <label className="ficha-label">Clics Incorrectos (Errores):</label>
-                  <span className="ficha-label-sub">Proteccion contra errores del usuario (ISO/IEC 25010)</span>
+                  <label className="ficha-label">Errores del Cliente (Clics fallidos):</label>
+                  <span className="ficha-label-sub">Registro de dificultades o confusión durante la interacción</span>
                   <div className="counter-box" style={{ marginTop: '5px' }}>
                     <button
                       type="button"
@@ -854,13 +855,13 @@ export default function FichaTecnica() {
 
             {/* Observaciones Cualitativas */}
             <div className="ficha-panel-card">
-              <h4 className="ficha-panel-title">Comportamiento Cualitativo</h4>
+              <h4 className="ficha-panel-title">Comportamiento del Cliente</h4>
               
               <div className="ficha-input-group" style={{ marginBottom: '16px' }}>
-                <label className="ficha-label" htmlFor="gestos">1. Gestos / Expresiones del participante:</label>
+                <label className="ficha-label" htmlFor="gestos">1. Reacción del cliente al interactuar con el sistema:</label>
                 <textarea
                   id="gestos"
-                  placeholder="Ej: Fruncia el ceño al leer los textos, suspiro en el pago..."
+                  placeholder="Ej: Dudó al hacer clic, suspiró al ver el checkout..."
                   value={observaciones.gestos}
                   onChange={e => setObservaciones({...observaciones, gestos: e.target.value})}
                   className="ficha-textarea"
@@ -868,10 +869,10 @@ export default function FichaTecnica() {
               </div>
 
               <div className="ficha-input-group" style={{ marginBottom: '16px' }}>
-                <label className="ficha-label" htmlFor="dudas">2. Dudas verbalizadas por el usuario:</label>
+                <label className="ficha-label" htmlFor="dudas">2. Preguntas o comentarios verbalizados por el cliente:</label>
                 <textarea
                   id="dudas"
-                  placeholder="Ej: Expresaba en voz alta 'No veo el boton de comprar'..."
+                  placeholder="Ej: Expresó en voz alta que las fotos cargaban lento..."
                   value={observaciones.dudas}
                   onChange={e => setObservaciones({...observaciones, dudas: e.target.value})}
                   className="ficha-textarea"
@@ -879,10 +880,10 @@ export default function FichaTecnica() {
               </div>
 
               <div className="ficha-input-group">
-                <label className="ficha-label" htmlFor="friccion">3. Momentos de mayor friccion (donde se detuvo):</label>
+                <label className="ficha-label" htmlFor="friccion">3. Momentos de dificultad (donde se detuvo el cliente):</label>
                 <textarea
                   id="friccion"
-                  placeholder="Ej: Permanecio inactivo 8 segundos tratando de cargar la foto..."
+                  placeholder="Ej: Permaneció inactivo 8 segundos en el formulario de envío..."
                   value={observaciones.friccion}
                   onChange={e => setObservaciones({...observaciones, friccion: e.target.value})}
                   className="ficha-textarea"
@@ -904,7 +905,7 @@ export default function FichaTecnica() {
         )}
 
         <div className="iso-disclaimer">
-          Ficha tecnica de evaluacion de usabilidad estructurada bajo los principios de Eficacia, Eficiencia y Satisfaccion de la norma ISO 9241-11:2018.
+          Registro interno de rendimiento y control del sistema de ventas de Bonitas Fashions.
         </div>
       </div>
     </div>

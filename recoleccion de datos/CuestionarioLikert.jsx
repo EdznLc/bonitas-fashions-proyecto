@@ -144,28 +144,23 @@ export default function CuestionarioLikert() {
   const preguntas = [
     { 
       key: 'p1', 
-      texto: 'El diseño de la pantalla fue claro y fácil de entender.',
-      sub: 'Mapeado a: Reconocimiento de Adecuación (ISO/IEC 25010 - Usabilidad / Estética)' 
+      texto: 'El diseño de la pantalla fue claro y fácil de entender.' 
     },
     { 
       key: 'p2', 
-      texto: 'Me resultó sencillo realizar la compra.',
-      sub: 'Mapeado a: Aprendizaje y Operabilidad (ISO/IEC 25010 - Facilidad de Aprendizaje)' 
+      texto: 'Me resultó sencillo realizar la compra.' 
     },
     { 
       key: 'p3', 
-      texto: 'El tamaño de los textos e iconos fue legible.',
-      sub: 'Mapeado a: Estética de la Interfaz de Usuario (ISO/IEC 25010 - Accesibilidad)' 
+      texto: 'El tamaño de los textos e iconos fue legible.' 
     },
     { 
       key: 'p4', 
-      texto: 'Me sentí cómodo/a usando este sistema.',
-      sub: 'Mapeado a: Operabilidad (ISO/IEC 25010 - Satisfacción Subjetiva)' 
+      texto: 'Me sentí cómodo/a usando este sistema.' 
     },
     { 
       key: 'p5', 
-      texto: 'Recomendaría este sistema para futuras compras.',
-      sub: 'Mapeado a: Satisfacción General y Confianza (ISO 9241-11 - Satisfacción)' 
+      texto: 'Recomendaría este sistema para futuras compras.' 
     }
   ];
 
@@ -195,6 +190,7 @@ export default function CuestionarioLikert() {
           font-size: 24px;
           font-weight: 700;
           letter-spacing: -0.01em;
+          color: #faf9f6;
         }
         .likert-header p {
           margin: 8px 0 0 0;
@@ -554,8 +550,8 @@ export default function CuestionarioLikert() {
       `}</style>
 
       <div className="likert-header">
-        <h2>Cuestionario de Satisfaccion (Escala Likert)</h2>
-        <p>Prueba Piloto de Interfaces - Evaluacion de Calidad del Producto de Software</p>
+        <h2>Cuestionario de Satisfaccion (Experiencia de Compra)</h2>
+        <p>Bonitas Fashions - Evaluacion de Calidad del Proceso de Ventas</p>
       </div>
 
       <div className="likert-body">
@@ -604,9 +600,9 @@ export default function CuestionarioLikert() {
 
               {/* Consentimiento */}
               <div className="info-box-card">
-                <h5 className="info-box-title">Terminos y Consentimiento Informado</h5>
+                <h5 className="info-box-title">Mejora Continua y Servicio</h5>
                 <p className="info-box-text">
-                  Al participar, acepta que se registren los datos anonimos de sus tiempos, clics y respuestas del cuestionario con fines de investigacion academica de acuerdo a la norma ISO 9241-11:2018.
+                  Al completar este cuestionario, nos ayuda a mejorar nuestro sistema de ventas y la calidad del servicio de Bonitas Fashions.
                 </p>
                 <div className="consent-check-row">
                   <input
@@ -617,7 +613,7 @@ export default function CuestionarioLikert() {
                     className="consent-checkbox"
                   />
                   <label htmlFor="consentCheck" className="input-label" style={{ cursor: 'pointer' }}>
-                    Acepto el tratamiento de datos anonimos
+                    Confirmar envio de respuestas anonimas
                   </label>
                 </div>
               </div>
@@ -651,9 +647,9 @@ export default function CuestionarioLikert() {
 
               {/* Informacion de ISO */}
               <div className="info-box-card">
-                <h5 className="info-box-title">Normativa de Calidad ISO</h5>
+                <h5 className="info-box-title">Calidad en el Servicio</h5>
                 <p className="info-box-text" style={{ marginBottom: 0 }}>
-                  Esta investigacion evalua la usabilidad segun la norma ISO 9241-11 (Eficacia, Eficiencia, Satisfaccion) y la calidad de producto bajo la norma ISO/IEC 25010 (Operabilidad y Estetica de Interfaz).
+                  Nuestro objetivo es garantizar una plataforma de compras facil, rapida y segura para todos nuestros clientes de Bonitas Fashions.
                 </p>
               </div>
             </div>
@@ -670,8 +666,7 @@ export default function CuestionarioLikert() {
 
             {preguntas.map((p) => (
               <div key={p.key} className="likert-question-card">
-                <p className="likert-question-text">{p.texto}</p>
-                <p className="likert-question-sub">{p.sub}</p>
+                <p className="likert-question-text" style={{ marginBottom: '16px' }}>{p.texto}</p>
                 <div className="likert-options-row">
                   {[1, 2, 3, 4, 5].map((num) => {
                     const seleccionado = respuestas[p.key] === num;
@@ -711,7 +706,7 @@ export default function CuestionarioLikert() {
         )}
 
         <div className="iso-disclaimer">
-          Cuestionario de usabilidad estructurado en base a las directrices de Calidad del Producto de Software (ISO/IEC 25010) y Metricas de Satisfaccion y Experiencia de Usuario (ISO 9241-11).
+          Cuestionario de satisfaccion para la mejora continua de nuestra plataforma de venta y la experiencia de nuestros clientes.
         </div>
       </div>
     </div>
