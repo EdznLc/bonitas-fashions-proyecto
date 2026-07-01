@@ -23,6 +23,19 @@ const surveyPool = new Pool({
     ssl: { rejectUnauthorized: false }
 });
 
+// Loguear detalles de conexión de forma segura al iniciar
+const parseDbHost = (url) => {
+    if (!url) return 'no configurada';
+    try {
+        const matches = url.match(/@([^/?#]+)/);
+        return matches ? matches[1] : 'desconocido';
+    } catch (e) {
+        return 'error al parsear';
+    }
+};
+console.log(`[Database] Pool de productos conectado a: ${parseDbHost(process.env.DATABASE_URL)}`);
+console.log(`[Database] Pool de encuestas conectado a: ${parseDbHost(SURVEY_DATABASE_URL)}`);
+
 // Endpoint para obtener el catálogo usando la Vista que crearon
 app.get('/api/productos', async (req, res) => {
     try {
