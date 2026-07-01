@@ -17,7 +17,7 @@ const pool = new Pool({
 });
 
 // Configuración de la conexión a Neon para la recolección de datos de encuestas/métricas
-const SURVEY_DATABASE_URL = process.env.SURVEY_DATABASE_URL;
+const SURVEY_DATABASE_URL = process.env.SURVEY_DATABASE_URL || process.env.DATABASE_URL;
 const surveyPool = new Pool({
     connectionString: SURVEY_DATABASE_URL,
     ssl: { rejectUnauthorized: false }
@@ -149,4 +149,9 @@ app.post('/api/recoleccion/respuestas', async (req, res) => {
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
     console.log(`Servidor de la API corriendo en http://localhost:${PORT}`);
+    if (!process.env.DATABASE_URL && !process.env.SURVEY_DATABASE_URL) {
+        console.warn("⚠️ ALERTA: Ni DATABASE_URL ni SURVEY_DATABASE_URL están configuradas en las variables de entorno.");
+    } else {
+        console.log("🚀 Base de datos configurada correctamente.");
+    }
 });
