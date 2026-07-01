@@ -4,13 +4,13 @@ export default function CuestionarioLikert() {
   // Lista de participantes registrados
   const [participantes, setParticipantes] = useState([]);
   const [participanteId, setParticipanteId] = useState('');
-  
+
   // Estado para registro rápido de participante
   const [nuevoParticipante, setNuevoParticipante] = useState({
     edad: '',
     version_interfaz: 'A'
   });
-  
+
   // Respuestas del cuestionario
   const [respuestas, setRespuestas] = useState({
     p1: null,
@@ -20,7 +20,7 @@ export default function CuestionarioLikert() {
     p5: null
   });
   const [consentimiento, setConsentimiento] = useState(false);
-  
+
   // Estados para UI
   const [mensajeExito, setMensajeExito] = useState('');
   const [errorSubmit, setErrorSubmit] = useState('');
@@ -28,7 +28,7 @@ export default function CuestionarioLikert() {
   const [guardando, setGuardando] = useState(false);
 
   // API base URL
-  const API_URL = (import.meta.env.VITE_API_URL || 'http://localhost:5000') + '/api/recoleccion';
+  const API_URL = (import.meta.env.VITE_API_URL || 'https://bonitas-fashions-proyecto.onrender.com') + '/api/recoleccion';
 
   // Cargar participantes
   const cargarParticipantes = async () => {
@@ -142,25 +142,25 @@ export default function CuestionarioLikert() {
   };
 
   const preguntas = [
-    { 
-      key: 'p1', 
-      texto: 'El diseño de la pantalla fue claro y fácil de entender.' 
+    {
+      key: 'p1',
+      texto: 'El diseño de la pantalla fue claro y fácil de entender.'
     },
-    { 
-      key: 'p2', 
-      texto: 'Me resultó sencillo realizar la compra.' 
+    {
+      key: 'p2',
+      texto: 'Me resultó sencillo realizar la compra.'
     },
-    { 
-      key: 'p3', 
-      texto: 'El tamaño de los textos e iconos fue legible.' 
+    {
+      key: 'p3',
+      texto: 'El tamaño de los textos e iconos fue legible.'
     },
-    { 
-      key: 'p4', 
-      texto: 'Me sentí cómodo/a usando este sistema.' 
+    {
+      key: 'p4',
+      texto: 'Me sentí cómodo/a usando este sistema.'
     },
-    { 
-      key: 'p5', 
-      texto: 'Recomendaría este sistema para futuras compras.' 
+    {
+      key: 'p5',
+      texto: 'Recomendaría este sistema para futuras compras.'
     }
   ];
 
@@ -612,17 +612,17 @@ export default function CuestionarioLikert() {
       </div>
 
       <div className="likert-body">
-        
+
         {/* Paso 1: Grid Sinuoso y Simétrico para Identificar Participante */}
         <div className="likert-section">
           <h3 className="likert-section-title">1. Identificacion del Participante</h3>
-          
+
           <div className="panel-grid-cols">
-            
+
             {/* Registro Rápido */}
             <div className="panel-card">
               <h4 className="panel-title">Registrar Nuevo Participante</h4>
-              
+
               <form onSubmit={registrarParticipante} style={{ display: 'contents' }}>
                 <div className="panel-inputs-row">
                   <div className="input-group">
@@ -633,7 +633,7 @@ export default function CuestionarioLikert() {
                       max="120"
                       placeholder="Ej: 25"
                       value={nuevoParticipante.edad}
-                      onChange={e => setNuevoParticipante({...nuevoParticipante, edad: e.target.value})}
+                      onChange={e => setNuevoParticipante({ ...nuevoParticipante, edad: e.target.value })}
                       className="input-field"
                       required
                     />
@@ -642,7 +642,7 @@ export default function CuestionarioLikert() {
                     <label className="input-label">Interfaz asignada:</label>
                     <select
                       value={nuevoParticipante.version_interfaz}
-                      onChange={e => setNuevoParticipante({...nuevoParticipante, version_interfaz: e.target.value})}
+                      onChange={e => setNuevoParticipante({ ...nuevoParticipante, version_interfaz: e.target.value })}
                       className="select-styled"
                     >
                       <option value="A">Interfaz A (Minimalista)</option>
@@ -651,7 +651,7 @@ export default function CuestionarioLikert() {
                     </select>
                   </div>
                 </div>
-                
+
                 <button type="submit" className="btn-action">Registrar Participante</button>
               </form>
 
@@ -679,7 +679,7 @@ export default function CuestionarioLikert() {
             {/* Selección de Existente */}
             <div className="panel-card">
               <h4 className="panel-title">Vincular Participante Existente</h4>
-              
+
               <div className="panel-inputs-row">
                 <div className="input-group full-width">
                   <label className="input-label">Seleccionar ID de Registro:</label>
@@ -697,7 +697,7 @@ export default function CuestionarioLikert() {
                   </select>
                 </div>
               </div>
-              
+
               <button type="button" onClick={cargarParticipantes} className="btn-action btn-action-secondary">
                 Actualizar Lista de Participantes
               </button>
@@ -710,7 +710,7 @@ export default function CuestionarioLikert() {
                 </p>
               </div>
             </div>
-            
+
           </div>
         </div>
 

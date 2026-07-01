@@ -17,11 +17,24 @@ const pool = new Pool({
 });
 
 // Configuración de la conexión a Neon para la recolección de datos de encuestas/métricas
-const SURVEY_DATABASE_URL = process.env.SURVEY_DATABASE_URL;
+const SURVEY_DATABASE_URL = process.env.SURVEY_DATABASE_URL || process.env.DATABASE_URL;
 const surveyPool = new Pool({
     connectionString: SURVEY_DATABASE_URL,
     ssl: { rejectUnauthorized: false }
 });
+
+// Loguear detalles de conexión de forma segura al iniciar
+const parseDbHost = (url) => {
+    if (!url) return 'no configurada';
+    try {
+        const matches = url.match(/@([^/?#]+)/);
+        return matches ? matches[1] : 'desconocido';
+    } catch (e) {
+        return 'error al parsear';
+    }
+};
+console.log(`[Database] Pool de productos conectado a: ${parseDbHost(process.env.DATABASE_URL)}`);
+console.log(`[Database] Pool de encuestas conectado a: ${parseDbHost(SURVEY_DATABASE_URL)}`);
 
 // Endpoint para obtener el catálogo usando la Vista que crearon
 app.get('/api/productos', async (req, res) => {
@@ -147,4 +160,9 @@ app.post('/api/recoleccion/respuestas', async (req, res) => {
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
     console.log(`Servidor de la API corriendo en http://localhost:${PORT}`);
+    if (!process.env.DATABASE_URL && !process.env.SURVEY_DATABASE_URL) {
+        console.warn("⚠️ ALERTA: Ni DATABASE_URL ni SURVEY_DATABASE_URL están configuradas en las variables de entorno.");
+    } else {
+        console.log("🚀 Base de datos configurada correctamente.");
+    }
 });

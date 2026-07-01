@@ -4,7 +4,7 @@ export default function FichaTecnica() {
   // Lista de participantes registrados
   const [participantes, setParticipantes] = useState([]);
   const [participanteId, setParticipanteId] = useState('');
-  
+
   // Estado para registro rápido de participante
   const [nuevoParticipante, setNuevoParticipante] = useState({
     edad: '',
@@ -36,7 +36,7 @@ export default function FichaTecnica() {
   const [consentimiento, setConsentimiento] = useState(false);
 
   // API base URL
-  const API_URL = (import.meta.env.VITE_API_URL || 'http://localhost:5000') + '/api/recoleccion';
+  const API_URL = (import.meta.env.VITE_API_URL || 'https://bonitas-fashions-proyecto.onrender.com') + '/api/recoleccion';
 
   // Cargar participantes
   const cargarParticipantes = async () => {
@@ -754,17 +754,17 @@ export default function FichaTecnica() {
       </div>
 
       <div className="ficha-body">
-        
+
         {/* Paso 1: Grid Simétrico para Configurar Sesión */}
         <div className="ficha-section">
           <h3 className="ficha-section-title">1. Configuración de la Sesión</h3>
-          
+
           <div className="panel-grid-cols">
-            
+
             {/* Registro Rápido */}
             <div className="panel-card">
               <h4 className="panel-title">Registrar Nuevo Participante</h4>
-              
+
               <form onSubmit={registrarParticipante} style={{ display: 'contents' }}>
                 <div className="panel-inputs-row">
                   <div className="input-group">
@@ -775,7 +775,7 @@ export default function FichaTecnica() {
                       max="120"
                       placeholder="Ej: 30"
                       value={nuevoParticipante.edad}
-                      onChange={e => setNuevoParticipante({...nuevoParticipante, edad: e.target.value})}
+                      onChange={e => setNuevoParticipante({ ...nuevoParticipante, edad: e.target.value })}
                       className="input-field"
                       required
                     />
@@ -784,7 +784,7 @@ export default function FichaTecnica() {
                     <label className="input-label">Interfaz asignada:</label>
                     <select
                       value={nuevoParticipante.version_interfaz}
-                      onChange={e => setNuevoParticipante({...nuevoParticipante, version_interfaz: e.target.value})}
+                      onChange={e => setNuevoParticipante({ ...nuevoParticipante, version_interfaz: e.target.value })}
                       className="select-styled"
                     >
                       <option value="A">Interfaz A (Minimalista)</option>
@@ -793,7 +793,7 @@ export default function FichaTecnica() {
                     </select>
                   </div>
                 </div>
-                
+
                 <button type="submit" className="btn-action">Registrar Participante</button>
               </form>
 
@@ -821,7 +821,7 @@ export default function FichaTecnica() {
             {/* Selección de Existente */}
             <div className="panel-card">
               <h4 className="panel-title">Seleccionar Participante Activo</h4>
-              
+
               <div className="panel-inputs-row">
                 <div className="input-group full-width">
                   <label className="input-label">ID de Registro Activo:</label>
@@ -839,7 +839,7 @@ export default function FichaTecnica() {
                   </select>
                 </div>
               </div>
-              
+
               <button type="button" onClick={cargarParticipantes} className="btn-action btn-action-secondary">
                 Actualizar Lista de Participantes
               </button>
@@ -852,29 +852,29 @@ export default function FichaTecnica() {
                 </p>
               </div>
             </div>
-            
+
           </div>
         </div>
 
         {/* Paso 2: Registro de Métricas y Observaciones */}
         {participanteId ? (
           <form onSubmit={enviarMetricas}>
-            
+
             {participanteSeleccionado && (
               <div className="ficha-banner">
-                Observando a: <strong>U{String(participanteSeleccionado.id).padStart(3, '0')}</strong> | 
-                Edad: <strong>{participanteSeleccionado.edad} anos</strong> | 
+                Observando a: <strong>U{String(participanteSeleccionado.id).padStart(3, '0')}</strong> |
+                Edad: <strong>{participanteSeleccionado.edad} anos</strong> |
                 Version de Interfaz: <span className="ficha-badge">{participanteSeleccionado.version_interfaz}</span>
               </div>
             )}
 
             {/* Panel de Métricas Cuantitativas */}
             <div className="ficha-grid-cols">
-              
+
               {/* Bloque de Tiempo & Cronómetro - Eficiencia */}
               <div className="ficha-panel-card">
                 <h4 className="ficha-panel-title">Eficiencia: Tiempo de Resolucion</h4>
-                
+
                 <div className="timer-display-box">
                   <div className="timer-digits">{formatearTiempo(cronometroTiempo)}</div>
                   <div className="timer-btn-row">
@@ -884,10 +884,10 @@ export default function FichaTecnica() {
                       <button type="button" onClick={pausarCronometro} className="timer-btn timer-btn-pause">Pausar</button>
                     )}
                     <button type="button" onClick={resetearCronometro} className="timer-btn timer-btn-reset">Reset</button>
-                    <button 
-                      type="button" 
-                      onClick={aplicarTiempoCronometro} 
-                      disabled={cronometroTiempo === 0} 
+                    <button
+                      type="button"
+                      onClick={aplicarTiempoCronometro}
+                      disabled={cronometroTiempo === 0}
                       className="timer-btn timer-btn-apply"
                     >
                       Aplicar
@@ -913,7 +913,7 @@ export default function FichaTecnica() {
               {/* Bloque de Tasa de Éxito e Incorrectos - Eficacia */}
               <div className="ficha-panel-card">
                 <h4 className="ficha-panel-title">Eficacia y Errores</h4>
-                
+
                 <div className="ficha-input-group" style={{ marginBottom: '20px' }}>
                   <label className="ficha-label">Resolución de Compra (Éxito):</label>
                   <span className="ficha-label-sub">Porcentaje de transacciones completadas con éxito</span>
@@ -962,14 +962,14 @@ export default function FichaTecnica() {
             {/* Observaciones Cualitativas */}
             <div className="ficha-panel-card">
               <h4 className="ficha-panel-title">Comportamiento del Cliente</h4>
-              
+
               <div className="ficha-input-group" style={{ marginBottom: '16px' }}>
                 <label className="ficha-label" htmlFor="gestos">1. Reacción del cliente al interactuar con el sistema:</label>
                 <textarea
                   id="gestos"
                   placeholder="Ej: Dudó al hacer clic, suspiró al ver el checkout..."
                   value={observaciones.gestos}
-                  onChange={e => setObservaciones({...observaciones, gestos: e.target.value})}
+                  onChange={e => setObservaciones({ ...observaciones, gestos: e.target.value })}
                   className="ficha-textarea"
                 />
               </div>
@@ -980,7 +980,7 @@ export default function FichaTecnica() {
                   id="dudas"
                   placeholder="Ej: Expresó en voz alta que las fotos cargaban lento..."
                   value={observaciones.dudas}
-                  onChange={e => setObservaciones({...observaciones, dudas: e.target.value})}
+                  onChange={e => setObservaciones({ ...observaciones, dudas: e.target.value })}
                   className="ficha-textarea"
                 />
               </div>
@@ -991,7 +991,7 @@ export default function FichaTecnica() {
                   id="friccion"
                   placeholder="Ej: Permaneció inactivo 8 segundos en el formulario de envío..."
                   value={observaciones.friccion}
-                  onChange={e => setObservaciones({...observaciones, friccion: e.target.value})}
+                  onChange={e => setObservaciones({ ...observaciones, friccion: e.target.value })}
                   className="ficha-textarea"
                 />
               </div>
