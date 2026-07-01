@@ -6,7 +6,7 @@ dotenv.config();
 const { Pool } = pg;
 const connectionString = 'postgresql://neondb_owner:npg_Ob0L2nZqpJBh@ep-round-sound-atd8y6nz-pooler.c-9.us-east-1.aws.neon.tech/neondb?sslmode=require';
 
-console.log("Testing database connection to:", connectionString);
+console.log("Testing database connection for 'metricas_usabilidad'...");
 
 const pool = new Pool({
     connectionString,
@@ -16,27 +16,18 @@ const pool = new Pool({
 async function run() {
     try {
         const client = await pool.connect();
-        console.log("SUCCESS: Connected to Neon Survey Database!");
         
-        // 1. Check if tables exist
-        const tablesRes = await client.query(`
-            SELECT table_name 
-            FROM information_schema.tables 
-            WHERE table_schema = 'public';
-        `);
-        console.log("Existing tables:", tablesRes.rows.map(r => r.table_name));
-
-        // 2. Check structure of 'respuestas_encuesta'
+        // Check structure of 'metricas_usabilidad'
         const columnsRes = await client.query(`
             SELECT column_name, data_type, is_nullable 
             FROM information_schema.columns 
-            WHERE table_name = 'respuestas_encuesta';
+            WHERE table_name = 'metricas_usabilidad';
         `);
-        console.log("Columns of 'respuestas_encuesta':", columnsRes.rows);
+        console.log("Columns of 'metricas_usabilidad':", columnsRes.rows);
 
-        // 3. Try to select some rows
-        const sampleRes = await client.query("SELECT * FROM respuestas_encuesta LIMIT 3;");
-        console.log("Sample rows from 'respuestas_encuesta':", sampleRes.rows);
+        // Try to select sample rows
+        const sampleRes = await client.query("SELECT * FROM metricas_usabilidad LIMIT 3;");
+        console.log("Sample rows from 'metricas_usabilidad':", sampleRes.rows);
 
         client.release();
     } catch (err) {

@@ -92,23 +92,22 @@ app.post('/api/recoleccion/participantes', async (req, res) => {
 
 // 3. Registrar la Ficha Técnica (métricas de usabilidad)
 app.post('/api/recoleccion/metricas', async (req, res) => {
-    const { participante_id, tiempo_segundos, tasa_exito, conteo_errores, observaciones_cualitativas } = req.body;
+    const { participante_id, tiempo_segundos, tasa_exito, conteo_errores } = req.body;
     if (participante_id === undefined || tiempo_segundos === undefined || tasa_exito === undefined) {
         return res.status(400).json({ error: 'El ID del participante, el tiempo (segundos) y la tasa de éxito son obligatorios.' });
     }
     try {
         const query = `
             INSERT INTO metricas_usabilidad 
-            (participante_id, tiempo_segundos, tasa_exito, conteo_errores, observaciones_cualitativas) 
-            VALUES ($1, $2, $3, $4, $5) 
+            (participante_id, tiempo_segundos, tasa_exito, conteo_errores) 
+            VALUES ($1, $2, $3, $4) 
             RETURNING *;
         `;
         const valores = [
             parseInt(participante_id, 10),
             parseInt(tiempo_segundos, 10),
             Boolean(tasa_exito),
-            parseInt(conteo_errores || 0, 10),
-            observaciones_cualitativas
+            parseInt(conteo_errores || 0, 10)
         ];
         const resultado = await surveyPool.query(query, valores);
         res.status(201).json(resultado.rows[0]);
