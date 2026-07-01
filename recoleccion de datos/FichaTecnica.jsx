@@ -701,6 +701,51 @@ export default function FichaTecnica() {
           text-align: center;
           font-weight: 500;
         }
+
+        /* --- Responsive Media Queries --- */
+        @media (max-width: 768px) {
+          .ficha-body {
+            padding: 20px 16px;
+          }
+          .ficha-header {
+            padding: 24px 16px;
+          }
+          .ficha-header h2 {
+            font-size: 20px;
+          }
+          .panel-grid-cols {
+            grid-template-columns: 1fr;
+            gap: 16px;
+          }
+          .ficha-grid-cols {
+            grid-template-columns: 1fr;
+            gap: 16px;
+            margin-bottom: 16px;
+          }
+          .ficha-panel-card {
+            padding: 16px;
+            margin-bottom: 16px;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .ficha-body {
+            padding: 16px 10px;
+          }
+          .panel-card {
+            padding: 16px;
+          }
+          .panel-inputs-row {
+            flex-direction: column;
+            align-items: stretch;
+            min-height: auto;
+            gap: 12px;
+          }
+          .btn-submit {
+            padding: 12px;
+            font-size: 14px;
+          }
+        }
       `}</style>
 
       <div className="ficha-header">

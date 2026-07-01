@@ -548,6 +548,62 @@ export default function CuestionarioLikert() {
           text-align: center;
           font-weight: 500;
         }
+
+        /* --- Responsive Media Queries --- */
+        @media (max-width: 768px) {
+          .likert-body {
+            padding: 20px 16px;
+          }
+          .likert-header {
+            padding: 24px 16px;
+          }
+          .likert-header h2 {
+            font-size: 20px;
+          }
+          .panel-grid-cols {
+            grid-template-columns: 1fr;
+            gap: 16px;
+          }
+          .likert-options-row {
+            gap: 6px;
+          }
+          .likert-option-btn {
+            height: 48px;
+            font-size: 11px;
+          }
+          .likert-option-number {
+            font-size: 16px;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .likert-body {
+            padding: 16px 10px;
+          }
+          .panel-card {
+            padding: 16px;
+          }
+          .panel-inputs-row {
+            flex-direction: column;
+            align-items: stretch;
+            min-height: auto;
+            gap: 12px;
+          }
+          .likert-options-row {
+            gap: 4px;
+          }
+          .likert-option-btn {
+            height: 44px;
+            font-size: 10px;
+          }
+          .likert-option-number {
+            font-size: 14px;
+          }
+          .btn-submit {
+            padding: 12px;
+            font-size: 14px;
+          }
+        }
       `}</style>
 
       <div className="likert-header">

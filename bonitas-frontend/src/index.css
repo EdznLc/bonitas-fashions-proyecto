@@ -1,5 +1,5 @@
 /* Global Baseline for Bonitas Fashions */
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
 
 html, body {
   margin: 0;
@@ -32,4 +32,123 @@ h1, h2, h3, h4, h5, h6 {
 /* Custom global styling overrides for default browser controls */
 input, select, textarea {
   font-family: inherit;
+}
+
+/* App Container (White main card wrapper) */
+.app-container {
+  width: 100%;
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 40px;
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+  border: 1px solid #cbd5e1;
+  box-sizing: border-box;
+}
+
+/* Header */
+.app-header {
+  text-align: center;
+  margin-bottom: 25px;
+  border-bottom: 2px solid #cbd5e1;
+  padding-bottom: 20px;
+}
+.app-title {
+  margin: 0 0 6px 0;
+  font-family: 'Outfit', sans-serif;
+  font-size: 38px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #1e293b;
+}
+.app-subtitle {
+  margin: 0;
+  color: #475569;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Navbar */
+.app-navbar {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 30px;
+  border-bottom: 1px solid #cbd5e1;
+  padding-bottom: 15px;
+  flex-wrap: wrap;
+}
+
+/* Nav Link */
+.app-nav-link {
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: 1.5px solid #cbd5e1;
+  background-color: #faf9f6;
+  color: #1e293b;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  height: 42px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  outline: none;
+}
+.app-nav-link:hover {
+  background-color: #f1f0ea;
+  border-color: #94a3b8;
+}
+.app-nav-link.active {
+  background-color: #115e59;
+  color: #faf9f6;
+  border-color: #115e59;
+  box-shadow: 0 4px 12px rgba(17, 94, 89, 0.15);
+}
+
+/* --- Responsive Media Queries --- */
+
+@media (max-width: 768px) {
+  .app-container {
+    margin: 15px auto;
+    padding: 24px 16px;
+    border-radius: 12px;
+    width: 95%;
+  }
+  .app-title {
+    font-size: 28px;
+  }
+  .app-subtitle {
+    font-size: 13px;
+  }
+  .app-navbar {
+    gap: 10px;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+  }
+  .app-nav-link {
+    font-size: 13px;
+    padding: 8px 14px;
+    flex: 1 1 auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .app-container {
+    margin: 8px auto;
+    padding: 16px 12px;
+    border-radius: 8px;
+    width: 96%;
+  }
+  .app-navbar {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .app-nav-link {
+    width: 100%;
+    font-size: 12px;
+  }
 }

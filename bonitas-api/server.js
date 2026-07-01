@@ -113,8 +113,7 @@ app.post('/api/recoleccion/respuestas', async (req, res) => {
         p2_facilidad_compra, 
         p3_legibilidad_textos, 
         p4_comodidad_uso, 
-        p5_recomendacion, 
-        comentario_abierto 
+        p5_recomendacion 
     } = req.body;
 
     // Validación de obligatoriedad para respuestas Likert (deben ser entre 1 y 5)
@@ -125,8 +124,8 @@ app.post('/api/recoleccion/respuestas', async (req, res) => {
     try {
         const query = `
             INSERT INTO respuestas_encuesta 
-            (participante_id, p1_claridad_diseno, p2_facilidad_compra, p3_legibilidad_textos, p4_comodidad_uso, p5_recomendacion, comentario_abierto) 
-            VALUES ($1, $2, $3, $4, $5, $6, $7) 
+            (participante_id, p1_claridad_diseno, p2_facilidad_compra, p3_legibilidad_textos, p4_comodidad_uso, p5_recomendacion) 
+            VALUES ($1, $2, $3, $4, $5, $6) 
             RETURNING *;
         `;
         const valores = [
@@ -135,8 +134,7 @@ app.post('/api/recoleccion/respuestas', async (req, res) => {
             parseInt(p2_facilidad_compra, 10),
             parseInt(p3_legibilidad_textos, 10),
             parseInt(p4_comodidad_uso, 10),
-            parseInt(p5_recomendacion, 10),
-            comentario_abierto
+            parseInt(p5_recomendacion, 10)
         ];
         const resultado = await surveyPool.query(query, valores);
         res.status(201).json(resultado.rows[0]);
