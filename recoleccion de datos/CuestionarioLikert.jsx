@@ -127,6 +127,7 @@ export default function CuestionarioLikert() {
 
       if (res.ok) {
         setMensajeExito("Encuesta guardada con éxito en la base de datos.");
+        alert("¡La encuesta ha sido guardada con éxito!");
         setRespuestas({ p1: null, p2: null, p3: null, p4: null, p5: null });
         setParticipanteId('');
       } else {

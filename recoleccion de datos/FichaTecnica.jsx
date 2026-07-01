@@ -119,7 +119,7 @@ export default function FichaTecnica() {
   const aplicarTiempoCronometro = () => {
     const segs = Math.round(cronometroTiempo / 100);
     setTiempoSegundos(segs.toString());
-    alert(`Se aplicó el tiempo de {segs} segundos al campo.`);
+    alert(`Se aplicó el tiempo de ${segs} segundos al campo.`);
   };
 
   // Formateador: mm:ss.d
@@ -181,6 +181,7 @@ export default function FichaTecnica() {
 
       if (res.ok) {
         setMensajeExito("Ficha Técnica de métricas guardada con éxito.");
+        alert("¡La Ficha Técnica ha sido guardada con éxito!");
         setTiempoSegundos('');
         setConteoErrores(0);
         setTasaExito(true);
