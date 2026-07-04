@@ -9,19 +9,13 @@ const hashPassword = (password) => {
     return crypto.createHash('sha256').update(password).digest('hex');
 };
 
-// 1. Registro de usuario
+// 1. Registro de usuario (Solo permite registrar CLIENTES por seguridad)
 router.post('/register', async (req, res) => {
-    const { nombre, apellido_p, apellido_m, correo, password, telefono, rol } = req.body;
+    const { nombre, apellido_p, apellido_m, correo, password, telefono } = req.body;
     
     // Validar obligatoriedad
-    if (!nombre || !correo || !password || !rol) {
-        return res.status(400).json({ error: 'Nombre, correo, contraseña y rol son obligatorios.' });
-    }
-
-    // Validar rol
-    const rolNormalizado = rol.toLowerCase();
-    if (rolNormalizado !== 'cliente' && rolNormalizado !== 'vendedor') {
-        return res.status(400).json({ error: 'El rol debe ser "cliente" o "vendedor".' });
+    if (!nombre || !correo || !password) {
+        return res.status(400).json({ error: 'Nombre, correo y contraseña son obligatorios.' });
     }
 
     try {
@@ -34,10 +28,10 @@ router.post('/register', async (req, res) => {
         const passwordHash = hashPassword(password);
         const query = `
             INSERT INTO usuario (nombre, apellido_p, apellido_m, correo, password, telefono, rol)
-            VALUES ($1, $2, $3, $4, $5, $6, $7)
+            VALUES ($1, $2, $3, $4, $5, $6, 'cliente')
             RETURNING id_usuario, nombre, apellido_p, apellido_m, correo, telefono, rol;
         `;
-        const valores = [nombre, apellido_p || null, apellido_m || null, correo, passwordHash, telefono || null, rolNormalizado];
+        const valores = [nombre, apellido_p || null, apellido_m || null, correo, passwordHash, telefono || null];
         const resultado = await pool.query(query, valores);
         res.status(201).json(resultado.rows[0]);
     } catch (error) {

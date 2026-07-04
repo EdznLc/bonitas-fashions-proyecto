@@ -144,19 +144,7 @@ export default function Register({ API_URL, onRegisterSuccess, onNavigateToLogin
             />
           </div>
 
-          <div className="auth-input-group">
-            <label className="auth-label">Rol del Usuario *</label>
-            <select
-              name="rol"
-              value={formData.rol}
-              onChange={handleChange}
-              className="auth-select"
-              required
-            >
-              <option value="cliente">Cliente (Comprador)</option>
-              <option value="vendedor">Vendedor (Administración)</option>
-            </select>
-          </div>
+
 
           <button type="submit" disabled={cargando} className="btn-auth-submit">
             {cargando ? 'Creando cuenta...' : 'Registrarse'}
