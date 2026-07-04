@@ -4,7 +4,7 @@ import { pool } from '../db/db.js';
 const router = express.Router();
 
 // 1. Obtener productos disponibles (para clientes/catálogo público)
-router.get('/', async (req, res) => {
+router.get('/prueba', async (req, res) => {
     try {
         // id_estado = 1 significa 'Disponible'
         const resultado = await pool.query('SELECT * FROM producto WHERE id_estado = 1 ORDER BY id_producto DESC;');
