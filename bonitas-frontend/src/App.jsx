@@ -27,7 +27,7 @@ export default function App() {
 
   // 2. Interface version selector state ('A': Minimalist, 'B': Standard Commercial, 'C': Basic)
   const [interfaceVersion, setInterfaceVersion] = useState(() => {
-    return queryParams.get('interface')?.toUpperCase() || 'B';
+    return queryParams.get('interface')?.toUpperCase() || 'A';
   });
 
   // 3. Active User session management
