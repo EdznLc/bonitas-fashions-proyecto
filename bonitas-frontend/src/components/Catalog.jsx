@@ -10,7 +10,7 @@ export default function Catalog({ API_URL, onSelectProduct }) {
 
   const cargarProductos = async () => {
     try {
-      const res = await fetch(`${API_URL}/productos`);
+      const res = await fetch(`${API_URL}/api/productos`);
       if (res.ok) {
         const data = await res.json();
         setProductos(data);
