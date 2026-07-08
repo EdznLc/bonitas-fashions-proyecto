@@ -1569,6 +1569,33 @@ input, select, textarea, button {
   font-weight: bold !important;
   font-size: 15px !important; /* Mayor legibilidad */
 }
+
+/* Fix para el selector debug de interfaces en modo C */
+.interface-c .interface-selector-debug {
+  background-color: #000000 !important;
+  border: 2px solid #ffff00 !important;
+}
+.interface-c .debug-label {
+  color: #ffff00 !important;
+}
+
+/* Fix para tarjetas de especificaciones y alertas en modo C (evitar blanco sobre crema) */
+.interface-c .spec-card, .interface-c .visitor-action-alert {
+  background-color: #000000 !important;
+  border: 2px solid #ffffff !important;
+  border-radius: 0 !important;
+}
+.interface-c .spec-title {
+  color: #ffff00 !important;
+}
+.interface-c .spec-value {
+  color: #ffffff !important;
+}
+.interface-c .visitor-action-alert p, .interface-c .visitor-action-alert span {
+  color: #ffffff !important;
+}
+
+/* Botones del header */
 .interface-c .btn-header-nav, .interface-c .btn-header-register {
   background-color: #000000 !important;
   color: #ffffff !important; /* Texto blanco de alto contraste */
@@ -1581,6 +1608,8 @@ input, select, textarea, button {
   color: #000000 !important; /* Contraste negro sobre amarillo */
   border-color: #ffff00 !important;
 }
+
+/* Catálogo y filtros */
 .interface-c .product-card {
   background-color: #000000 !important;
   border: 2px solid #ffffff !important;
@@ -1637,6 +1666,20 @@ input, select, textarea, button {
   background-color: #000000 !important;
   border: 2.5px solid #ffffff !important;
   border-radius: 0 !important;
+}
+
+/* Fix para inputs y filtros en modo C */
+.interface-c .filter-select, .interface-c .filter-search-input {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+  border-radius: 0 !important;
+  padding: 10px !important;
+  font-weight: bold !important;
+}
+.interface-c select option {
+  background-color: #000000 !important;
+  color: #ffffff !important;
 }
 .interface-c .auth-input, .interface-c .auth-select {
   background-color: #000000 !important;
@@ -1747,6 +1790,34 @@ input, select, textarea, button {
   border-radius: 0 !important;
 }
 
+/* ==========================================================================
+   PREVENIR RECORTES DE FOTOS EN TODAS LAS INTERFACES (ISO 9241 USABILITY)
+   ========================================================================== */
+.product-card-image, 
+.product-detail-image, 
+.apartado-card-image, 
+.table-thumbnail {
+  object-fit: contain !important; /* Ajustar imagen completa sin recortar */
+  background-color: #faf9f6; /* Fondo neutro para rellenar espacios vacíos */
+}
+.interface-c .product-card-image,
+.interface-c .product-detail-image,
+.interface-c .apartado-card-image,
+.interface-c .table-thumbnail {
+  background-color: #000000 !important; /* Fondo negro en alto contraste */
+}
 
-
-
+/* Asegurar visibilidad del botón de registro en Interfaz A */
+.interface-a .btn-header-register {
+  border: 1.5px solid #ab4e79 !important;
+  color: #ab4e79 !important;
+  background-color: transparent !important;
+  padding: 8px 16px !important;
+  border-radius: 0 !important;
+  font-weight: 600 !important;
+  display: inline-block !important;
+}
+.interface-a .btn-header-register:hover {
+  background-color: #ab4e79 !important;
+  color: #ffffff !important;
+}
