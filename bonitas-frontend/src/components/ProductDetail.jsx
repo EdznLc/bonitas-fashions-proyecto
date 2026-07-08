@@ -68,8 +68,10 @@ export default function ProductDetail({ API_URL, producto, user, onBack, onNavig
 
       const data = await res.json();
       if (res.ok) {
-        alert('¡Prenda apartada con éxito!\n\nRecuerda coordinar el pago directamente con el vendedor por WhatsApp desde tu panel de cliente. Tienes un máximo de 2 semanas, de lo contrario el apartado se cancelará automáticamente.');
+        alert('¡Prenda apartada con éxito!\n\nSe abrirá WhatsApp para que coordines el pago y detalles directamente con la vendedora.');
         setShowReservaModal(false);
+        // Redirigir proactivamente a WhatsApp para acordar pago
+        window.open(`https://wa.me/521234567890?text=Hola,%20acabo%20de%20apartar%20la%20prenda%20"${encodeURIComponent(producto.nombre)}"%20con%20talla%20${producto.talla}.%20Quiero%20acordar%20el%20pago%20y%20detalles%20de%20la%20compra.`, '_blank');
         onReservationSuccess();
       } else {
         setErrorModal(data.error || 'No se pudo realizar el apartado.');
@@ -87,15 +89,13 @@ export default function ProductDetail({ API_URL, producto, user, onBack, onNavig
     setErrorModal('');
     setCargandoModal(true);
 
-    const tipoSel = tiposEntrega.find(t => t.id_tipo_entrega.toString() === idTipoEntrega);
-    const costoEnvio = tipoSel ? parseFloat(tipoSel.costo_adicional) : 0;
-    const total = parseFloat(producto.precio) + costoEnvio;
+    const total = parseFloat(producto.precio);
 
     const payload = {
       id_usuario: user.id_usuario,
       id_metodo_pago: parseInt(idMetodoPago, 10),
       id_tipo_entrega: parseInt(idTipoEntrega, 10),
-      detalles_entrega: detallesEntrega,
+      detalles_entrega: 'Acordado por WhatsApp',
       total_final: total,
       productos: [
         {
@@ -114,8 +114,10 @@ export default function ProductDetail({ API_URL, producto, user, onBack, onNavig
 
       const data = await res.json();
       if (res.ok) {
-        alert('¡Compra registrada con éxito! Tu prenda ha sido marcada como Vendida.');
+        alert('¡Compra registrada con éxito!\n\nSe abrirá WhatsApp para que coordines el pago y entrega directamente con la vendedora.');
         setShowCompraModal(false);
+        // Redirigir proactivamente a WhatsApp para acordar pago/detalles
+        window.open(`https://wa.me/521234567890?text=Hola,%20acabo%20de%20comprar%20la%20prenda%20"${encodeURIComponent(producto.nombre)}"%20con%20talla%20${producto.talla}.%20Quiero%20acordar%20el%20pago%20y%20detalles%20de%20la%20entrega.`, '_blank');
         onReservationSuccess();
       } else {
         setErrorModal(data.error || 'No se pudo registrar la compra.');
@@ -287,37 +289,17 @@ export default function ProductDetail({ API_URL, producto, user, onBack, onNavig
                   >
                     {tiposEntrega.map(t => (
                       <option key={t.id_tipo_entrega} value={t.id_tipo_entrega}>
-                        {t.nombre} (+${parseFloat(t.costo_adicional).toFixed(2)})
+                        {t.nombre}
                       </option>
                     ))}
                   </select>
                 </div>
               </div>
 
-              <div className="modal-input-group">
-                <label className="modal-label">Detalles de la Entrega (Dirección / Sucursal) *</label>
-                <input
-                  type="text"
-                  placeholder="Ej. Av. Hidalgo #123, Col. Centro o Recoge en Sucursal Norte"
-                  value={detallesEntrega}
-                  onChange={(e) => setDetallesEntrega(e.target.value)}
-                  className="modal-input"
-                  required
-                />
-              </div>
-
               <div className="modal-summary-box">
-                <div className="summary-row">
-                  <span>Subtotal Prenda:</span>
-                  <span>${parseFloat(producto.precio).toFixed(2)}</span>
-                </div>
-                <div className="summary-row">
-                  <span>Costo de Entrega:</span>
-                  <span>+${costoAdicional.toFixed(2)}</span>
-                </div>
                 <div className="summary-row total">
                   <span>Total Final:</span>
-                  <span>${totalCompra.toFixed(2)}</span>
+                  <span>${parseFloat(producto.precio).toFixed(2)}</span>
                 </div>
               </div>
 
