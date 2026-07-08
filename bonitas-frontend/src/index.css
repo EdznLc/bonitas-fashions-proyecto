@@ -1914,3 +1914,17 @@ input, select, textarea, button {
 .interface-c .seller-table td {
   background-color: #000000 !important;
 }
+
+/* Override de alto contraste para el botón de WhatsApp en modo C */
+.interface-c .btn-whatsapp-contact {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+.interface-c .btn-whatsapp-contact:hover {
+  background-color: #ff66cc !important;
+  color: #000000 !important;
+  border-color: #ff66cc !important;
+}

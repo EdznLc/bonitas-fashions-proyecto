@@ -68,7 +68,7 @@ export default function ProductDetail({ API_URL, producto, user, onBack, onNavig
 
       const data = await res.json();
       if (res.ok) {
-        alert('¡Prenda apartada con éxito! Revisa tu panel para ver la fecha límite.');
+        alert('¡Prenda apartada con éxito!\n\nRecuerda coordinar el pago directamente con el vendedor por WhatsApp desde tu panel de cliente. Tienes un máximo de 2 semanas, de lo contrario el apartado se cancelará automáticamente.');
         setShowReservaModal(false);
         onReservationSuccess();
       } else {
@@ -229,6 +229,7 @@ export default function ProductDetail({ API_URL, producto, user, onBack, onNavig
                   value={fechaLimite}
                   onChange={(e) => setFechaLimite(e.target.value)}
                   min={new Date().toISOString().substring(0, 10)}
+                  max={new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toISOString().substring(0, 10)}
                   className="modal-input"
                   required
                 />

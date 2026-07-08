@@ -13,6 +13,7 @@ export default function Register({ API_URL, onRegisterSuccess, onNavigateToLogin
   const [error, setError] = useState('');
   const [exito, setExito] = useState('');
   const [cargando, setCargando] = useState(false);
+  const [aceptaPolitica, setAceptaPolitica] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -26,6 +27,11 @@ export default function Register({ API_URL, onRegisterSuccess, onNavigateToLogin
     e.preventDefault();
     setError('');
     setExito('');
+
+    if (!aceptaPolitica) {
+      setError('Debes aceptar la política de privacidad para registrarte.');
+      return;
+    }
 
     const { nombre, correo, password, rol } = formData;
     if (!nombre || !correo || !password || !rol) {
@@ -144,7 +150,19 @@ export default function Register({ API_URL, onRegisterSuccess, onNavigateToLogin
             />
           </div>
 
-
+          <div className="auth-input-group checkbox-group" style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', marginTop: '15px', marginBottom: '20px' }}>
+            <input
+              type="checkbox"
+              id="politica_privacidad"
+              checked={aceptaPolitica}
+              onChange={(e) => setAceptaPolitica(e.target.checked)}
+              style={{ marginTop: '4px', width: 'auto', cursor: 'pointer' }}
+              required
+            />
+            <label htmlFor="politica_privacidad" className="auth-label" style={{ fontSize: '12px', fontWeight: '500', lineHeight: '1.4', cursor: 'pointer' }}>
+              Acepto la <strong style={{ textDecoration: 'underline', cursor: 'pointer' }} onClick={(e) => { e.preventDefault(); alert("POLÍTICA DE PRIVACIDAD:\nEn Bonitas Fashions, protegemos tus datos personales. La información recopilada (nombre, correo y teléfono) se utiliza exclusivamente para la gestión de apartados, compras y contacto directo por WhatsApp. No compartimos tu información con terceros y garantizamos el uso responsable bajo estándares éticos de confidencialidad."); }}>política de privacidad y el uso responsable de mis datos personales</strong> para la gestión de apartados. *
+            </label>
+          </div>
 
           <button type="submit" disabled={cargando} className="btn-auth-submit">
             {cargando ? 'Creando cuenta...' : 'Registrarse'}
