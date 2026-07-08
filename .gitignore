@@ -5,6 +5,7 @@ bonitas-api/node_modules/
 # === Archivos del Frontend ===
 bonitas-frontend/node_modules/
 bonitas-frontend/dist/
+bonitas-frontend/.env
 bonitas-frontend/.env.local
 
 # === Archivos del Sistema / Editores ===
