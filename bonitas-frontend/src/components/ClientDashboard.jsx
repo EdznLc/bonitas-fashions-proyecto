@@ -5,19 +5,7 @@ export default function ClientDashboard({ API_URL, user }) {
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState('');
   
-  // Métodos de pago registrados por el usuario localmente
-  const [misTarjetas, setMisTarjetas] = useState(() => {
-    return JSON.parse(localStorage.getItem(`tarjetas_${user.id_usuario}`) || '[]');
-  });
 
-  // Formulario tarjeta
-  const [nuevaTarjeta, setNuevaTarjeta] = useState({
-    alias: '',
-    numero: '',
-    titular: '',
-    tipo: 'Crédito'
-  });
-  const [showTarjetaForm, setShowTarjetaForm] = useState(false);
 
   const cargarApartados = async () => {
     try {
@@ -40,47 +28,12 @@ export default function ClientDashboard({ API_URL, user }) {
     cargarApartados();
   }, []);
 
-  const handleAgregarTarjeta = (e) => {
-    e.preventDefault();
-    if (!nuevaTarjeta.alias || !nuevaTarjeta.numero || !nuevaTarjeta.titular) {
-      alert('Por favor, completa todos los campos de la tarjeta.');
-      return;
-    }
 
-    // Mask card number
-    const numEnmascarado = nuevaTarjeta.numero.replace(/\s?/g, '');
-    if (numEnmascarado.length < 15 || numEnmascarado.length > 16) {
-      alert('Número de tarjeta no válido. Debe tener 15 o 16 dígitos.');
-      return;
-    }
-    const mask = `•••• •••• •••• ${numEnmascarado.slice(-4)}`;
-    
-    const tarjetaGuardar = {
-      id: Date.now(),
-      alias: nuevaTarjeta.alias,
-      numero: mask,
-      titular: nuevaTarjeta.titular.toUpperCase(),
-      tipo: nuevaTarjeta.tipo
-    };
-
-    const actualizadas = [...misTarjetas, tarjetaGuardar];
-    setMisTarjetas(actualizadas);
-    localStorage.setItem(`tarjetas_${user.id_usuario}`, JSON.stringify(actualizadas));
-    setNuevaTarjeta({ alias: '', numero: '', titular: '', tipo: 'Crédito' });
-    setShowTarjetaForm(false);
-    alert('¡Método de pago registrado con éxito en tu cartera digital!');
-  };
-
-  const handleEliminarTarjeta = (id) => {
-    const filtradas = misTarjetas.filter(t => t.id !== id);
-    setMisTarjetas(filtradas);
-    localStorage.setItem(`tarjetas_${user.id_usuario}`, JSON.stringify(filtradas));
-  };
 
   return (
     <div className="dashboard-container">
       <h2 className="dashboard-title">Panel de Cliente</h2>
-      <p className="dashboard-subtitle">Administra tus prendas apartadas y métodos de pago.</p>
+      <p className="dashboard-subtitle">Administra tus prendas apartadas.</p>
 
       <div className="dashboard-grid">
         
@@ -147,108 +100,6 @@ export default function ClientDashboard({ API_URL, user }) {
               );
             })}
           </div>
-        </div>
-
-        {/* COLUMNA 2: MÉTODOS DE PAGO */}
-        <div className="dashboard-column">
-          <div className="section-header-row">
-            <h3 className="section-subtitle">Mis Métodos de Pago</h3>
-            <button
-              onClick={() => setShowTarjetaForm(!showTarjetaForm)}
-              className="btn-add-card"
-            >
-              {showTarjetaForm ? 'Cancelar' : '+ Registrar Tarjeta'}
-            </button>
-          </div>
-
-          {showTarjetaForm && (
-            <form onSubmit={handleAgregarTarjeta} className="card-registration-form">
-              <div className="auth-input-group">
-                <label className="auth-label">Alias del Método (Ej: Mi Tarjeta Visa) *</label>
-                <input
-                  type="text"
-                  value={nuevaTarjeta.alias}
-                  onChange={(e) => setNuevaTarjeta(prev => ({ ...prev, alias: e.target.value }))}
-                  placeholder="Visa Principal, Nómina, etc."
-                  className="auth-input"
-                  required
-                />
-              </div>
-
-              <div className="auth-input-group">
-                <label className="auth-label">Titular de la Tarjeta *</label>
-                <input
-                  type="text"
-                  value={nuevaTarjeta.titular}
-                  onChange={(e) => setNuevaTarjeta(prev => ({ ...prev, titular: e.target.value }))}
-                  placeholder="NOMBRE COMPLETO EN LA TARJETA"
-                  className="auth-input"
-                  required
-                />
-              </div>
-
-              <div className="auth-form-row">
-                <div className="auth-input-group">
-                  <label className="auth-label">Número de Tarjeta *</label>
-                  <input
-                    type="text"
-                    maxLength="16"
-                    value={nuevaTarjeta.numero}
-                    onChange={(e) => setNuevaTarjeta(prev => ({ ...prev, numero: e.target.value.replace(/\D/g, '') }))}
-                    placeholder="16 dígitos de la tarjeta"
-                    className="auth-input"
-                    required
-                  />
-                </div>
-
-                <div className="auth-input-group">
-                  <label className="auth-label">Tipo *</label>
-                  <select
-                    value={nuevaTarjeta.tipo}
-                    onChange={(e) => setNuevaTarjeta(prev => ({ ...prev, tipo: e.target.value }))}
-                    className="auth-select"
-                    required
-                  >
-                    <option value="Crédito">Crédito</option>
-                    <option value="Débito">Débito</option>
-                  </select>
-                </div>
-              </div>
-
-              <button type="submit" className="btn-save-card">
-                Guardar Tarjeta
-              </button>
-            </form>
-          )}
-
-          {misTarjetas.length === 0 ? (
-            <div className="dashboard-empty-card">
-              No tienes tarjetas de pago registradas. Puedes registrar tarjetas aquí para agilizar tus compras en línea.
-            </div>
-          ) : (
-            <div className="cards-list">
-              {misTarjetas.map(t => (
-                <div key={t.id} className="payment-card-ui">
-                  <div className="payment-card-chip"></div>
-                  <div className="payment-card-info-row">
-                    <span className="payment-card-alias">{t.alias}</span>
-                    <span className="payment-card-type">{t.tipo}</span>
-                  </div>
-                  <div className="payment-card-number">{t.numero}</div>
-                  <div className="payment-card-footer">
-                    <span className="payment-card-holder">{t.titular}</span>
-                    <button
-                      onClick={() => handleEliminarTarjeta(t.id)}
-                      className="btn-delete-card"
-                      title="Eliminar Tarjeta"
-                    >
-                      Eliminar
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
         </div>
 
       </div>
