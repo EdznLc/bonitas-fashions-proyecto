@@ -18,7 +18,7 @@ app.use(express.json());
 
 // Mount Modular Routes
 app.use('/', authRoutes);
-app.use('/api/productos', productRoutes);
+app.use('/', productRoutes);
 app.use('/api/apartados', apartadoRoutes);
 app.use('/api/recoleccion', recoleccionRoutes);
 
