@@ -1903,3 +1903,14 @@ input, select, textarea, button {
   color: #000000 !important;
   border-color: #ff66cc !important;
 }
+
+/* Fix de fondo blanco en secciones administrativas para modo C */
+.interface-c .seller-section, 
+.interface-c .table-responsive, 
+.interface-c .product-form-card {
+  background-color: #000000 !important;
+  border-color: #ff66cc !important;
+}
+.interface-c .seller-table td {
+  background-color: #000000 !important;
+}
