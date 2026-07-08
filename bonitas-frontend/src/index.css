@@ -1086,3 +1086,339 @@ input, select, textarea {
   }
 }
 
+/* ==========================================================================
+   ALINEACIÓN CROMÁTICA CON EL LOGOTIPO FLORAL DE BONITAS FASHIONS
+   ========================================================================== */
+:root {
+  --color-bg-html: #faf6f8; /* Soft pink-cream watercolor background */
+  --color-text-main: #382a4b; /* Deep charcoal-purple */
+  --color-primary: #ab4e79; /* Ciruela/rosa viejo */
+  --color-primary-hover: #8e3d62;
+  --color-secondary: #faf0f5; /* Lavender/pink cream */
+}
+
+/* Modificar el fondo general */
+html, body {
+  background-color: var(--color-bg-html) !important;
+  color: var(--color-text-main) !important;
+}
+
+h1, h2, h3, h4, h5, h6, .welcome-text {
+  color: var(--color-text-main) !important;
+}
+
+/* Cambiar colores primarios de la tienda standard (Interface B) */
+.app-title {
+  color: var(--color-primary) !important;
+}
+.btn-header-nav:hover, .btn-header-nav.active {
+  background-color: var(--color-primary) !important;
+  border-color: var(--color-primary) !important;
+}
+.btn-auth-submit, .btn-comprar-now, .btn-save-card, .btn-modal-submit {
+  background-color: var(--color-primary) !important;
+}
+.btn-auth-submit:hover, .btn-comprar-now:hover, .btn-save-card:hover, .btn-modal-submit:hover {
+  background-color: var(--color-primary-hover) !important;
+}
+.btn-header-register, .btn-apartar-now, .btn-add-card, .btn-add-product {
+  border-color: var(--color-primary) !important;
+  color: var(--color-primary) !important;
+}
+.btn-header-register:hover, .btn-apartar-now:hover, .btn-add-card:hover, .btn-add-product:hover {
+  background-color: var(--color-primary) !important;
+  color: #ffffff !important;
+}
+.product-card-price, .price-value, .apartado-card-price {
+  color: var(--color-primary) !important;
+}
+.btn-product-card-view {
+  border-color: var(--color-primary) !important;
+  color: var(--color-primary) !important;
+}
+.product-card:hover .btn-product-card-view {
+  background-color: var(--color-primary) !important;
+  border-color: var(--color-primary) !important;
+}
+.product-card-tag {
+  background-color: var(--color-primary) !important;
+}
+.status-badge-active {
+  background-color: var(--color-secondary) !important;
+  color: var(--color-primary) !important;
+}
+
+/* ==========================================================================
+   SELECTOR DE INTERFAZ DEBUG (EN CABECERA)
+   ========================================================================== */
+.header-title-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.interface-selector-debug {
+  display: inline-flex;
+  align-items: center;
+  background-color: #f5edf1;
+  padding: 4px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+}
+.debug-label {
+  font-size: 10px;
+  font-weight: 700;
+  color: #382a4b;
+  margin-right: 6px;
+  margin-left: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.btn-debug-toggle {
+  padding: 4px 10px;
+  border: none;
+  background: transparent;
+  color: #382a4b;
+  font-size: 11px;
+  font-weight: 700;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-debug-toggle:hover {
+  background-color: #ebdfeb;
+}
+.btn-debug-toggle.active {
+  background-color: #ab4e79;
+  color: #ffffff;
+}
+
+/* ==========================================================================
+   INTERFACE A: MINIMALISTA (GESTALT) OVERRIDES
+   ========================================================================== */
+.app-container.interface-a {
+  background-color: #ffffff !important;
+  box-shadow: none !important;
+  border: none !important;
+  padding: 60px 20px !important;
+}
+.interface-a .app-title {
+  color: #382a4b !important;
+  font-weight: 400 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.1em !important;
+  font-size: 26px !important;
+}
+.interface-a .product-card {
+  border: none !important;
+  border-radius: 0 !important;
+  background-color: transparent !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+}
+.interface-a .product-card:hover {
+  transform: none !important;
+  box-shadow: none !important;
+}
+.interface-a .product-image-container {
+  background-color: #fbf9fa !important;
+  border-radius: 0 !important;
+  height: 250px !important;
+}
+.interface-a .product-card-tag {
+  display: none !important;
+}
+.interface-a .product-card-info {
+  padding: 12px 0 0 0 !important;
+  text-align: center !important;
+}
+.interface-a .product-card-title {
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.05em !important;
+}
+.interface-a .product-card-brand {
+  font-size: 11px !important;
+  letter-spacing: 0.05em !important;
+  text-transform: uppercase !important;
+}
+.interface-a .product-card-details-row {
+  justify-content: center !important;
+  gap: 15px !important;
+  margin-bottom: 8px !important;
+}
+.interface-a .product-card-size {
+  border: none !important;
+  background: none !important;
+  padding: 0 !important;
+  font-weight: 400 !important;
+  font-size: 13px !important;
+  color: #64748b !important;
+}
+.interface-a .product-card-price {
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  color: #382a4b !important;
+}
+.interface-a .btn-product-card-view {
+  border: none !important;
+  border-bottom: 1.5px solid #382a4b !important;
+  color: #382a4b !important;
+  border-radius: 0 !important;
+  padding: 4px 0 !important;
+  background: transparent !important;
+  text-transform: uppercase !important;
+  font-size: 10px !important;
+  letter-spacing: 0.1em !important;
+  margin-top: 5px !important;
+}
+.interface-a .product-card:hover .btn-product-card-view {
+  background-color: transparent !important;
+  color: #ab4e79 !important;
+  border-color: #ab4e79 !important;
+}
+.interface-a .product-detail-image-box {
+  border-radius: 0 !important;
+  border: none !important;
+  background-color: #fbf9fa !important;
+}
+.interface-a .product-detail-badge {
+  display: none !important;
+}
+.interface-a .product-detail-spec-grid {
+  grid-template-columns: 1fr !important;
+  gap: 8px !important;
+}
+.interface-a .spec-card {
+  border: none !important;
+  background: transparent !important;
+  text-align: left !important;
+  padding: 6px 0 !important;
+  border-bottom: 1px solid #f1f5f9 !important;
+  display: flex !important;
+  justify-content: space-between !important;
+}
+.interface-a .spec-title {
+  font-size: 11px !important;
+}
+.interface-a .spec-value {
+  font-size: 13px !important;
+}
+.interface-a .btn-comprar-now {
+  background-color: #382a4b !important;
+  border-radius: 0 !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.1em !important;
+  text-transform: uppercase !important;
+  padding: 12px !important;
+}
+.interface-a .btn-comprar-now:hover {
+  background-color: #ab4e79 !important;
+}
+.interface-a .btn-apartar-now {
+  border: 1.5px solid #382a4b !important;
+  color: #382a4b !important;
+  border-radius: 0 !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.1em !important;
+  text-transform: uppercase !important;
+  padding: 12px !important;
+}
+.interface-a .btn-apartar-now:hover {
+  background-color: #382a4b !important;
+  color: #ffffff !important;
+}
+.interface-a .auth-card {
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  max-width: 400px !important;
+}
+.interface-a .auth-input, .interface-a .auth-select {
+  border: none !important;
+  border-bottom: 1.5px solid #cbd5e1 !important;
+  border-radius: 0 !important;
+  padding: 8px 4px !important;
+}
+.interface-a .auth-input:focus {
+  border-color: #ab4e79 !important;
+}
+.interface-a .btn-auth-submit {
+  background-color: #382a4b !important;
+  border-radius: 0 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.1em !important;
+  font-size: 13px !important;
+}
+.interface-a .dashboard-empty-card, .interface-a .seller-empty-card {
+  border: none !important;
+  background-color: #fbf9fa !important;
+  border-radius: 0 !important;
+}
+.interface-a .apartado-card {
+  border: none !important;
+  border-bottom: 1px solid #e2e8f0 !important;
+  border-radius: 0 !important;
+  padding: 16px 0 !important;
+}
+.interface-a .apartado-card-image-box {
+  border-radius: 0 !important;
+}
+.interface-a .seller-table th {
+  background-color: transparent !important;
+  border-bottom: 2px solid #382a4b !important;
+}
+.interface-a .table-thumbnail {
+  border-radius: 0 !important;
+}
+.interface-a .table-badge-1, .interface-a .table-badge-2, .interface-a .table-badge-3 {
+  border-radius: 0 !important;
+  font-size: 9px !important;
+}
+.interface-a .btn-table-edit, .interface-a .btn-table-delete {
+  border-radius: 0 !important;
+  font-size: 11px !important;
+}
+
+/* ==========================================================================
+   INTERFACE C: BÁSICA (MORADO TRADICIONAL) OVERRIDES
+   ========================================================================== */
+.interface-c .app-title {
+  color: #6d28d9 !important; /* Morado Clásico */
+}
+.interface-c .btn-header-nav.active {
+  background-color: #6d28d9 !important;
+  border-color: #6d28d9 !important;
+}
+.interface-c .product-card {
+  border: 1px solid #a78bfa !important;
+  border-radius: 4px !important;
+}
+.interface-c .btn-product-card-view {
+  border: 1px solid #6d28d9 !important;
+  color: #6d28d9 !important;
+  border-radius: 4px !important;
+}
+.interface-c .btn-product-card-view:hover {
+  background-color: #6d28d9 !important;
+  color: #ffffff !important;
+}
+.interface-c .btn-comprar-now {
+  background-color: #6d28d9 !important;
+  border-radius: 4px !important;
+}
+.interface-c .btn-apartar-now {
+  border: 2px solid #6d28d9 !important;
+  color: #6d28d9 !important;
+  border-radius: 4px !important;
+}
+.interface-c .btn-apartar-now:hover {
+  background-color: #6d28d9 !important;
+  color: #ffffff !important;
+}
+.interface-c .btn-auth-submit {
+  background-color: #6d28d9 !important;
+  border-radius: 4px !important;
+}
+
+

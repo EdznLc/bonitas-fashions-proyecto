@@ -25,7 +25,12 @@ export default function App() {
     return <FichaTecnica />;
   }
 
-  // 2. Active User session management
+  // 2. Interface version selector state ('A': Minimalist, 'B': Standard Commercial, 'C': Basic)
+  const [interfaceVersion, setInterfaceVersion] = useState(() => {
+    return queryParams.get('interface')?.toUpperCase() || 'B';
+  });
+
+  // 3. Active User session management
   const [user, setUser] = useState(() => {
     return JSON.parse(localStorage.getItem('user') || 'null');
   });
@@ -42,10 +47,38 @@ export default function App() {
   };
 
   return (
-    <div className="app-container">
+    <div className={`app-container interface-${interfaceVersion.toLowerCase()}`}>
       <header className="app-header">
         <div className="header-brand-container" onClick={() => { setView('catalog'); setSelectedProduct(null); }}>
-          <h1 className="app-title">Bonitas Fashions</h1>
+          <div className="header-title-row">
+            <h1 className="app-title">Bonitas Fashions</h1>
+            
+            {/* Quick switcher for usablity evaluation testing */}
+            <div className="interface-selector-debug">
+              <span className="debug-label">Diseño:</span>
+              <button 
+                onClick={() => setInterfaceVersion('A')} 
+                className={`btn-debug-toggle ${interfaceVersion === 'A' ? 'active' : ''}`}
+                title="Interfaz A: Minimalista (Gestalt)"
+              >
+                A
+              </button>
+              <button 
+                onClick={() => setInterfaceVersion('B')} 
+                className={`btn-debug-toggle ${interfaceVersion === 'B' ? 'active' : ''}`}
+                title="Interfaz B: Estándar Comercial"
+              >
+                B
+              </button>
+              <button 
+                onClick={() => setInterfaceVersion('C')} 
+                className={`btn-debug-toggle ${interfaceVersion === 'C' ? 'active' : ''}`}
+                title="Interfaz C: Básica"
+              >
+                C
+              </button>
+            </div>
+          </div>
           <p className="app-subtitle">Tienda de Moda Online - Diseños Exclusivos</p>
         </div>
 
