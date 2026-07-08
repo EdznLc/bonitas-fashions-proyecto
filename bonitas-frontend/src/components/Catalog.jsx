@@ -117,6 +117,11 @@ export default function Catalog({ API_URL, onSelectProduct }) {
               <h3 className="product-card-title">{producto.nombre}</h3>
               {producto.marca && <p className="product-card-brand">{producto.marca}</p>}
               
+              <div className="product-card-rating">
+                <span className="rating-stars">⭐⭐⭐⭐⭐</span>
+                <span className="rating-count">(12)</span>
+              </div>
+              
               <div className="product-card-details-row">
                 <span className="product-card-size">Talla: {producto.talla}</span>
                 <span className="product-card-price">${parseFloat(producto.precio).toFixed(2)}</span>

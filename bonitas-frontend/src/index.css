@@ -1381,44 +1381,288 @@ h1, h2, h3, h4, h5, h6, .welcome-text {
 }
 
 /* ==========================================================================
-   INTERFACE C: BÁSICA (MORADO TRADICIONAL) OVERRIDES
+   INTERFACE B: TRADICIONAL (ESTILO AMAZON CON CABECERA OSCURA Y GRID DE BLOQUES)
    ========================================================================== */
-.interface-c .app-title {
-  color: #6d28d9 !important; /* Morado Clásico */
+.interface-b .app-header {
+  background-color: #2e1f3b !important; /* Cabecera ciruela oscuro tipo Amazon */
+  padding: 16px 24px !important;
+  border-radius: 8px 8px 0 0 !important;
+  color: #ffffff !important;
+  margin-bottom: 24px !important;
 }
-.interface-c .btn-header-nav.active {
-  background-color: #6d28d9 !important;
-  border-color: #6d28d9 !important;
+.interface-b .app-title {
+  color: #ffffff !important; /* Título blanco */
+  font-family: 'Outfit', sans-serif !important;
+  font-size: 24px !important;
+  font-weight: 700 !important;
+}
+.interface-b .app-subtitle {
+  color: #faf0f5 !important;
+  opacity: 0.8;
+}
+.interface-b .welcome-text {
+  color: #ffffff !important;
+}
+.interface-b .btn-header-nav {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  color: #ffffff !important;
+  border-radius: 4px !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+.interface-b .btn-header-nav:hover, .interface-b .btn-header-nav.active {
+  background-color: #ffffff !important;
+  color: #2e1f3b !important;
+}
+.interface-b .btn-header-register {
+  background-color: #ab4e79 !important;
+  color: #ffffff !important;
+  border-radius: 4px !important;
+}
+.interface-b .btn-header-register:hover {
+  background-color: #8e3d62 !important;
+}
+.interface-b .product-card {
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 8px !important;
+  background-color: #f8fafc !important; /* Tarjetas con fondo ligeramente gris */
+  padding: 12px !important;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05) !important;
+}
+.interface-b .product-card:hover {
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
+}
+.interface-b .product-image-container {
+  border-radius: 6px !important;
+}
+.interface-b .product-card-rating {
+  display: flex !important;
+  align-items: center;
+  gap: 4px;
+  margin: 6px 0;
+  font-size: 13px;
+}
+.interface-b .rating-stars {
+  color: #eab308;
+}
+.interface-b .rating-count {
+  color: #64748b;
+  font-size: 11px;
+}
+.interface-b .product-card-details-row {
+  margin-top: 8px !important;
+  align-items: center !important;
+}
+.interface-b .product-card-price {
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  color: #ab4e79 !important;
+}
+.interface-b .btn-product-card-view {
+  background: linear-gradient(180deg, #fbf7f9 0%, #f3e5ee 100%) !important;
+  border: 1px solid #d8b2c6 !important;
+  border-radius: 20px !important; /* Botón píldora tipo Amazon */
+  color: #382a4b !important;
+  font-weight: 500 !important;
+  padding: 8px 16px !important;
+  width: 100% !important;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05) !important;
+}
+.interface-b .btn-product-card-view:hover {
+  background: linear-gradient(180deg, #f5e4ee 0%, #e2c0d5 100%) !important;
+}
+.interface-b .btn-comprar-now {
+  background: linear-gradient(180deg, #b85888 0%, #ab4e79 100%) !important;
+  border: 1px solid #8e3d62 !important;
+  border-radius: 20px !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+}
+.interface-b .btn-comprar-now:hover {
+  background: linear-gradient(180deg, #ab4e79 0%, #8e3d62 100%) !important;
+}
+.interface-b .btn-apartar-now {
+  background: linear-gradient(180deg, #fefefe 0%, #f3edf1 100%) !important;
+  border: 1.5px solid #ab4e79 !important;
+  color: #ab4e79 !important;
+  border-radius: 20px !important;
+}
+.interface-b .btn-apartar-now:hover {
+  background: #faf0f5 !important;
+}
+
+/* ==========================================================================
+   INTERFACE C: ACCESIBILIDAD Y ALTO CONTRASTE EXTREMO (WCAG AAA / ISO 25010)
+   ========================================================================== */
+.app-container.interface-c {
+  background-color: #000000 !important; /* Fondo Negro Puro */
+  border: 3px solid #ffff00 !important; /* Borde grueso amarillo */
+  box-shadow: none !important;
+  color: #ffffff !important;
+}
+.interface-c .app-title {
+  color: #ffff00 !important; /* Amarillo de alta visibilidad */
+  font-weight: 800 !important;
+  text-transform: uppercase !important;
+  font-size: 28px !important;
+}
+.interface-c .app-subtitle {
+  color: #ffffff !important;
+  font-weight: bold !important;
+}
+.interface-c h1, .interface-c h2, .interface-c h3, .interface-c h4, .interface-c h5, .interface-c h6, .interface-c .welcome-text {
+  color: #ffff00 !important;
+}
+.interface-c p, .interface-c span, .interface-c label, .interface-c td, .interface-c th {
+  color: #ffffff !important;
+  font-weight: bold !important;
+}
+.interface-c .product-card-rating {
+  display: none !important; /* Eliminar estrellas decorativas */
+}
+.interface-c .btn-header-nav, .interface-c .btn-header-register {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+  border-radius: 0 !important;
+  font-weight: bold !important;
+}
+.interface-c .btn-header-nav.active, .interface-c .btn-header-nav:hover {
+  background-color: #ffff00 !important;
+  color: #000000 !important;
+  border-color: #ffff00 !important;
 }
 .interface-c .product-card {
-  border: 1px solid #a78bfa !important;
-  border-radius: 4px !important;
+  background-color: #000000 !important;
+  border: 2px solid #ffffff !important;
+  border-radius: 0 !important;
+}
+.interface-c .product-card:hover {
+  border-color: #ffff00 !important;
+  transform: none !important;
+}
+.interface-c .product-card-price {
+  color: #ffff00 !important;
+  font-size: 20px !important;
+  font-weight: 900 !important;
 }
 .interface-c .btn-product-card-view {
-  border: 1px solid #6d28d9 !important;
-  color: #6d28d9 !important;
-  border-radius: 4px !important;
+  background-color: #000000 !important;
+  color: #ffff00 !important;
+  border: 2px solid #ffff00 !important;
+  border-radius: 0 !important;
+  font-weight: bold !important;
+  text-transform: uppercase !important;
 }
 .interface-c .btn-product-card-view:hover {
-  background-color: #6d28d9 !important;
-  color: #ffffff !important;
+  background-color: #ffff00 !important;
+  color: #000000 !important;
 }
 .interface-c .btn-comprar-now {
-  background-color: #6d28d9 !important;
-  border-radius: 4px !important;
+  background-color: #ffff00 !important;
+  color: #000000 !important;
+  border: 2px solid #ffff00 !important;
+  border-radius: 0 !important;
+  font-weight: 900 !important;
+  text-transform: uppercase !important;
+}
+.interface-c .btn-comprar-now:hover {
+  background-color: #ffffff !important;
+  border-color: #ffffff !important;
 }
 .interface-c .btn-apartar-now {
-  border: 2px solid #6d28d9 !important;
-  color: #6d28d9 !important;
-  border-radius: 4px !important;
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+  border-radius: 0 !important;
+  font-weight: 900 !important;
+  text-transform: uppercase !important;
 }
 .interface-c .btn-apartar-now:hover {
-  background-color: #6d28d9 !important;
+  background-color: #ffffff !important;
+  color: #000000 !important;
+}
+.interface-c .auth-card {
+  background-color: #000000 !important;
+  border: 2px solid #ffffff !important;
+  border-radius: 0 !important;
+}
+.interface-c .auth-input, .interface-c .auth-select {
+  background-color: #000000 !important;
   color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+  border-radius: 0 !important;
+}
+.interface-c .auth-input:focus, .interface-c .auth-select:focus {
+  border-color: #ffff00 !important;
+  outline: none !important;
 }
 .interface-c .btn-auth-submit {
-  background-color: #6d28d9 !important;
-  border-radius: 4px !important;
+  background-color: #ffff00 !important;
+  color: #000000 !important;
+  border-radius: 0 !important;
+  font-weight: 900 !important;
+  text-transform: uppercase !important;
 }
+.interface-c .dashboard-empty-card, .interface-c .seller-empty-card {
+  background-color: #000000 !important;
+  border: 2px dashed #ffffff !important;
+  border-radius: 0 !important;
+}
+.interface-c .apartado-card {
+  background-color: #000000 !important;
+  border: 2px solid #ffffff !important;
+  border-radius: 0 !important;
+  margin-bottom: 12px !important;
+}
+.interface-c .apartado-card-price {
+  color: #ffff00 !important;
+}
+.interface-c .catalog-filter-select, .interface-c .filter-select {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+  border-radius: 0 !important;
+}
+.interface-c .catalog-search-input {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+  border-radius: 0 !important;
+}
+.interface-c .seller-table th {
+  background-color: #1e1e1e !important;
+  border: 2px solid #ffffff !important;
+  color: #ffff00 !important;
+}
+.interface-c .seller-table td {
+  border: 1px solid #ffffff !important;
+}
+.interface-c .modal-content {
+  background-color: #000000 !important;
+  border: 3px solid #ffff00 !important;
+  border-radius: 0 !important;
+}
+.interface-c .modal-input, .interface-c .modal-select {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+.interface-c .btn-modal-submit {
+  background-color: #ffff00 !important;
+  color: #000000 !important;
+}
+.interface-c .btn-modal-cancel {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+.interface-c .btn-debug-toggle {
+  border: 1px solid #ffff00 !important;
+  color: #ffffff !important;
+}
+.interface-c .btn-debug-toggle.active {
+  background-color: #ffff00 !important;
+  color: #000000 !important;
+}
+
 
 
