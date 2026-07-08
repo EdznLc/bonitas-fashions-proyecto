@@ -45,10 +45,10 @@ export default function ProductDetail({ API_URL, producto, user, onBack, onNavig
       }
     };
     
-    if (showCompraModal) {
+    if (showReservaModal) {
       cargarCatalogos();
     }
-  }, [showCompraModal]);
+  }, [showReservaModal]);
 
   const handleApartar = async (e) => {
     e.preventDefault();
@@ -62,16 +62,16 @@ export default function ProductDetail({ API_URL, producto, user, onBack, onNavig
         body: JSON.stringify({
           id_usuario: user.id_usuario,
           id_producto: producto.id_producto,
-          fecha_limite: fechaLimite
+          fecha_limite: fechaLimite,
+          id_metodo_pago: parseInt(idMetodoPago, 10),
+          id_tipo_entrega: parseInt(idTipoEntrega, 10)
         })
       });
 
       const data = await res.json();
       if (res.ok) {
-        alert('¡Prenda apartada con éxito!\n\nSe abrirá WhatsApp para que coordines el pago y detalles directamente con la vendedora.');
+        alert('¡Prenda apartada con éxito!\n\nAhora puedes consultarla y coordinar el pago desde tu sección de apartados.');
         setShowReservaModal(false);
-        // Redirigir proactivamente a WhatsApp para acordar pago
-        window.open(`https://wa.me/521234567890?text=Hola,%20acabo%20de%20apartar%20la%20prenda%20"${encodeURIComponent(producto.nombre)}"%20con%20talla%20${producto.talla}.%20Quiero%20acordar%20el%20pago%20y%20detalles%20de%20la%20compra.`, '_blank');
         onReservationSuccess();
       } else {
         setErrorModal(data.error || 'No se pudo realizar el apartado.');
@@ -83,56 +83,6 @@ export default function ProductDetail({ API_URL, producto, user, onBack, onNavig
       setCargandoModal(false);
     }
   };
-
-  const handleComprar = async (e) => {
-    e.preventDefault();
-    setErrorModal('');
-    setCargandoModal(true);
-
-    const total = parseFloat(producto.precio);
-
-    const payload = {
-      id_usuario: user.id_usuario,
-      id_metodo_pago: parseInt(idMetodoPago, 10),
-      id_tipo_entrega: parseInt(idTipoEntrega, 10),
-      detalles_entrega: 'Acordado por WhatsApp',
-      total_final: total,
-      productos: [
-        {
-          id_producto: producto.id_producto,
-          precio: producto.precio
-        }
-      ]
-    };
-
-    try {
-      const res = await fetch(`${API_URL}/api/apartados/checkout`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
-
-      const data = await res.json();
-      if (res.ok) {
-        alert('¡Compra registrada con éxito!\n\nSe abrirá WhatsApp para que coordines el pago y entrega directamente con la vendedora.');
-        setShowCompraModal(false);
-        // Redirigir proactivamente a WhatsApp para acordar pago/detalles
-        window.open(`https://wa.me/521234567890?text=Hola,%20acabo%20de%20comprar%20la%20prenda%20"${encodeURIComponent(producto.nombre)}"%20con%20talla%20${producto.talla}.%20Quiero%20acordar%20el%20pago%20y%20detalles%20de%20la%20entrega.`, '_blank');
-        onReservationSuccess();
-      } else {
-        setErrorModal(data.error || 'No se pudo registrar la compra.');
-      }
-    } catch (err) {
-      console.error(err);
-      setErrorModal('Error al procesar el pago.');
-    } finally {
-      setCargandoModal(false);
-    }
-  };
-
-  const tipoEntregaSeleccionado = tiposEntrega.find(t => t.id_tipo_entrega.toString() === idTipoEntrega);
-  const costoAdicional = tipoEntregaSeleccionado ? parseFloat(tipoEntregaSeleccionado.costo_adicional) : 0;
-  const totalCompra = parseFloat(producto.precio) + costoAdicional;
 
   return (
     <div className="product-detail-container">
@@ -191,22 +141,19 @@ export default function ProductDetail({ API_URL, producto, user, onBack, onNavig
           <div className="product-detail-actions">
             {!user ? (
               <div className="visitor-action-alert">
-                <p>Inicia sesión con tu cuenta de cliente para adquirir o apartar esta prenda.</p>
+                <p>Inicia sesión con tu cuenta de cliente para apartar esta prenda.</p>
                 <button onClick={onNavigateToLogin} className="btn-login-redirect">
                   Iniciar Sesión / Registrarse
                 </button>
               </div>
             ) : user.rol === 'vendedor' ? (
               <div className="visitor-action-alert">
-                <p>Como vendedor, no tienes habilitada la opción de apartar o comprar productos.</p>
+                <p>Como vendedor, no tienes habilitada la opción de apartar productos.</p>
               </div>
             ) : (
               <div className="client-action-buttons">
-                <button onClick={() => setShowCompraModal(true)} className="btn-comprar-now">
-                  Comprar Prenda
-                </button>
-                <button onClick={() => setShowReservaModal(true)} className="btn-apartar-now">
-                  Apartar (Abonar / Reservar)
+                <button onClick={() => setShowReservaModal(true)} className="btn-apartar-now" style={{ width: '100%' }}>
+                  Apartar Prenda (Reservar)
                 </button>
               </div>
             )}
@@ -219,7 +166,7 @@ export default function ProductDetail({ API_URL, producto, user, onBack, onNavig
         <div className="modal-overlay">
           <div className="modal-card">
             <h3 className="modal-title">Apartar Prenda</h3>
-            <p className="modal-subtitle">Establece la fecha límite de pago para resguardar la prenda.</p>
+            <p className="modal-subtitle">Establece los detalles de tu apartado y coordinaremos el pago por WhatsApp.</p>
             
             {errorModal && <div className="modal-error">{errorModal}</div>}
 
@@ -237,29 +184,6 @@ export default function ProductDetail({ API_URL, producto, user, onBack, onNavig
                 />
               </div>
 
-              <div className="modal-actions-row">
-                <button type="button" onClick={() => setShowReservaModal(false)} className="btn-modal-cancel">
-                  Cancelar
-                </button>
-                <button type="submit" disabled={cargandoModal} className="btn-modal-submit">
-                  {cargandoModal ? 'Registrando...' : 'Confirmar Apartado'}
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
-
-      {/* MODAL 2: COMPRAR/CHECKOUT */}
-      {showCompraModal && (
-        <div className="modal-overlay">
-          <div className="modal-card">
-            <h3 className="modal-title">Completar Compra</h3>
-            <p className="modal-subtitle">Registra tu método de pago y detalles de entrega.</p>
-            
-            {errorModal && <div className="modal-error">{errorModal}</div>}
-
-            <form onSubmit={handleComprar} className="modal-form">
               <div className="modal-input-group">
                 <label className="modal-label">Método de Pago *</label>
                 <div className="select-wrapper">
@@ -298,17 +222,17 @@ export default function ProductDetail({ API_URL, producto, user, onBack, onNavig
 
               <div className="modal-summary-box">
                 <div className="summary-row total">
-                  <span>Total Final:</span>
+                  <span>Monto a Liquidar:</span>
                   <span>${parseFloat(producto.precio).toFixed(2)}</span>
                 </div>
               </div>
 
               <div className="modal-actions-row">
-                <button type="button" onClick={() => setShowCompraModal(false)} className="btn-modal-cancel">
+                <button type="button" onClick={() => setShowReservaModal(false)} className="btn-modal-cancel">
                   Cancelar
                 </button>
                 <button type="submit" disabled={cargandoModal} className="btn-modal-submit">
-                  {cargandoModal ? 'Registrando Pago...' : 'Confirmar Compra'}
+                  {cargandoModal ? 'Registrando...' : 'Confirmar Apartado'}
                 </button>
               </div>
             </form>

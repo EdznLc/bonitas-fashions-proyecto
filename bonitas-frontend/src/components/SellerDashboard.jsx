@@ -423,7 +423,8 @@ export default function SellerDashboard({ API_URL }) {
                 <tr>
                   <th>Apartado</th>
                   <th>Cliente</th>
-                  <th>Contacto</th>
+                  <th>Correo Electrónico</th>
+                  <th>Teléfono</th>
                   <th>Prenda</th>
                   <th>Talla</th>
                   <th>Monto</th>
@@ -446,12 +447,8 @@ export default function SellerDashboard({ API_URL }) {
                     <tr key={a.id_apartado}>
                       <td>{a.id_apartado}</td>
                       <td><strong>{a.usuario_nombre}</strong></td>
-                      <td>
-                        <div className="table-contact-cell">
-                          <span>{a.correo}</span>
-                          {a.telefono && <span className="sub-phone">{a.telefono}</span>}
-                        </div>
-                      </td>
+                      <td>{a.correo}</td>
+                      <td>{a.telefono || 'N/A'}</td>
                       <td>{a.producto_nombre}</td>
                       <td>{a.talla}</td>
                       <td>${parseFloat(a.precio).toFixed(2)}</td>

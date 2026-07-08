@@ -27,7 +27,7 @@ router.get('/tipos-entrega', async (req, res) => {
 
 // 3. Crear un nuevo apartado (Transaccional)
 router.post('/', async (req, res) => {
-    const { id_usuario, id_producto, fecha_limite } = req.body;
+    const { id_usuario, id_producto, fecha_limite, id_metodo_pago, id_tipo_entrega } = req.body;
 
     if (!id_usuario || !id_producto || !fecha_limite) {
         return res.status(400).json({ error: 'ID de usuario, ID de producto y fecha límite son obligatorios.' });
@@ -51,11 +51,17 @@ router.post('/', async (req, res) => {
 
         // 1. Insertar en la tabla 'apartado'
         const queryApartado = `
-            INSERT INTO apartado (id_usuario, id_producto, fecha_limite, estatus)
-            VALUES ($1, $2, $3, 'Activo')
+            INSERT INTO apartado (id_usuario, id_producto, fecha_limite, id_metodo_pago, id_tipo_entrega, estatus)
+            VALUES ($1, $2, $3, $4, $5, 'Activo')
             RETURNING *;
         `;
-        const resApartado = await client.query(queryApartado, [id_usuario, id_producto, new Date(fecha_limite)]);
+        const resApartado = await client.query(queryApartado, [
+            id_usuario, 
+            id_producto, 
+            new Date(fecha_limite),
+            id_metodo_pago ? parseInt(id_metodo_pago, 10) : null,
+            id_tipo_entrega ? parseInt(id_tipo_entrega, 10) : null
+        ]);
 
         // 2. Actualizar el estado del producto a 2 (Apartado)
         await client.query('UPDATE producto SET id_estado = 2 WHERE id_producto = $1', [id_producto]);
