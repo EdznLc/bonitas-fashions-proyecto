@@ -1541,15 +1541,15 @@ input, select, textarea, button {
    ========================================================================== */
 .app-container.interface-c {
   background-color: #000000 !important; /* Fondo Negro Puro */
-  border: 4px solid #ffff00 !important; /* Borde grueso amarillo */
+  border: 4px solid #ff66cc !important; /* Borde grueso rosa de alto contraste */
   box-shadow: none !important;
   color: #ffffff !important;
 }
 .interface-c .app-logo-header {
-  border: 2.5px solid #ffff00 !important;
+  border: 2.5px solid #ff66cc !important;
 }
 .interface-c .app-title {
-  color: #ffff00 !important; /* Amarillo puro */
+  color: #ff66cc !important; /* Rosa de alta visibilidad */
   font-weight: 900 !important;
   text-transform: uppercase !important;
   font-size: 28px !important;
@@ -1561,7 +1561,7 @@ input, select, textarea, button {
   letter-spacing: 0.02em !important;
 }
 .interface-c h1, .interface-c h2, .interface-c h3, .interface-c h4, .interface-c h5, .interface-c h6, .interface-c .welcome-text {
-  color: #ffff00 !important;
+  color: #ff66cc !important;
   text-shadow: none !important;
 }
 .interface-c p, .interface-c span, .interface-c label, .interface-c td, .interface-c th {
@@ -1573,10 +1573,10 @@ input, select, textarea, button {
 /* Fix para el selector debug de interfaces en modo C */
 .interface-c .interface-selector-debug {
   background-color: #000000 !important;
-  border: 2px solid #ffff00 !important;
+  border: 2px solid #ff66cc !important;
 }
 .interface-c .debug-label {
-  color: #ffff00 !important;
+  color: #ff66cc !important;
 }
 
 /* Fix para tarjetas de especificaciones y alertas en modo C (evitar blanco sobre crema) */
@@ -1586,7 +1586,7 @@ input, select, textarea, button {
   border-radius: 0 !important;
 }
 .interface-c .spec-title {
-  color: #ffff00 !important;
+  color: #ff66cc !important;
 }
 .interface-c .spec-value {
   color: #ffffff !important;
@@ -1604,9 +1604,9 @@ input, select, textarea, button {
   font-weight: 900 !important;
 }
 .interface-c .btn-header-nav.active, .interface-c .btn-header-nav:hover {
-  background-color: #ffff00 !important;
-  color: #000000 !important; /* Contraste negro sobre amarillo */
-  border-color: #ffff00 !important;
+  background-color: #ff66cc !important;
+  color: #000000 !important; /* Contraste negro sobre rosa */
+  border-color: #ff66cc !important;
 }
 
 /* Catálogo y filtros */
@@ -1617,30 +1617,30 @@ input, select, textarea, button {
   padding: 15px !important;
 }
 .interface-c .product-card:hover {
-  border-color: #ffff00 !important;
+  border-color: #ff66cc !important;
   transform: none !important;
 }
 .interface-c .product-card-price {
-  color: #ffff00 !important;
+  color: #ff66cc !important;
   font-size: 22px !important;
   font-weight: 900 !important;
 }
 .interface-c .btn-product-card-view {
   background-color: #000000 !important;
-  color: #ffff00 !important; /* Texto amarillo */
-  border: 2px solid #ffff00 !important;
+  color: #ff66cc !important; /* Texto rosa */
+  border: 2px solid #ff66cc !important;
   border-radius: 0 !important;
   font-weight: 900 !important;
   text-transform: uppercase !important;
 }
 .interface-c .btn-product-card-view:hover {
-  background-color: #ffff00 !important;
+  background-color: #ff66cc !important;
   color: #000000 !important;
 }
 .interface-c .btn-comprar-now {
-  background-color: #ffff00 !important;
-  color: #000000 !important; /* Texto negro sobre fondo amarillo */
-  border: 2px solid #ffff00 !important;
+  background-color: #ff66cc !important;
+  color: #000000 !important; /* Texto negro sobre fondo rosa */
+  border: 2px solid #ff66cc !important;
   border-radius: 0 !important;
   font-weight: 900 !important;
   text-transform: uppercase !important;
@@ -1692,12 +1692,12 @@ input, select, textarea, button {
   color: #a1a1aa !important;
 }
 .interface-c .auth-input:focus, .interface-c .auth-select:focus {
-  border-color: #ffff00 !important;
+  border-color: #ff66cc !important;
   outline: none !important;
 }
 .interface-c .btn-auth-submit {
-  background-color: #ffff00 !important;
-  color: #000000 !important; /* Texto negro sobre amarillo */
+  background-color: #ff66cc !important;
+  color: #000000 !important; /* Texto negro sobre rosa */
   border-radius: 0 !important;
   font-weight: 900 !important;
   text-transform: uppercase !important;
@@ -1714,7 +1714,7 @@ input, select, textarea, button {
   margin-bottom: 12px !important;
 }
 .interface-c .apartado-card-price {
-  color: #ffff00 !important;
+  color: #ff66cc !important;
 }
 .interface-c .catalog-filter-select, .interface-c .filter-select {
   background-color: #000000 !important;
@@ -1733,14 +1733,14 @@ input, select, textarea, button {
 .interface-c .seller-table th {
   background-color: #1e1e1e !important;
   border: 2px solid #ffffff !important;
-  color: #ffff00 !important;
+  color: #ff66cc !important;
 }
 .interface-c .seller-table td {
   border: 2px solid #ffffff !important;
 }
 .interface-c .modal-content {
   background-color: #000000 !important;
-  border: 4px solid #ffff00 !important;
+  border: 4px solid #ff66cc !important;
   border-radius: 0 !important;
 }
 .interface-c .modal-input, .interface-c .modal-select {
@@ -1749,7 +1749,7 @@ input, select, textarea, button {
   border: 2px solid #ffffff !important;
 }
 .interface-c .btn-modal-submit {
-  background-color: #ffff00 !important;
+  background-color: #ff66cc !important;
   color: #000000 !important;
 }
 .interface-c .btn-modal-cancel {
@@ -1758,18 +1758,18 @@ input, select, textarea, button {
   border: 2px solid #ffffff !important;
 }
 .interface-c .btn-debug-toggle {
-  border: 1.5px solid #ffff00 !important;
+  border: 1.5px solid #ff66cc !important;
   color: #ffffff !important;
   border-radius: 0 !important;
 }
 .interface-c .btn-debug-toggle.active {
-  background-color: #ffff00 !important;
+  background-color: #ff66cc !important;
   color: #000000 !important;
 }
 .interface-c .status-badge-active {
   background-color: #1e1e1e !important;
-  color: #ffff00 !important;
-  border: 1px solid #ffff00 !important;
+  color: #ff66cc !important;
+  border: 1px solid #ff66cc !important;
   border-radius: 0 !important;
 }
 .interface-c .table-badge-1, .interface-c .table-badge-2, .interface-c .table-badge-3 {
@@ -1779,7 +1779,7 @@ input, select, textarea, button {
   color: #ffffff !important;
 }
 .interface-c .btn-table-edit {
-  background-color: #ffff00 !important;
+  background-color: #ff66cc !important;
   color: #000000 !important;
   border-radius: 0 !important;
 }
@@ -1831,7 +1831,7 @@ input, select, textarea, button {
 }
 .interface-c .product-card-tag {
   background-color: #000000 !important;
-  color: #ffff00 !important; /* Amarillo para llamar la atención en alto contraste */
-  border: 2px solid #ffff00 !important;
+  color: #ff66cc !important; /* Rosa de alta visibilidad */
+  border: 2px solid #ff66cc !important;
   border-radius: 0 !important;
 }
