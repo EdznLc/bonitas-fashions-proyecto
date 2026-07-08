@@ -1821,3 +1821,17 @@ input, select, textarea, button {
   background-color: #ab4e79 !important;
   color: #ffffff !important;
 }
+
+/* Fix de visibilidad para tallas y etiquetas de productos en modo C */
+.interface-c .product-card-size {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+  border-radius: 0 !important;
+}
+.interface-c .product-card-tag {
+  background-color: #000000 !important;
+  color: #ffff00 !important; /* Amarillo para llamar la atención en alto contraste */
+  border: 2px solid #ffff00 !important;
+  border-radius: 0 !important;
+}
