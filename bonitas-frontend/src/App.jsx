@@ -51,7 +51,10 @@ export default function App() {
       <header className="app-header">
         <div className="header-brand-container" onClick={() => { setView('catalog'); setSelectedProduct(null); }}>
           <div className="header-title-row">
-            <h1 className="app-title">Bonitas Fashions</h1>
+            <div className="logo-title-group">
+              <img src="/logo.jpg" alt="Bonitas Fashions Logo" className="app-logo-header" />
+              <h1 className="app-title">Bonitas Fashions</h1>
+            </div>
             
             {/* Quick switcher for usablity evaluation testing */}
             <div className="interface-selector-debug">

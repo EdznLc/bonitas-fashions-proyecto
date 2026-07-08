@@ -34,17 +34,20 @@ input, select, textarea {
   font-family: inherit;
 }
 
-/* App Container (White main card wrapper) */
+/* App Container (Full screen layout) */
 .app-container {
   width: 100%;
-  max-width: 1000px;
-  margin: 40px auto;
-  padding: 40px;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 30px 40px !important;
   background-color: #ffffff;
-  border-radius: 16px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
-  border: 1px solid #cbd5e1;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  border: none !important;
   box-sizing: border-box;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Header */
@@ -1194,13 +1197,65 @@ h1, h2, h3, h4, h5, h6, .welcome-text {
 }
 
 /* ==========================================================================
+   ELEMENTOS DE LOGO COMPARTIDOS Y RESPONSIVIDAD DE FORMULARIOS
+   ========================================================================== */
+.logo-title-group {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.app-logo-header {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1.5px solid var(--color-primary);
+}
+
+/* Prevenir desbordamiento de inputs de formularios de forma definitiva */
+input, select, textarea, button {
+  box-sizing: border-box !important;
+  max-width: 100% !important;
+}
+.auth-card {
+  width: 100% !important;
+  max-width: 440px !important;
+  box-sizing: border-box !important;
+  margin: 30px auto !important;
+  padding: 30px !important;
+}
+.auth-input-group {
+  width: 100% !important;
+  box-sizing: border-box !important;
+  margin-bottom: 15px;
+}
+.auth-input, .auth-select {
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+.auth-form-row {
+  width: 100% !important;
+  box-sizing: border-box !important;
+  display: flex;
+  gap: 15px;
+}
+.auth-form-row .auth-input-group {
+  flex: 1;
+  min-width: 0; /* Previene desbordamiento en flexbox */
+  margin-bottom: 0;
+}
+
+/* ==========================================================================
    INTERFACE A: MINIMALISTA (GESTALT) OVERRIDES
    ========================================================================== */
 .app-container.interface-a {
   background-color: #ffffff !important;
   box-shadow: none !important;
   border: none !important;
-  padding: 60px 20px !important;
+  padding: 50px 40px !important;
+}
+.interface-a .app-logo-header {
+  border: 1.5px solid #382a4b !important;
 }
 .interface-a .app-title {
   color: #382a4b !important;
@@ -1306,6 +1361,7 @@ h1, h2, h3, h4, h5, h6, .welcome-text {
 }
 .interface-a .btn-comprar-now {
   background-color: #382a4b !important;
+  color: #ffffff !important; /* Texto blanco explícito */
   border-radius: 0 !important;
   font-weight: 600 !important;
   letter-spacing: 0.1em !important;
@@ -1318,6 +1374,7 @@ h1, h2, h3, h4, h5, h6, .welcome-text {
 .interface-a .btn-apartar-now {
   border: 1.5px solid #382a4b !important;
   color: #382a4b !important;
+  background-color: transparent !important;
   border-radius: 0 !important;
   font-weight: 600 !important;
   letter-spacing: 0.1em !important;
@@ -1332,7 +1389,6 @@ h1, h2, h3, h4, h5, h6, .welcome-text {
   border: none !important;
   box-shadow: none !important;
   padding: 0 !important;
-  max-width: 400px !important;
 }
 .interface-a .auth-input, .interface-a .auth-select {
   border: none !important;
@@ -1345,6 +1401,7 @@ h1, h2, h3, h4, h5, h6, .welcome-text {
 }
 .interface-a .btn-auth-submit {
   background-color: #382a4b !important;
+  color: #ffffff !important; /* Texto blanco explícito */
   border-radius: 0 !important;
   text-transform: uppercase !important;
   letter-spacing: 0.1em !important;
@@ -1384,38 +1441,41 @@ h1, h2, h3, h4, h5, h6, .welcome-text {
    INTERFACE B: TRADICIONAL (ESTILO AMAZON CON CABECERA OSCURA Y GRID DE BLOQUES)
    ========================================================================== */
 .interface-b .app-header {
-  background-color: #2e1f3b !important; /* Cabecera ciruela oscuro tipo Amazon */
-  padding: 16px 24px !important;
-  border-radius: 8px 8px 0 0 !important;
+  background-color: #2e1f3b !important; /* Cabecera ciruela oscuro */
+  padding: 16px 30px !important;
+  border-radius: 6px !important;
   color: #ffffff !important;
   margin-bottom: 24px !important;
 }
+.interface-b .app-logo-header {
+  border: 2.5px solid #ffffff !important;
+}
 .interface-b .app-title {
-  color: #ffffff !important; /* Título blanco */
+  color: #ffffff !important;
   font-family: 'Outfit', sans-serif !important;
-  font-size: 24px !important;
+  font-size: 25px !important;
   font-weight: 700 !important;
 }
 .interface-b .app-subtitle {
   color: #faf0f5 !important;
-  opacity: 0.8;
+  opacity: 0.85;
 }
 .interface-b .welcome-text {
   color: #ffffff !important;
 }
 .interface-b .btn-header-nav {
   background-color: rgba(255, 255, 255, 0.1) !important;
-  color: #ffffff !important;
+  color: #ffffff !important; /* Texto blanco explícito */
   border-radius: 4px !important;
-  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
 }
 .interface-b .btn-header-nav:hover, .interface-b .btn-header-nav.active {
   background-color: #ffffff !important;
-  color: #2e1f3b !important;
+  color: #2e1f3b !important; /* Contraste inverso al estar activo */
 }
 .interface-b .btn-header-register {
   background-color: #ab4e79 !important;
-  color: #ffffff !important;
+  color: #ffffff !important; /* Texto blanco explícito */
   border-radius: 4px !important;
 }
 .interface-b .btn-header-register:hover {
@@ -1424,32 +1484,18 @@ h1, h2, h3, h4, h5, h6, .welcome-text {
 .interface-b .product-card {
   border: 1px solid #e2e8f0 !important;
   border-radius: 8px !important;
-  background-color: #f8fafc !important; /* Tarjetas con fondo ligeramente gris */
-  padding: 12px !important;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05) !important;
+  background-color: #f8fafc !important;
+  padding: 15px !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04) !important;
 }
 .interface-b .product-card:hover {
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08) !important;
 }
 .interface-b .product-image-container {
   border-radius: 6px !important;
 }
-.interface-b .product-card-rating {
-  display: flex !important;
-  align-items: center;
-  gap: 4px;
-  margin: 6px 0;
-  font-size: 13px;
-}
-.interface-b .rating-stars {
-  color: #eab308;
-}
-.interface-b .rating-count {
-  color: #64748b;
-  font-size: 11px;
-}
 .interface-b .product-card-details-row {
-  margin-top: 8px !important;
+  margin-top: 10px !important;
   align-items: center !important;
 }
 .interface-b .product-card-price {
@@ -1460,12 +1506,11 @@ h1, h2, h3, h4, h5, h6, .welcome-text {
 .interface-b .btn-product-card-view {
   background: linear-gradient(180deg, #fbf7f9 0%, #f3e5ee 100%) !important;
   border: 1px solid #d8b2c6 !important;
-  border-radius: 20px !important; /* Botón píldora tipo Amazon */
-  color: #382a4b !important;
-  font-weight: 500 !important;
+  border-radius: 20px !important;
+  color: #382a4b !important; /* Texto ciruela */
+  font-weight: 600 !important;
   padding: 8px 16px !important;
   width: 100% !important;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.05) !important;
 }
 .interface-b .btn-product-card-view:hover {
   background: linear-gradient(180deg, #f5e4ee 0%, #e2c0d5 100%) !important;
@@ -1474,7 +1519,8 @@ h1, h2, h3, h4, h5, h6, .welcome-text {
   background: linear-gradient(180deg, #b85888 0%, #ab4e79 100%) !important;
   border: 1px solid #8e3d62 !important;
   border-radius: 20px !important;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+  color: #ffffff !important; /* Texto blanco explícito */
+  font-weight: 600 !important;
 }
 .interface-b .btn-comprar-now:hover {
   background: linear-gradient(180deg, #ab4e79 0%, #8e3d62 100%) !important;
@@ -1482,58 +1528,64 @@ h1, h2, h3, h4, h5, h6, .welcome-text {
 .interface-b .btn-apartar-now {
   background: linear-gradient(180deg, #fefefe 0%, #f3edf1 100%) !important;
   border: 1.5px solid #ab4e79 !important;
-  color: #ab4e79 !important;
+  color: #ab4e79 !important; /* Texto ciruela explícito */
   border-radius: 20px !important;
+  font-weight: 600 !important;
 }
 .interface-b .btn-apartar-now:hover {
   background: #faf0f5 !important;
 }
 
 /* ==========================================================================
-   INTERFACE C: ACCESIBILIDAD Y ALTO CONTRASTE EXTREMO (WCAG AAA / ISO 25010)
+   INTERFACE C: ACCESIBILIDAD Y ALTO CONTRASTE EXTREMO (WCAG AAA)
    ========================================================================== */
 .app-container.interface-c {
   background-color: #000000 !important; /* Fondo Negro Puro */
-  border: 3px solid #ffff00 !important; /* Borde grueso amarillo */
+  border: 4px solid #ffff00 !important; /* Borde grueso amarillo */
   box-shadow: none !important;
   color: #ffffff !important;
 }
+.interface-c .app-logo-header {
+  border: 2.5px solid #ffff00 !important;
+}
 .interface-c .app-title {
-  color: #ffff00 !important; /* Amarillo de alta visibilidad */
-  font-weight: 800 !important;
+  color: #ffff00 !important; /* Amarillo puro */
+  font-weight: 900 !important;
   text-transform: uppercase !important;
   font-size: 28px !important;
+  letter-spacing: 0.05em !important;
 }
 .interface-c .app-subtitle {
   color: #ffffff !important;
   font-weight: bold !important;
+  letter-spacing: 0.02em !important;
 }
 .interface-c h1, .interface-c h2, .interface-c h3, .interface-c h4, .interface-c h5, .interface-c h6, .interface-c .welcome-text {
   color: #ffff00 !important;
+  text-shadow: none !important;
 }
 .interface-c p, .interface-c span, .interface-c label, .interface-c td, .interface-c th {
   color: #ffffff !important;
   font-weight: bold !important;
-}
-.interface-c .product-card-rating {
-  display: none !important; /* Eliminar estrellas decorativas */
+  font-size: 15px !important; /* Mayor legibilidad */
 }
 .interface-c .btn-header-nav, .interface-c .btn-header-register {
   background-color: #000000 !important;
-  color: #ffffff !important;
+  color: #ffffff !important; /* Texto blanco de alto contraste */
   border: 2px solid #ffffff !important;
   border-radius: 0 !important;
-  font-weight: bold !important;
+  font-weight: 900 !important;
 }
 .interface-c .btn-header-nav.active, .interface-c .btn-header-nav:hover {
   background-color: #ffff00 !important;
-  color: #000000 !important;
+  color: #000000 !important; /* Contraste negro sobre amarillo */
   border-color: #ffff00 !important;
 }
 .interface-c .product-card {
   background-color: #000000 !important;
   border: 2px solid #ffffff !important;
   border-radius: 0 !important;
+  padding: 15px !important;
 }
 .interface-c .product-card:hover {
   border-color: #ffff00 !important;
@@ -1541,15 +1593,15 @@ h1, h2, h3, h4, h5, h6, .welcome-text {
 }
 .interface-c .product-card-price {
   color: #ffff00 !important;
-  font-size: 20px !important;
+  font-size: 22px !important;
   font-weight: 900 !important;
 }
 .interface-c .btn-product-card-view {
   background-color: #000000 !important;
-  color: #ffff00 !important;
+  color: #ffff00 !important; /* Texto amarillo */
   border: 2px solid #ffff00 !important;
   border-radius: 0 !important;
-  font-weight: bold !important;
+  font-weight: 900 !important;
   text-transform: uppercase !important;
 }
 .interface-c .btn-product-card-view:hover {
@@ -1558,7 +1610,7 @@ h1, h2, h3, h4, h5, h6, .welcome-text {
 }
 .interface-c .btn-comprar-now {
   background-color: #ffff00 !important;
-  color: #000000 !important;
+  color: #000000 !important; /* Texto negro sobre fondo amarillo */
   border: 2px solid #ffff00 !important;
   border-radius: 0 !important;
   font-weight: 900 !important;
@@ -1566,11 +1618,12 @@ h1, h2, h3, h4, h5, h6, .welcome-text {
 }
 .interface-c .btn-comprar-now:hover {
   background-color: #ffffff !important;
+  color: #000000 !important;
   border-color: #ffffff !important;
 }
 .interface-c .btn-apartar-now {
   background-color: #000000 !important;
-  color: #ffffff !important;
+  color: #ffffff !important; /* Texto blanco */
   border: 2px solid #ffffff !important;
   border-radius: 0 !important;
   font-weight: 900 !important;
@@ -1582,7 +1635,7 @@ h1, h2, h3, h4, h5, h6, .welcome-text {
 }
 .interface-c .auth-card {
   background-color: #000000 !important;
-  border: 2px solid #ffffff !important;
+  border: 2.5px solid #ffffff !important;
   border-radius: 0 !important;
 }
 .interface-c .auth-input, .interface-c .auth-select {
@@ -1590,6 +1643,10 @@ h1, h2, h3, h4, h5, h6, .welcome-text {
   color: #ffffff !important;
   border: 2px solid #ffffff !important;
   border-radius: 0 !important;
+  padding: 10px !important;
+}
+.interface-c .auth-input::placeholder {
+  color: #a1a1aa !important;
 }
 .interface-c .auth-input:focus, .interface-c .auth-select:focus {
   border-color: #ffff00 !important;
@@ -1597,7 +1654,7 @@ h1, h2, h3, h4, h5, h6, .welcome-text {
 }
 .interface-c .btn-auth-submit {
   background-color: #ffff00 !important;
-  color: #000000 !important;
+  color: #000000 !important; /* Texto negro sobre amarillo */
   border-radius: 0 !important;
   font-weight: 900 !important;
   text-transform: uppercase !important;
@@ -1621,12 +1678,14 @@ h1, h2, h3, h4, h5, h6, .welcome-text {
   color: #ffffff !important;
   border: 2px solid #ffffff !important;
   border-radius: 0 !important;
+  padding: 8px !important;
 }
 .interface-c .catalog-search-input {
   background-color: #000000 !important;
   color: #ffffff !important;
   border: 2px solid #ffffff !important;
   border-radius: 0 !important;
+  padding: 8px !important;
 }
 .interface-c .seller-table th {
   background-color: #1e1e1e !important;
@@ -1634,11 +1693,11 @@ h1, h2, h3, h4, h5, h6, .welcome-text {
   color: #ffff00 !important;
 }
 .interface-c .seller-table td {
-  border: 1px solid #ffffff !important;
+  border: 2px solid #ffffff !important;
 }
 .interface-c .modal-content {
   background-color: #000000 !important;
-  border: 3px solid #ffff00 !important;
+  border: 4px solid #ffff00 !important;
   border-radius: 0 !important;
 }
 .interface-c .modal-input, .interface-c .modal-select {
@@ -1656,13 +1715,38 @@ h1, h2, h3, h4, h5, h6, .welcome-text {
   border: 2px solid #ffffff !important;
 }
 .interface-c .btn-debug-toggle {
-  border: 1px solid #ffff00 !important;
+  border: 1.5px solid #ffff00 !important;
   color: #ffffff !important;
+  border-radius: 0 !important;
 }
 .interface-c .btn-debug-toggle.active {
   background-color: #ffff00 !important;
   color: #000000 !important;
 }
+.interface-c .status-badge-active {
+  background-color: #1e1e1e !important;
+  color: #ffff00 !important;
+  border: 1px solid #ffff00 !important;
+  border-radius: 0 !important;
+}
+.interface-c .table-badge-1, .interface-c .table-badge-2, .interface-c .table-badge-3 {
+  border-radius: 0 !important;
+  border: 1.5px solid #ffffff !important;
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
+.interface-c .btn-table-edit {
+  background-color: #ffff00 !important;
+  color: #000000 !important;
+  border-radius: 0 !important;
+}
+.interface-c .btn-table-delete {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border: 1.5px solid #ffffff !important;
+  border-radius: 0 !important;
+}
+
 
 
 
