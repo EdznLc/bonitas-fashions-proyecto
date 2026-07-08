@@ -26,7 +26,7 @@ router.get('/tipos-entrega', async (req, res) => {
 });
 
 // 3. Crear un nuevo apartado (Transaccional)
-router.post('/', async (req, res) => {
+router.post('/apartado', async (req, res) => {
     const { id_usuario, id_producto, fecha_limite } = req.body;
 
     if (!id_usuario || !id_producto || !fecha_limite) {
@@ -72,7 +72,7 @@ router.post('/', async (req, res) => {
 });
 
 // 4. Consultar apartados activos de un cliente específico
-router.get('/usuario/:id_usuario', async (req, res) => {
+router.get('/apartado/:id_usuario', async (req, res) => {
     const { id_usuario } = req.params;
     try {
         const query = `
@@ -91,7 +91,7 @@ router.get('/usuario/:id_usuario', async (req, res) => {
 });
 
 // 5. Consultar todos los apartados registrados (Administrador/Vendedor)
-router.get('/admin', async (req, res) => {
+router.get('/producto-apartado', async (req, res) => {
     try {
         const query = `
             SELECT a.*, p.nombre as producto_nombre, p.precio, p.talla, u.nombre as usuario_nombre, u.correo, u.telefono

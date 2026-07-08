@@ -4,7 +4,7 @@ import { pool } from '../db/db.js';
 const router = express.Router();
 
 // 1. Obtener productos disponibles (para clientes/catálogo público)
-router.get('/prueba', async (req, res) => {
+router.get('/productos', async (req, res) => {
     try {
         // id_estado = 1 significa 'Disponible'
         const resultado = await pool.query('SELECT * FROM producto WHERE id_estado = 1 ORDER BY id_producto DESC;');
@@ -16,7 +16,7 @@ router.get('/prueba', async (req, res) => {
 });
 
 // 2. Obtener todos los productos con su estado (para vendedor/inventario)
-router.get('/admin', async (req, res) => {
+router.get('/productos-estado', async (req, res) => {
     try {
         const query = `
             SELECT p.*, ep.nombre as estado_nombre 
@@ -44,7 +44,7 @@ router.get('/estados', async (req, res) => {
 });
 
 // 4. Agregar nueva prenda (Vendedor)
-router.post('/', async (req, res) => {
+router.post('/ropa', async (req, res) => {
     const { nombre, descripcion, precio, talla, marca, condicion, url_imagen, id_estado } = req.body;
     
     if (!nombre || precio === undefined || !talla || !id_estado) {
@@ -76,7 +76,7 @@ router.post('/', async (req, res) => {
 });
 
 // 5. Modificar una prenda (Vendedor)
-router.put('/:id', async (req, res) => {
+router.put('/ropa/:id', async (req, res) => {
     const { id } = req.params;
     const { nombre, descripcion, precio, talla, marca, condicion, url_imagen, id_estado } = req.body;
     
@@ -115,7 +115,7 @@ router.put('/:id', async (req, res) => {
 });
 
 // 6. Eliminar una prenda (Vendedor)
-router.delete('/:id', async (req, res) => {
+router.delete('/ropa/:id', async (req, res) => {
     const { id } = req.params;
     try {
         // Primero verificamos si hay restricciones (si ya se apartó o se vendió)
