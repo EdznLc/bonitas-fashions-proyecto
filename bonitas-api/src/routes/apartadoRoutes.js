@@ -162,4 +162,37 @@ router.post('/checkout', async (req, res) => {
     }
 });
 
+// 7. Eliminar/Quitar apartado (Administrador/Vendedor)
+router.delete('/:id', async (req, res) => {
+    const { id } = req.params;
+    const { id_producto } = req.query;
+
+    const client = await pool.connect();
+    try {
+        await client.query('BEGIN');
+
+        // 1. Eliminar el apartado
+        const deleteQuery = 'DELETE FROM apartado WHERE id_apartado = $1 RETURNING *;';
+        const deleteRes = await client.query(deleteQuery, [parseInt(id, 10)]);
+
+        if (deleteRes.rows.length === 0) {
+            await client.query('ROLLBACK');
+            return res.status(404).json({ error: 'No se encontró el apartado a eliminar.' });
+        }
+
+        // 2. Liberar el producto (cambiar su estado a 1 - Disponible)
+        const targetProdId = id_producto ? parseInt(id_producto, 10) : deleteRes.rows[0].id_producto;
+        await client.query('UPDATE producto SET id_estado = 1 WHERE id_producto = $1', [targetProdId]);
+
+        await client.query('COMMIT');
+        res.json({ message: 'Apartado eliminado y prenda liberada con éxito.' });
+    } catch (error) {
+        await client.query('ROLLBACK');
+        console.error('Error al eliminar apartado:', error);
+        res.status(500).json({ error: 'No se pudo eliminar el apartado.' });
+    } finally {
+        client.release();
+    }
+});
+
 export default router;

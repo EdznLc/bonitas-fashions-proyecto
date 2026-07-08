@@ -69,6 +69,32 @@ export default function SellerDashboard({ API_URL }) {
     }
   };
 
+  const handleEstados = () => {}; // fallback placeholder if needed
+  
+  const handleQuitarApartado = async (idApartado, idProducto) => {
+    if (!window.confirm('¿Estás seguro de que deseas cancelar y eliminar este apartado? La prenda volverá a estar disponible de inmediato en la tienda.')) {
+      return;
+    }
+    
+    try {
+      const res = await fetch(`${API_URL}/api/apartados/${idApartado}?id_producto=${idProducto}`, {
+        method: 'DELETE'
+      });
+      
+      if (res.ok) {
+        alert('Apartado eliminado y prenda liberada con éxito.');
+        cargarApartados();
+        cargarProductos();
+      } else {
+        const errorData = await res.json();
+        alert(`Error: ${errorData.error || 'No se pudo eliminar el apartado.'}`);
+      }
+    } catch (err) {
+      console.error(err);
+      alert('Error al intentar eliminar el apartado.');
+    }
+  };
+
   useEffect(() => {
     cargarProductos();
     cargarApartados();
@@ -404,6 +430,7 @@ export default function SellerDashboard({ API_URL }) {
                   <th>Fecha Registro</th>
                   <th>Fecha Límite</th>
                   <th>Estatus</th>
+                  <th>Acción</th>
                 </tr>
               </thead>
               <tbody>
@@ -434,6 +461,15 @@ export default function SellerDashboard({ API_URL }) {
                         <span className="status-badge-active">
                           {a.estatus}
                         </span>
+                      </td>
+                      <td>
+                        <button 
+                          onClick={() => handleQuitarApartado(a.id_apartado, a.id_producto)} 
+                          className="btn-table-delete"
+                          title="Eliminar o cancelar este apartado"
+                        >
+                          Quitar
+                        </button>
                       </td>
                     </tr>
                   );

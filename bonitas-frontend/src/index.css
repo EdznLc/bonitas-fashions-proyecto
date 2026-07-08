@@ -1835,3 +1835,71 @@ input, select, textarea, button {
   border: 2px solid #ff66cc !important;
   border-radius: 0 !important;
 }
+
+/* ==========================================================================
+   ESTILOS DE ADMINISTRACIÓN ADICIONALES (CONTROL DE INVENTARIO Y APARTADOS)
+   ========================================================================== */
+/* Interfaz A: Minimalista (Botones planos de tabla sin bordes, solo subrayado) */
+.interface-a .btn-table-edit {
+  background-color: transparent !important;
+  color: #382a4b !important;
+  border: none !important;
+  border-bottom: 1.5px solid #382a4b !important;
+  border-radius: 0 !important;
+  padding: 2px 0 !important;
+  font-weight: 500 !important;
+}
+.interface-a .btn-table-edit:hover {
+  color: #ab4e79 !important;
+  border-color: #ab4e79 !important;
+}
+.interface-a .btn-table-delete {
+  background-color: transparent !important;
+  color: #ef4444 !important;
+  border: none !important;
+  border-bottom: 1.5px solid #ef4444 !important;
+  border-radius: 0 !important;
+  padding: 2px 0 !important;
+  font-weight: 500 !important;
+}
+.interface-a .btn-table-delete:hover {
+  color: #b91c1c !important;
+  border-color: #b91c1c !important;
+}
+
+/* Interfaz B: Tradicional (Botones redondeados con fondo gris/rojo) */
+.interface-b .seller-table th {
+  background-color: #f1f5f9 !important;
+  color: #334155 !important;
+  font-weight: 600 !important;
+}
+.interface-b .btn-table-edit {
+  background-color: #e2e8f0 !important;
+  color: #334155 !important;
+  border: 1px solid #cbd5e1 !important;
+  border-radius: 6px !important;
+  padding: 6px 12px !important;
+  font-weight: 600 !important;
+}
+.interface-b .btn-table-edit:hover {
+  background-color: #cbd5e1 !important;
+}
+.interface-b .btn-table-delete {
+  background-color: #fee2e2 !important;
+  color: #ef4444 !important;
+  border: 1px solid #fca5a5 !important;
+  border-radius: 6px !important;
+  padding: 6px 12px !important;
+  font-weight: 600 !important;
+}
+.interface-b .btn-table-delete:hover {
+  background-color: #fca5a5 !important;
+  color: #991b1b !important;
+}
+
+/* Interfaz C: Alto Contraste (Botones sin radio, bordes gruesos) */
+.interface-c .btn-table-delete:hover {
+  background-color: #ff66cc !important;
+  color: #000000 !important;
+  border-color: #ff66cc !important;
+}
