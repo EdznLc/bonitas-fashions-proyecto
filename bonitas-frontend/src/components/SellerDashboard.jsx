@@ -109,6 +109,26 @@ export default function SellerDashboard({ API_URL }) {
     }));
   };
 
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    if (file.size > 2 * 1024 * 1024) {
+      alert('La imagen es demasiado pesada. El tamaño máximo permitido es de 2 MB.');
+      e.target.value = '';
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setFormProducto(prev => ({
+        ...prev,
+        url_imagen: reader.result
+      }));
+    };
+    reader.readAsDataURL(file);
+  };
+
   const handleAgregarNuevoClick = () => {
     setEditandoId(null);
     setFormProducto({
@@ -304,15 +324,40 @@ export default function SellerDashboard({ API_URL }) {
               </div>
 
               <div className="auth-input-group">
-                <label className="auth-label">Enlace URL de Imagen</label>
-                <input
-                  type="url"
-                  name="url_imagen"
-                  value={formProducto.url_imagen}
-                  onChange={handleInputChange}
-                  placeholder="https://enlace.com/imagen.jpg"
-                  className="auth-input"
-                />
+                <label className="auth-label">Imagen de la Prenda *</label>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                  {/* Selector de Archivo Local */}
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleFileChange}
+                    className="auth-input"
+                    style={{ padding: '6px', cursor: 'pointer' }}
+                  />
+                  {/* Entrada de URL alternativa */}
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <span style={{ fontSize: '11px', opacity: 0.8, whiteSpace: 'nowrap' }}>o URL:</span>
+                    <input
+                      type="text"
+                      name="url_imagen"
+                      value={formProducto.url_imagen}
+                      onChange={handleInputChange}
+                      placeholder="https://enlace.com/imagen.jpg"
+                      className="auth-input"
+                      style={{ flex: 1 }}
+                    />
+                  </div>
+                </div>
+                {/* Previsualización del archivo cargado */}
+                {formProducto.url_imagen && (
+                  <div style={{ marginTop: '10px', border: '1px solid #cbd5e1', padding: '6px', borderRadius: '4px', maxWidth: '120px', backgroundColor: '#faf9f6' }}>
+                    <img
+                      src={formProducto.url_imagen}
+                      alt="Previsualización"
+                      style={{ width: '100%', height: '80px', objectFit: 'contain' }}
+                    />
+                  </div>
+                )}
               </div>
 
               <div className="auth-input-group">
