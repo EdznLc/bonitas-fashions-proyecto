@@ -22,7 +22,20 @@ export default function App() {
     return <CuestionarioLikert />;
   }
   if (mode === 'ficha') {
-    return <FichaTecnica />;
+    const localUser = JSON.parse(localStorage.getItem('user') || 'null');
+    if (localUser && localUser.rol === 'vendedor') {
+      return <FichaTecnica />;
+    } else {
+      return (
+        <div style={{ padding: '50px 20px', textAlign: 'center', fontFamily: 'Outfit, Inter, sans-serif', backgroundColor: '#faf6f8', minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+          <div style={{ backgroundColor: '#ffffff', padding: '40px', borderRadius: '12px', boxShadow: '0 10px 25px rgba(0,0,0,0.05)', maxWidth: '450px' }}>
+            <h2 style={{ color: '#ab4e79', marginBottom: '15px', fontWeight: '700' }}>Acceso Restringido</h2>
+            <p style={{ color: '#382a4b', lineHeight: '1.6', marginBottom: '25px' }}>Esta encuesta de monitoreo demográfico está reservada exclusivamente para el personal administrador (Vendedor) de Bonitas Fashions.</p>
+            <a href="/" style={{ display: 'inline-block', backgroundColor: '#ab4e79', color: '#ffffff', padding: '10px 24px', borderRadius: '6px', textDecoration: 'none', fontWeight: '600' }}>Volver a la Tienda</a>
+          </div>
+        </div>
+      );
+    }
   }
 
   // 2. Interface version selector state ('A': Minimalist, 'B': Standard Commercial, 'C': Basic)
@@ -84,14 +97,16 @@ export default function App() {
 
             <div className="interface-selector-debug" style={{ marginLeft: '15px' }}>
               <span className="debug-label">Encuestas:</span>
-              <button 
-                onClick={() => window.open('?mode=ficha', '_blank')} 
-                className="btn-debug-toggle"
-                style={{ textTransform: 'none', fontWeight: '600' }}
-                title="Responder Ficha Técnica Demográfica"
-              >
-                Demográfica
-              </button>
+              {user && user.rol === 'vendedor' && (
+                <button 
+                  onClick={() => window.open('?mode=ficha', '_blank')} 
+                  className="btn-debug-toggle"
+                  style={{ textTransform: 'none', fontWeight: '600' }}
+                  title="Responder Ficha Técnica Demográfica"
+                >
+                  Demográfica
+                </button>
+              )}
               <button 
                 onClick={() => window.open('?mode=likert', '_blank')} 
                 className="btn-debug-toggle"
