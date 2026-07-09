@@ -1107,7 +1107,7 @@ html, body {
 }
 
 h1, h2, h3, h4, h5, h6, .welcome-text {
-  color: var(--color-text-main) !important;
+  color: var(--color-text-main);
 }
 
 /* Cambiar colores primarios de la tienda standard (Interface B) */
@@ -1564,7 +1564,7 @@ input, select, textarea, button {
   color: #ff66cc !important;
   text-shadow: none !important;
 }
-.interface-c p, .interface-c span, .interface-c label, .interface-c td, .interface-c th {
+.interface-c p, .interface-c span, .interface-c label, .interface-c td, .interface-c th, .interface-c strong, .interface-c .table-item-name {
   color: #ffffff !important;
   font-weight: bold !important;
   font-size: 15px !important; /* Mayor legibilidad */
