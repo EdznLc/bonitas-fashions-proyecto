@@ -104,7 +104,7 @@ export default function App() {
                   style={{ textTransform: 'none', fontWeight: '600' }}
                   title="Responder Ficha Técnica Demográfica"
                 >
-                  Demográfica
+                  Observación
                 </button>
               )}
               <button 
@@ -113,7 +113,7 @@ export default function App() {
                 style={{ textTransform: 'none', fontWeight: '600' }}
                 title="Responder Cuestionario de Usabilidad"
               >
-                Usabilidad
+                Satisfacción
               </button>
             </div>
           </div>
