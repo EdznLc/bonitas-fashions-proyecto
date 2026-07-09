@@ -39,6 +39,64 @@ export default function Register({ API_URL, onRegisterSuccess, onNavigateToLogin
       return;
     }
 
+    // 1. Validar Nombre
+    const cleanNombre = nombre.trim();
+    if (cleanNombre.length < 2 || cleanNombre.length > 50) {
+      setError('El nombre debe tener entre 2 y 50 caracteres.');
+      return;
+    }
+    const lettersRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s]+$/;
+    if (!lettersRegex.test(cleanNombre)) {
+      setError('El nombre solo puede contener letras y espacios.');
+      return;
+    }
+
+    // 2. Validar Primer Apellido (si se ingresa)
+    if (formData.apellido_p && formData.apellido_p.trim() !== '') {
+      const cleanApP = formData.apellido_p.trim();
+      if (cleanApP.length < 2 || cleanApP.length > 50) {
+        setError('El primer apellido debe tener entre 2 y 50 caracteres.');
+        return;
+      }
+      if (!lettersRegex.test(cleanApP)) {
+        setError('El primer apellido solo puede contener letras y espacios.');
+        return;
+      }
+    }
+
+    // 3. Validar Segundo Apellido (si se ingresa)
+    if (formData.apellido_m && formData.apellido_m.trim() !== '') {
+      const cleanApM = formData.apellido_m.trim();
+      if (cleanApM.length < 2 || cleanApM.length > 50) {
+        setError('El segundo apellido debe tener entre 2 y 50 caracteres.');
+        return;
+      }
+      if (!lettersRegex.test(cleanApM)) {
+        setError('El segundo apellido solo puede contener letras y espacios.');
+        return;
+      }
+    }
+
+    // 4. Validar Contraseña (longitud mínima)
+    if (password.length < 6) {
+      setError('La contraseña debe tener al menos 6 caracteres.');
+      return;
+    }
+
+    // 5. Validar Teléfono (si se ingresa, debe ser numérico de exactamente 10 dígitos)
+    if (formData.telefono && formData.telefono.trim() !== '') {
+      const cleanPhone = formData.telefono.trim();
+      const phoneRegex = /^\d+$/;
+      if (!phoneRegex.test(cleanPhone)) {
+        setError('El teléfono solo puede contener números (dígitos).');
+        return;
+      }
+      if (cleanPhone.length !== 10) {
+        setError('El teléfono debe tener exactamente 10 dígitos.');
+        return;
+      }
+    }
+
     setCargando(true);
     try {
       const res = await fetch(`${API_URL}/api/auth/register`, {
