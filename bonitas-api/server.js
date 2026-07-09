@@ -47,7 +47,7 @@ app.use(async (req, res, next) => {
 app.use('/api/auth', authRoutes);
 app.use('/api/productos', productRoutes);
 app.use('/api/apartados', apartadoRoutes);
-app.use('/', recoleccionRoutes);
+app.use('/api/recoleccion', recoleccionRoutes);
 
 // Root route
 app.get('/', (req, res) => {
