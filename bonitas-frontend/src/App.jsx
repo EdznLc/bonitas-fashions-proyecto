@@ -81,6 +81,26 @@ export default function App() {
                 C
               </button>
             </div>
+
+            <div className="interface-selector-debug" style={{ marginLeft: '15px' }}>
+              <span className="debug-label">Encuestas:</span>
+              <button 
+                onClick={() => window.open('?mode=ficha', '_blank')} 
+                className="btn-debug-toggle"
+                style={{ textTransform: 'none', fontWeight: '600' }}
+                title="Responder Ficha Técnica Demográfica"
+              >
+                Demográfica
+              </button>
+              <button 
+                onClick={() => window.open('?mode=likert', '_blank')} 
+                className="btn-debug-toggle"
+                style={{ textTransform: 'none', fontWeight: '600' }}
+                title="Responder Cuestionario de Usabilidad"
+              >
+                Usabilidad
+              </button>
+            </div>
           </div>
           <p className="app-subtitle">Tienda de Moda Online - Diseños Exclusivos</p>
         </div>
