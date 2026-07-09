@@ -1989,3 +1989,9 @@ input, select, textarea, button {
   background-color: #000000 !important;
   color: #ff66cc !important;
 }
+
+/* Color del ícono del calendario en inputs tipo date para alto contraste */
+.interface-c .modal-input::-webkit-calendar-picker-indicator {
+  filter: invert(1) !important;
+  cursor: pointer !important;
+}

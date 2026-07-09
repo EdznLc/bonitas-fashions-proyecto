@@ -179,7 +179,10 @@ export default function ProductDetail({ API_URL, producto, user, onBack, onNavig
                   onChange={(e) => setFechaLimite(e.target.value)}
                   min={new Date().toISOString().substring(0, 10)}
                   max={new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toISOString().substring(0, 10)}
+                  onClick={(e) => { try { e.target.showPicker(); } catch (err) {} }}
+                  onFocus={(e) => { try { e.target.showPicker(); } catch (err) {} }}
                   className="modal-input"
+                  style={{ cursor: 'pointer' }}
                   required
                 />
               </div>
