@@ -1,4 +1,4 @@
-/* Global Baseline for Bonitas Fashions */
+﻿/* Global Baseline for Bonitas Fashions */
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
 
 html, body {
@@ -1068,7 +1068,7 @@ input, select, textarea {
     font-size: 11px;
   }
 
-  /* Selectores A/B/C y Encuestas: misma fila en tablet, apilados en móvil */
+  /* Selectores A/B/C y Encuestas: misma fila en tablet, apilados en mÃ³vil */
   .interface-selector-debug {
     flex-wrap: wrap;
   }
@@ -1115,7 +1115,7 @@ input, select, textarea {
     gap: 25px;
   }
 
-  /* Seller section-header-row: apila botón debajo del título */
+  /* Seller section-header-row: apila botÃ³n debajo del tÃ­tulo */
   .section-header-row {
     flex-direction: column;
     align-items: flex-start;
@@ -1126,7 +1126,7 @@ input, select, textarea {
     text-align: center;
   }
 
-  /* Formulario de producto: 2 cols → 1 col */
+  /* Formulario de producto: 2 cols â†’ 1 col */
   .auth-form-row {
     flex-direction: column;
     gap: 10px;
@@ -1136,13 +1136,13 @@ input, select, textarea {
     flex: none;
   }
 
-  /* Modal: padding más ajustado */
+  /* Modal: padding mÃ¡s ajustado */
   .modal-card {
     padding: 20px 16px;
     width: 94%;
   }
 
-  /* Apartado-card: permite contenido más estrecho */
+  /* Apartado-card: permite contenido mÃ¡s estrecho */
   .apartado-card {
     flex-wrap: wrap;
   }
@@ -1167,7 +1167,7 @@ input, select, textarea {
   }
 }
 
-/* ===== MÓVIL: max-width 480px ===== */
+/* ===== MÃ“VIL: max-width 480px ===== */
 @media (max-width: 480px) {
   .app-container {
     margin: 6px auto;
@@ -1176,7 +1176,7 @@ input, select, textarea {
     width: 98%;
   }
 
-  /* Header compacto en móvil */
+  /* Header compacto en mÃ³vil */
   .app-title {
     font-size: 18px !important;
   }
@@ -1201,7 +1201,7 @@ input, select, textarea {
     margin-right: 4px;
   }
 
-  /* Botones de navegación en 2 columnas */
+  /* Botones de navegaciÃ³n en 2 columnas */
   .nav-action-links {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -1211,12 +1211,12 @@ input, select, textarea {
     font-size: 11px;
     padding: 7px 6px;
   }
-  /* Si hay 3 botones (Catálogo, Iniciar Sesión, Crear Cuenta), el 3ro ocupa 2 cols */
+  /* Si hay 3 botones (CatÃ¡logo, Iniciar SesiÃ³n, Crear Cuenta), el 3ro ocupa 2 cols */
   .nav-action-links .btn-header-register:last-child:nth-child(odd) {
     grid-column: 1 / -1;
   }
 
-  /* Catálogo: 2 columnas en lugar de 1 para mejor aprovechamiento */
+  /* CatÃ¡logo: 2 columnas en lugar de 1 para mejor aprovechamiento */
   .catalog-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 12px;
@@ -1231,7 +1231,7 @@ input, select, textarea {
     font-size: 15px;
   }
 
-  /* Filtros del catálogo */
+  /* Filtros del catÃ¡logo */
   .catalog-filters-bar {
     flex-direction: column;
     gap: 10px;
@@ -1273,7 +1273,7 @@ input, select, textarea {
     gap: 10px;
   }
 
-  /* Modal: pantallas muy pequeñas */
+  /* Modal: pantallas muy pequeÃ±as */
   .modal-card {
     padding: 16px 12px;
     width: 96%;
@@ -1338,7 +1338,7 @@ input, select, textarea {
 }
 
 /* ==========================================================================
-   ALINEACIÓN CROMÁTICA CON EL LOGOTIPO FLORAL DE BONITAS FASHIONS
+   ALINEACIÃ“N CROMÃTICA CON EL LOGOTIPO FLORAL DE BONITAS FASHIONS
    ========================================================================== */
 :root {
   --color-bg-html: #faf6f8; /* Soft pink-cream watercolor background */
@@ -1494,8 +1494,12 @@ input, select, textarea, button {
 }
 
 /* ==========================================================================
-   INTERFACE A: MINIMALISTA (GESTALT) OVERRIDES
+   INTERFACE A: MINIMALISTA â€” PRINCIPIOS GESTALT (ESPACIO, JERARQUÃA, FORMA)
+   FilosofÃ­a: Espacio en blanco como elemento activo. Sin ornamentaciÃ³n.
+   TipografÃ­a liviana con tracking amplio. Color solo para Ã©nfasis puntual.
    ========================================================================== */
+
+/* Contenedor base */
 .app-container.interface-a {
   background-color: #ffffff !important;
   box-shadow: none !important;
@@ -1503,551 +1507,1848 @@ input, select, textarea, button {
   padding: 50px 40px !important;
 }
 @media (max-width: 768px) {
-  .app-container.interface-a {
-    padding: 20px 14px !important;
-  }
+  .app-container.interface-a { padding: 20px 16px !important; }
 }
 @media (max-width: 480px) {
-  .app-container.interface-a {
-    padding: 14px 10px !important;
-  }
+  .app-container.interface-a { padding: 14px 10px !important; }
+}
+
+/* Header â€” sin fondo, lÃ­nea divisoria minimalista */
+.interface-a .app-header {
+  background: none !important;
+  border-bottom: 1px solid #e2e8f0 !important;
+  padding-bottom: 24px !important;
+  align-items: flex-end !important;
 }
 .interface-a .app-logo-header {
-  border: 1.5px solid #382a4b !important;
+  border: 1px solid #e2e8f0 !important;
+  filter: grayscale(15%) !important;
 }
 .interface-a .app-title {
-  color: #382a4b !important;
-  font-weight: 400 !important;
+  color: #1a1a2e !important;
+  font-weight: 300 !important;
   text-transform: uppercase !important;
-  letter-spacing: 0.1em !important;
-  font-size: 26px !important;
+  letter-spacing: 0.15em !important;
+  font-size: 24px !important;
 }
+.interface-a .app-subtitle {
+  color: #94a3b8 !important;
+  font-size: 11px !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+}
+
+/* Selector debug en A */
+.interface-a .interface-selector-debug {
+  background: none !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 2px !important;
+}
+.interface-a .debug-label { color: #94a3b8 !important; }
+.interface-a .btn-debug-toggle {
+  color: #94a3b8 !important;
+  border-radius: 2px !important;
+  font-weight: 400 !important;
+}
+.interface-a .btn-debug-toggle.active {
+  background-color: #1a1a2e !important;
+  color: #ffffff !important;
+}
+.interface-a .btn-debug-toggle:hover {
+  background-color: #f8fafc !important;
+  color: #1a1a2e !important;
+}
+
+/* Botones de navegaciÃ³n â€” solo texto con subrayado */
+.interface-a .btn-header-nav {
+  background: none !important;
+  border: none !important;
+  color: #64748b !important;
+  font-weight: 400 !important;
+  font-size: 12px !important;
+  letter-spacing: 0.06em !important;
+  text-transform: uppercase !important;
+  padding: 4px 8px !important;
+  border-radius: 0 !important;
+  border-bottom: 1.5px solid transparent !important;
+  transition: border-color 0.2s, color 0.2s !important;
+}
+.interface-a .btn-header-nav:hover,
+.interface-a .btn-header-nav.active {
+  background: none !important;
+  color: #1a1a2e !important;
+  border-color: #1a1a2e !important;
+}
+.interface-a .btn-header-logout {
+  background: none !important;
+  border: none !important;
+  color: #94a3b8 !important;
+  font-size: 12px !important;
+  letter-spacing: 0.06em !important;
+  text-transform: uppercase !important;
+  border-bottom: 1px solid transparent !important;
+  border-radius: 0 !important;
+}
+.interface-a .btn-header-logout:hover {
+  color: #ef4444 !important;
+  border-color: #ef4444 !important;
+  background: none !important;
+}
+.interface-a .btn-header-register {
+  background: none !important;
+  border: 1px solid #1a1a2e !important;
+  color: #1a1a2e !important;
+  border-radius: 0 !important;
+  font-size: 11px !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  padding: 6px 14px !important;
+}
+.interface-a .btn-header-register:hover {
+  background-color: #1a1a2e !important;
+  color: #ffffff !important;
+}
+.interface-a .welcome-text {
+  color: #64748b !important;
+  font-size: 12px !important;
+  font-weight: 400 !important;
+}
+
+/* CatÃ¡logo â€” grid limpio, sin bordes */
+.interface-a .catalog-filters-bar {
+  border-bottom: 1px solid #f1f5f9 !important;
+  padding-bottom: 16px !important;
+  margin-bottom: 32px !important;
+}
+.interface-a .filter-search-input {
+  border: none !important;
+  border-bottom: 1px solid #e2e8f0 !important;
+  border-radius: 0 !important;
+  font-size: 13px !important;
+  padding: 8px 4px !important;
+  background: transparent !important;
+}
+.interface-a .filter-search-input:focus {
+  border-color: #1a1a2e !important;
+  outline: none !important;
+}
+.interface-a .filter-select {
+  border: none !important;
+  border-bottom: 1px solid #e2e8f0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  font-size: 12px !important;
+  letter-spacing: 0.04em !important;
+  padding: 8px 4px !important;
+}
+
+/* Tarjetas â€” solo imagen + texto, sin borde ni sombra */
 .interface-a .product-card {
   border: none !important;
   border-radius: 0 !important;
   background-color: transparent !important;
   padding: 0 !important;
   box-shadow: none !important;
+  cursor: pointer !important;
 }
 .interface-a .product-card:hover {
   transform: none !important;
   box-shadow: none !important;
 }
+.interface-a .product-card:hover .product-image-container {
+  opacity: 0.88 !important;
+  transition: opacity 0.3s !important;
+}
 .interface-a .product-image-container {
-  background-color: #fbf9fa !important;
+  background-color: #f8f9fa !important;
   border-radius: 0 !important;
   height: 250px !important;
+  transition: opacity 0.3s !important;
 }
-.interface-a .product-card-tag {
-  display: none !important;
-}
+.interface-a .product-card-tag { display: none !important; }
 .interface-a .product-card-info {
-  padding: 12px 0 0 0 !important;
+  padding: 14px 0 0 0 !important;
   text-align: center !important;
 }
 .interface-a .product-card-title {
-  font-size: 14px !important;
-  font-weight: 500 !important;
-  letter-spacing: 0.05em !important;
+  font-size: 13px !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.06em !important;
+  color: #1a1a2e !important;
 }
 .interface-a .product-card-brand {
-  font-size: 11px !important;
-  letter-spacing: 0.05em !important;
+  font-size: 10px !important;
+  letter-spacing: 0.1em !important;
   text-transform: uppercase !important;
+  color: #94a3b8 !important;
 }
 .interface-a .product-card-details-row {
   justify-content: center !important;
-  gap: 15px !important;
-  margin-bottom: 8px !important;
+  gap: 12px !important;
 }
 .interface-a .product-card-size {
   border: none !important;
   background: none !important;
   padding: 0 !important;
-  font-weight: 400 !important;
-  font-size: 13px !important;
-  color: #64748b !important;
+  font-weight: 300 !important;
+  font-size: 11px !important;
+  color: #94a3b8 !important;
 }
 .interface-a .product-card-price {
-  font-size: 14px !important;
-  font-weight: 600 !important;
-  color: #382a4b !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  color: #1a1a2e !important;
 }
 .interface-a .btn-product-card-view {
   border: none !important;
-  border-bottom: 1.5px solid #382a4b !important;
-  color: #382a4b !important;
+  border-bottom: 1px solid #1a1a2e !important;
+  color: #1a1a2e !important;
   border-radius: 0 !important;
-  padding: 4px 0 !important;
+  padding: 3px 0 !important;
   background: transparent !important;
   text-transform: uppercase !important;
-  font-size: 10px !important;
-  letter-spacing: 0.1em !important;
-  margin-top: 5px !important;
+  font-size: 9px !important;
+  letter-spacing: 0.12em !important;
+  font-weight: 500 !important;
+  margin-top: 8px !important;
+  transition: color 0.2s, border-color 0.2s !important;
 }
 .interface-a .product-card:hover .btn-product-card-view {
   background-color: transparent !important;
   color: #ab4e79 !important;
   border-color: #ab4e79 !important;
 }
+
+/* Detalle de producto */
+.interface-a .btn-back {
+  color: #94a3b8 !important;
+  background: none !important;
+  border: none !important;
+  font-size: 11px !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  padding: 0 !important;
+  margin-bottom: 30px !important;
+  border-bottom: 1px solid transparent !important;
+}
+.interface-a .btn-back:hover {
+  color: #1a1a2e !important;
+  border-color: #1a1a2e !important;
+}
 .interface-a .product-detail-image-box {
   border-radius: 0 !important;
   border: none !important;
-  background-color: #fbf9fa !important;
+  background-color: #f8f9fa !important;
 }
-.interface-a .product-detail-badge {
-  display: none !important;
+.interface-a .product-detail-badge { display: none !important; }
+.interface-a .product-detail-title {
+  font-size: 22px !important;
+  font-weight: 300 !important;
+  letter-spacing: 0.08em !important;
+  color: #1a1a2e !important;
+}
+.interface-a .product-detail-brand {
+  font-size: 11px !important;
+  letter-spacing: 0.1em !important;
+  text-transform: uppercase !important;
+  color: #94a3b8 !important;
+  font-weight: 400 !important;
+}
+.interface-a .product-detail-divider {
+  border-top: 1px solid #f1f5f9 !important;
+  margin: 16px 0 !important;
+}
+.interface-a .price-label {
+  font-size: 11px !important;
+  letter-spacing: 0.06em !important;
+  text-transform: uppercase !important;
+  color: #94a3b8 !important;
+  font-weight: 400 !important;
+}
+.interface-a .price-value {
+  font-size: 20px !important;
+  font-weight: 400 !important;
+  color: #1a1a2e !important;
 }
 .interface-a .product-detail-spec-grid {
   grid-template-columns: 1fr !important;
-  gap: 8px !important;
+  gap: 0 !important;
 }
 .interface-a .spec-card {
   border: none !important;
   background: transparent !important;
   text-align: left !important;
-  padding: 6px 0 !important;
+  padding: 8px 0 !important;
   border-bottom: 1px solid #f1f5f9 !important;
+  border-radius: 0 !important;
   display: flex !important;
   justify-content: space-between !important;
+  align-items: center !important;
 }
 .interface-a .spec-title {
-  font-size: 11px !important;
+  font-size: 10px !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  color: #94a3b8 !important;
+  font-weight: 400 !important;
 }
 .interface-a .spec-value {
   font-size: 13px !important;
+  font-weight: 400 !important;
+  color: #1a1a2e !important;
 }
-.interface-a .btn-comprar-now {
-  background-color: #382a4b !important;
-  color: #ffffff !important; /* Texto blanco explícito */
-  border-radius: 0 !important;
-  font-weight: 600 !important;
-  letter-spacing: 0.1em !important;
-  text-transform: uppercase !important;
-  padding: 12px !important;
-}
-.interface-a .btn-comprar-now:hover {
-  background-color: #ab4e79 !important;
+.interface-a .product-detail-description {
+  font-size: 13px !important;
+  color: #64748b !important;
+  line-height: 1.8 !important;
+  font-weight: 300 !important;
 }
 .interface-a .btn-apartar-now {
-  border: 1.5px solid #382a4b !important;
-  color: #382a4b !important;
+  border: 1px solid #1a1a2e !important;
+  color: #1a1a2e !important;
   background-color: transparent !important;
   border-radius: 0 !important;
-  font-weight: 600 !important;
+  font-weight: 400 !important;
   letter-spacing: 0.1em !important;
   text-transform: uppercase !important;
-  padding: 12px !important;
+  font-size: 12px !important;
+  padding: 14px !important;
+  transition: background-color 0.2s, color 0.2s !important;
 }
 .interface-a .btn-apartar-now:hover {
-  background-color: #382a4b !important;
+  background-color: #1a1a2e !important;
   color: #ffffff !important;
 }
-.interface-a .auth-card {
-  border: none !important;
+
+/* Modal â€” sin sombra, borde fino */
+.interface-a .modal-card {
+  border-radius: 0 !important;
+  border: 1px solid #e2e8f0 !important;
   box-shadow: none !important;
-  padding: 0 !important;
+  padding: 36px !important;
 }
-.interface-a .auth-input, .interface-a .auth-select {
-  border: none !important;
-  border-bottom: 1.5px solid #cbd5e1 !important;
-  border-radius: 0 !important;
-  padding: 8px 4px !important;
-}
-.interface-a .auth-input:focus {
-  border-color: #ab4e79 !important;
-}
-.interface-a .btn-auth-submit {
-  background-color: #382a4b !important;
-  color: #ffffff !important; /* Texto blanco explícito */
-  border-radius: 0 !important;
-  text-transform: uppercase !important;
+.interface-a .modal-title {
+  font-size: 16px !important;
+  font-weight: 400 !important;
   letter-spacing: 0.1em !important;
-  font-size: 13px !important;
+  text-transform: uppercase !important;
+  color: #1a1a2e !important;
 }
-.interface-a .dashboard-empty-card, .interface-a .seller-empty-card {
-  border: none !important;
-  background-color: #fbf9fa !important;
-  border-radius: 0 !important;
+.interface-a .modal-subtitle {
+  color: #94a3b8 !important;
+  font-size: 12px !important;
 }
-.interface-a .apartado-card {
+.interface-a .modal-label {
+  font-size: 10px !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  color: #94a3b8 !important;
+  font-weight: 400 !important;
+}
+.interface-a .modal-input,
+.interface-a .modal-select {
   border: none !important;
   border-bottom: 1px solid #e2e8f0 !important;
   border-radius: 0 !important;
-  padding: 16px 0 !important;
+  background: transparent !important;
+  padding: 8px 4px !important;
+  font-size: 13px !important;
+}
+.interface-a .modal-input:focus,
+.interface-a .modal-select:focus {
+  border-color: #1a1a2e !important;
+  outline: none !important;
+}
+.interface-a .modal-summary-box {
+  background: #f8f9fa !important;
+  border: none !important;
+  border-radius: 0 !important;
+  border-top: 1px solid #e2e8f0 !important;
+  padding: 12px 0 !important;
+}
+.interface-a .summary-row.total {
+  color: #1a1a2e !important;
+  font-size: 13px !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.04em !important;
+}
+.interface-a .btn-modal-cancel {
+  background: transparent !important;
+  border: 1px solid #e2e8f0 !important;
+  color: #94a3b8 !important;
+  border-radius: 0 !important;
+  font-size: 11px !important;
+  letter-spacing: 0.06em !important;
+  text-transform: uppercase !important;
+}
+.interface-a .btn-modal-cancel:hover {
+  border-color: #94a3b8 !important;
+  color: #1a1a2e !important;
+}
+.interface-a .btn-modal-submit {
+  background-color: #1a1a2e !important;
+  color: #ffffff !important;
+  border-radius: 0 !important;
+  font-size: 11px !important;
+  letter-spacing: 0.1em !important;
+  text-transform: uppercase !important;
+  font-weight: 500 !important;
+}
+.interface-a .btn-modal-submit:hover {
+  background-color: #ab4e79 !important;
+}
+
+/* Auth Login/Registro */
+.interface-a .auth-card {
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 30px !important;
+  background: transparent !important;
+}
+.interface-a .auth-title {
+  font-weight: 300 !important;
+  letter-spacing: 0.1em !important;
+  text-transform: uppercase !important;
+  color: #1a1a2e !important;
+  font-size: 20px !important;
+}
+.interface-a .auth-subtitle {
+  color: #94a3b8 !important;
+  font-size: 12px !important;
+}
+.interface-a .auth-label {
+  font-size: 10px !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  color: #94a3b8 !important;
+  font-weight: 400 !important;
+}
+.interface-a .auth-input,
+.interface-a .auth-select {
+  border: none !important;
+  border-bottom: 1px solid #e2e8f0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  padding: 8px 4px !important;
+  font-size: 13px !important;
+  color: #1a1a2e !important;
+}
+.interface-a .auth-input:focus,
+.interface-a .auth-select:focus {
+  border-color: #1a1a2e !important;
+  outline: none !important;
+}
+.interface-a .auth-input::placeholder { color: #cbd5e1 !important; }
+.interface-a .btn-auth-submit {
+  background-color: #1a1a2e !important;
+  color: #ffffff !important;
+  border-radius: 0 !important;
+  font-size: 12px !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  padding: 12px !important;
+}
+.interface-a .btn-auth-submit:hover { background-color: #ab4e79 !important; }
+.interface-a .btn-auth-toggle {
+  color: #ab4e79 !important;
+  font-weight: 400 !important;
+  font-size: 12px !important;
+}
+
+/* Dashboard cliente */
+.interface-a .dashboard-title {
+  font-weight: 300 !important;
+  letter-spacing: 0.1em !important;
+  text-transform: uppercase !important;
+  font-size: 22px !important;
+  color: #1a1a2e !important;
+}
+.interface-a .dashboard-subtitle {
+  font-size: 11px !important;
+  color: #94a3b8 !important;
+  letter-spacing: 0.04em !important;
+}
+.interface-a .dashboard-empty-card,
+.interface-a .seller-empty-card {
+  border: none !important;
+  border-top: 1px solid #f1f5f9 !important;
+  background-color: transparent !important;
+  border-radius: 0 !important;
+  color: #94a3b8 !important;
+  font-size: 13px !important;
+  padding: 30px 0 !important;
+  text-align: left !important;
+}
+.interface-a .apartado-card {
+  border: none !important;
+  border-bottom: 1px solid #f1f5f9 !important;
+  border-radius: 0 !important;
+  padding: 20px 0 !important;
+  background: transparent !important;
 }
 .interface-a .apartado-card-image-box {
   border-radius: 0 !important;
+  background-color: #f8f9fa !important;
+}
+.interface-a .apartado-card-title {
+  font-weight: 400 !important;
+  letter-spacing: 0.04em !important;
+  color: #1a1a2e !important;
+}
+.interface-a .apartado-card-meta { color: #94a3b8 !important; }
+.interface-a .apartado-card-price {
+  color: #1a1a2e !important;
+  font-weight: 500 !important;
+}
+.interface-a .status-badge-active {
+  background: none !important;
+  border: 1px solid #e2e8f0 !important;
+  color: #64748b !important;
+  border-radius: 0 !important;
+  font-size: 9px !important;
+  letter-spacing: 0.06em !important;
+  text-transform: uppercase !important;
+}
+.interface-a .btn-whatsapp-contact {
+  background: transparent !important;
+  color: #1a1a2e !important;
+  border: 1px solid #1a1a2e !important;
+  border-radius: 0 !important;
+  font-size: 10px !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  padding: 6px 12px !important;
+}
+.interface-a .btn-whatsapp-contact:hover {
+  background: #1a1a2e !important;
+  color: #ffffff !important;
+}
+
+/* Dashboard vendedor */
+.interface-a .section-subtitle {
+  font-weight: 300 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  font-size: 16px !important;
+  color: #1a1a2e !important;
+  border-bottom: 1px solid #e2e8f0 !important;
+  padding-bottom: 10px !important;
+}
+.interface-a .seller-section-divider {
+  background-color: #f1f5f9 !important;
+  height: 1px !important;
+}
+.interface-a .product-form-card {
+  background: transparent !important;
+  border: none !important;
+  border-top: 1px solid #f1f5f9 !important;
+  border-radius: 0 !important;
+  padding: 20px 0 !important;
+}
+.interface-a .auth-input.text-area {
+  border: none !important;
+  border-bottom: 1px solid #e2e8f0 !important;
+}
+.interface-a .btn-add-product {
+  background: transparent !important;
+  border: 1px solid #1a1a2e !important;
+  color: #1a1a2e !important;
+  border-radius: 0 !important;
+  font-size: 10px !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+}
+.interface-a .btn-add-product:hover {
+  background: #1a1a2e !important;
+  color: #ffffff !important;
 }
 .interface-a .seller-table th {
   background-color: transparent !important;
-  border-bottom: 2px solid #382a4b !important;
+  border-bottom: 1.5px solid #1a1a2e !important;
+  color: #1a1a2e !important;
+  font-size: 10px !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  font-weight: 500 !important;
+  padding: 10px 16px !important;
 }
-.interface-a .table-thumbnail {
-  border-radius: 0 !important;
-}
+.interface-a .seller-table td { border-color: #f1f5f9 !important; }
+.interface-a .table-thumbnail { border-radius: 0 !important; }
 .interface-a .table-badge-1, .interface-a .table-badge-2, .interface-a .table-badge-3 {
   border-radius: 0 !important;
   font-size: 9px !important;
+  letter-spacing: 0.04em !important;
 }
-.interface-a .btn-table-edit, .interface-a .btn-table-delete {
+.interface-a .btn-table-edit {
+  background: transparent !important;
+  border: none !important;
+  border-bottom: 1px solid #64748b !important;
+  color: #64748b !important;
   border-radius: 0 !important;
+  padding: 2px 0 !important;
   font-size: 11px !important;
+  font-weight: 400 !important;
+}
+.interface-a .btn-table-edit:hover {
+  color: #1a1a2e !important;
+  border-color: #1a1a2e !important;
+  background: transparent !important;
+}
+.interface-a .btn-table-delete {
+  background: transparent !important;
+  border: none !important;
+  border-bottom: 1px solid #ef4444 !important;
+  color: #ef4444 !important;
+  border-radius: 0 !important;
+  padding: 2px 0 !important;
+  font-size: 11px !important;
+  font-weight: 400 !important;
+}
+.interface-a .btn-table-delete:hover {
+  color: #b91c1c !important;
+  border-color: #b91c1c !important;
+  background: transparent !important;
+}
+.interface-a .seller-loading, .interface-a .seller-error {
+  font-size: 12px !important;
+  color: #94a3b8 !important;
+  letter-spacing: 0.04em !important;
+}
+.interface-a .modal-error {
+  font-size: 12px !important;
+  color: #ef4444 !important;
+}
+/* Calendario interface A */
+.interface-a .modal-input::-webkit-calendar-picker-indicator {
+  opacity: 0.4;
+  cursor: pointer;
 }
 
+
 /* ==========================================================================
-   INTERFACE B: TRADICIONAL (ESTILO AMAZON CON CABECERA OSCURA Y GRID DE BLOQUES)
+   INTERFACE B: TRADICIONAL â€” E-COMMERCE (CABECERA OSCURA, TARJETAS SÃ“LIDAS, PILLS)
+   FilosofÃ­a: Familiar, de confianza, similar a Amazon/Mercado Libre.
+   Cabecera ciruela oscuro, tarjetas con padding, botones redondeados.
    ========================================================================== */
+
+/* Contenedor base */
+.app-container.interface-b {
+  background-color: #faf6f8 !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+  max-width: 100% !important;
+  margin: 0 auto !important;
+}
+
+/* Header oscuro estilo e-commerce */
 .interface-b .app-header {
-  background-color: #2e1f3b !important; /* Cabecera ciruela oscuro */
+  background: linear-gradient(135deg, #2e1f3b 0%, #3d2251 100%) !important;
   padding: 16px 30px !important;
-  border-radius: 6px !important;
-  color: #ffffff !important;
+  border-radius: 0 !important;
+  border-bottom: 3px solid #ab4e79 !important;
   margin-bottom: 24px !important;
+  align-items: center !important;
+}
+@media (max-width: 768px) {
+  .interface-b .app-header { padding: 14px 16px !important; }
 }
 .interface-b .app-logo-header {
-  border: 2.5px solid #ffffff !important;
+  border: 2.5px solid #ab4e79 !important;
+  box-shadow: 0 0 0 2px rgba(171,78,121,0.3) !important;
 }
 .interface-b .app-title {
   color: #ffffff !important;
-  font-family: 'Outfit', sans-serif !important;
-  font-size: 25px !important;
+  font-size: 26px !important;
   font-weight: 700 !important;
+  letter-spacing: -0.01em !important;
 }
 .interface-b .app-subtitle {
-  color: #faf0f5 !important;
-  opacity: 0.85;
+  color: rgba(255,255,255,0.65) !important;
+  font-size: 12px !important;
 }
-.interface-b .welcome-text {
+.interface-b .welcome-text { color: rgba(255,255,255,0.9) !important; }
+
+/* Selector debug en B */
+.interface-b .interface-selector-debug {
+  background-color: rgba(255,255,255,0.08) !important;
+  border: 1px solid rgba(255,255,255,0.2) !important;
+  border-radius: 6px !important;
+}
+.interface-b .debug-label { color: rgba(255,255,255,0.6) !important; }
+.interface-b .btn-debug-toggle {
+  color: rgba(255,255,255,0.8) !important;
+  border-radius: 4px !important;
+}
+.interface-b .btn-debug-toggle.active {
+  background-color: #ab4e79 !important;
   color: #ffffff !important;
 }
-.interface-b .btn-header-nav {
-  background-color: rgba(255, 255, 255, 0.1) !important;
-  color: #ffffff !important; /* Texto blanco explícito */
-  border-radius: 4px !important;
-  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+.interface-b .btn-debug-toggle:hover {
+  background-color: rgba(255,255,255,0.15) !important;
+  color: #ffffff !important;
 }
-.interface-b .btn-header-nav:hover, .interface-b .btn-header-nav.active {
+
+/* Botones de navegaciÃ³n estilo Amazon */
+.interface-b .btn-header-nav {
+  background-color: rgba(255,255,255,0.08) !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255,255,255,0.2) !important;
+  border-radius: 4px !important;
+  font-size: 13px !important;
+  padding: 7px 14px !important;
+}
+.interface-b .btn-header-nav:hover,
+.interface-b .btn-header-nav.active {
   background-color: #ffffff !important;
-  color: #2e1f3b !important; /* Contraste inverso al estar activo */
+  color: #2e1f3b !important;
+  border-color: #ffffff !important;
+}
+.interface-b .btn-header-logout {
+  background: transparent !important;
+  border: 1px solid rgba(255,255,255,0.3) !important;
+  color: rgba(255,255,255,0.75) !important;
+  border-radius: 4px !important;
+  font-size: 12px !important;
+}
+.interface-b .btn-header-logout:hover {
+  background-color: rgba(239,68,68,0.3) !important;
+  color: #ffffff !important;
+  border-color: #ef4444 !important;
 }
 .interface-b .btn-header-register {
   background-color: #ab4e79 !important;
-  color: #ffffff !important; /* Texto blanco explícito */
-  border-radius: 4px !important;
+  color: #ffffff !important;
+  border: 1px solid #8e3d62 !important;
+  border-radius: 20px !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  padding: 7px 18px !important;
 }
 .interface-b .btn-header-register:hover {
   background-color: #8e3d62 !important;
 }
+
+/* Ãrea del contenido con padding horizontal */
+.interface-b .app-main-content {
+  padding: 0 24px 24px !important;
+}
+@media (max-width: 480px) {
+  .interface-b .app-main-content { padding: 0 12px 16px !important; }
+}
+
+/* Filtros del catÃ¡logo */
+.interface-b .catalog-filters-bar {
+  background-color: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 8px !important;
+  padding: 14px 16px !important;
+  margin-bottom: 20px !important;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04) !important;
+}
+.interface-b .filter-search-input {
+  border: 1.5px solid #e2e8f0 !important;
+  border-radius: 6px !important;
+  font-size: 14px !important;
+  padding: 10px 16px !important;
+  background: #f8fafc !important;
+}
+.interface-b .filter-search-input:focus {
+  border-color: #ab4e79 !important;
+}
+.interface-b .filter-select {
+  border: 1.5px solid #e2e8f0 !important;
+  border-radius: 6px !important;
+  background: #f8fafc !important;
+  font-size: 13px !important;
+  padding: 10px 12px !important;
+}
+
+/* Tarjetas estilo e-commerce */
 .interface-b .product-card {
   border: 1px solid #e2e8f0 !important;
   border-radius: 8px !important;
-  background-color: #f8fafc !important;
-  padding: 15px !important;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04) !important;
+  background-color: #ffffff !important;
+  padding: 0 !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05) !important;
+  transition: box-shadow 0.2s, transform 0.2s !important;
 }
 .interface-b .product-card:hover {
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1) !important;
+  transform: translateY(-3px) !important;
 }
 .interface-b .product-image-container {
-  border-radius: 6px !important;
+  border-radius: 8px 8px 0 0 !important;
 }
-.interface-b .product-card-details-row {
-  margin-top: 10px !important;
-  align-items: center !important;
+.interface-b .product-card-info { padding: 14px !important; }
+.interface-b .product-card-tag {
+  border-radius: 4px !important;
+  font-size: 10px !important;
+}
+.interface-b .product-card-title {
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  color: #1e293b !important;
+}
+.interface-b .product-card-brand {
+  color: #64748b !important;
+  font-size: 12px !important;
 }
 .interface-b .product-card-price {
-  font-size: 18px !important;
+  font-size: 20px !important;
   font-weight: 700 !important;
   color: #ab4e79 !important;
 }
+.interface-b .product-card-size {
+  background-color: #f1f5f9 !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 4px !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  color: #475569 !important;
+}
 .interface-b .btn-product-card-view {
-  background: linear-gradient(180deg, #fbf7f9 0%, #f3e5ee 100%) !important;
+  background: linear-gradient(180deg, #fdf5f9 0%, #f5e4ee 100%) !important;
   border: 1px solid #d8b2c6 !important;
   border-radius: 20px !important;
-  color: #382a4b !important; /* Texto ciruela */
+  color: #2e1f3b !important;
   font-weight: 600 !important;
+  font-size: 13px !important;
   padding: 8px 16px !important;
   width: 100% !important;
 }
-.interface-b .btn-product-card-view:hover {
+.interface-b .product-card:hover .btn-product-card-view {
   background: linear-gradient(180deg, #f5e4ee 0%, #e2c0d5 100%) !important;
+  border-color: #ab4e79 !important;
 }
-.interface-b .btn-comprar-now {
-  background: linear-gradient(180deg, #b85888 0%, #ab4e79 100%) !important;
-  border: 1px solid #8e3d62 !important;
+
+/* Detalle de producto */
+.interface-b .btn-back {
+  background-color: #f1f5f9 !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 6px !important;
+  color: #475569 !important;
+  font-size: 13px !important;
+  padding: 8px 16px !important;
+  font-weight: 500 !important;
+}
+.interface-b .btn-back:hover {
+  background-color: #e2e8f0 !important;
+}
+.interface-b .product-detail-image-box {
+  border-radius: 12px !important;
+  border: 1px solid #e2e8f0 !important;
+  background-color: #f8fafc !important;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.06) !important;
+}
+.interface-b .product-detail-badge {
+  background-color: #fdf5f9 !important;
+  border: 1px solid #d8b2c6 !important;
+  color: #8e3d62 !important;
   border-radius: 20px !important;
-  color: #ffffff !important; /* Texto blanco explícito */
+  font-size: 11px !important;
   font-weight: 600 !important;
+  padding: 4px 12px !important;
 }
-.interface-b .btn-comprar-now:hover {
-  background: linear-gradient(180deg, #ab4e79 0%, #8e3d62 100%) !important;
+.interface-b .product-detail-title {
+  font-size: 26px !important;
+  font-weight: 700 !important;
+  color: #1e293b !important;
+}
+.interface-b .product-detail-brand {
+  color: #64748b !important;
+  font-size: 14px !important;
+}
+.interface-b .price-value {
+  font-size: 28px !important;
+  font-weight: 700 !important;
+  color: #ab4e79 !important;
+}
+.interface-b .price-label {
+  color: #64748b !important;
+  font-size: 14px !important;
+}
+.interface-b .product-detail-spec-grid {
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 10px !important;
+}
+.interface-b .spec-card {
+  background-color: #f8fafc !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 8px !important;
+  text-align: center !important;
+  padding: 12px !important;
+}
+.interface-b .spec-title {
+  font-size: 11px !important;
+  color: #64748b !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.04em !important;
+}
+.interface-b .spec-value {
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  color: #1e293b !important;
 }
 .interface-b .btn-apartar-now {
-  background: linear-gradient(180deg, #fefefe 0%, #f3edf1 100%) !important;
+  background: linear-gradient(180deg, #ffffff 0%, #fdf5f9 100%) !important;
   border: 1.5px solid #ab4e79 !important;
-  color: #ab4e79 !important; /* Texto ciruela explícito */
+  color: #ab4e79 !important;
   border-radius: 20px !important;
   font-weight: 600 !important;
+  font-size: 14px !important;
+  padding: 14px !important;
 }
 .interface-b .btn-apartar-now:hover {
-  background: #faf0f5 !important;
+  background: #fdf5f9 !important;
+  box-shadow: 0 4px 12px rgba(171,78,121,0.2) !important;
 }
+
+/* Modal */
+.interface-b .modal-card {
+  border-radius: 16px !important;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.15) !important;
+  border: none !important;
+  padding: 32px !important;
+}
+.interface-b .modal-title {
+  font-size: 20px !important;
+  font-weight: 700 !important;
+  color: #1e293b !important;
+}
+.interface-b .modal-subtitle { color: #64748b !important; }
+.interface-b .modal-label {
+  color: #475569 !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+}
+.interface-b .modal-input,
+.interface-b .modal-select {
+  border: 1.5px solid #e2e8f0 !important;
+  border-radius: 8px !important;
+  padding: 10px 14px !important;
+  font-size: 14px !important;
+  background: #f8fafc !important;
+}
+.interface-b .modal-input:focus,
+.interface-b .modal-select:focus {
+  border-color: #ab4e79 !important;
+  background: #ffffff !important;
+}
+.interface-b .modal-summary-box {
+  background: #fdf5f9 !important;
+  border: 1px solid #e8c8d8 !important;
+  border-radius: 8px !important;
+}
+.interface-b .summary-row.total {
+  color: #ab4e79 !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+}
+.interface-b .btn-modal-cancel {
+  border-radius: 20px !important;
+  border: 1.5px solid #e2e8f0 !important;
+  color: #64748b !important;
+  background: #f8fafc !important;
+}
+.interface-b .btn-modal-cancel:hover { background: #e2e8f0 !important; }
+.interface-b .btn-modal-submit {
+  background: linear-gradient(135deg, #b85888 0%, #ab4e79 100%) !important;
+  border-radius: 20px !important;
+  font-weight: 700 !important;
+  font-size: 14px !important;
+  box-shadow: 0 4px 12px rgba(171,78,121,0.3) !important;
+}
+.interface-b .btn-modal-submit:hover {
+  background: linear-gradient(135deg, #ab4e79 0%, #8e3d62 100%) !important;
+}
+
+/* Auth Login/Registro */
+.interface-b .auth-card {
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 16px !important;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.08) !important;
+  background: #ffffff !important;
+  padding: 36px !important;
+}
+.interface-b .auth-title {
+  font-weight: 700 !important;
+  color: #1e293b !important;
+  font-size: 22px !important;
+}
+.interface-b .auth-subtitle { color: #64748b !important; }
+.interface-b .auth-label {
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  color: #475569 !important;
+}
+.interface-b .auth-input,
+.interface-b .auth-select {
+  border: 1.5px solid #e2e8f0 !important;
+  border-radius: 8px !important;
+  padding: 11px 14px !important;
+  background: #f8fafc !important;
+  font-size: 14px !important;
+}
+.interface-b .auth-input:focus,
+.interface-b .auth-select:focus {
+  border-color: #ab4e79 !important;
+  background: #ffffff !important;
+  outline: none !important;
+}
+.interface-b .btn-auth-submit {
+  background: linear-gradient(135deg, #b85888 0%, #ab4e79 100%) !important;
+  border-radius: 20px !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  padding: 13px !important;
+  letter-spacing: 0 !important;
+  box-shadow: 0 4px 12px rgba(171,78,121,0.3) !important;
+}
+.interface-b .btn-auth-submit:hover {
+  background: linear-gradient(135deg, #ab4e79 0%, #8e3d62 100%) !important;
+}
+.interface-b .btn-auth-toggle { color: #ab4e79 !important; font-weight: 600 !important; }
+
+/* Dashboard cliente */
+.interface-b .dashboard-title { font-weight: 700 !important; color: #1e293b !important; }
+.interface-b .dashboard-empty-card {
+  border-radius: 8px !important;
+  background: #fdf5f9 !important;
+  border: 1px dashed #d8b2c6 !important;
+  color: #64748b !important;
+}
+.interface-b .apartado-card {
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 10px !important;
+  background: #ffffff !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04) !important;
+  padding: 14px !important;
+}
+.interface-b .apartado-card-title {
+  font-weight: 600 !important;
+  color: #1e293b !important;
+}
+.interface-b .apartado-card-price {
+  font-weight: 700 !important;
+  color: #ab4e79 !important;
+  font-size: 16px !important;
+}
+.interface-b .status-badge-active {
+  border-radius: 20px !important;
+  font-size: 10px !important;
+  font-weight: 600 !important;
+}
+.interface-b .btn-whatsapp-contact {
+  background-color: #25d366 !important;
+  border-radius: 20px !important;
+  font-weight: 600 !important;
+  font-size: 12px !important;
+  padding: 8px 14px !important;
+  box-shadow: 0 2px 8px rgba(37,211,102,0.3) !important;
+}
+
+/* Dashboard vendedor */
+.interface-b .seller-table th {
+  background-color: #f8fafc !important;
+  color: #475569 !important;
+  font-weight: 600 !important;
+  border-bottom: 2px solid #e2e8f0 !important;
+  font-size: 12px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.04em !important;
+}
+.interface-b .seller-table td {
+  background-color: #ffffff !important;
+  border-color: #f1f5f9 !important;
+}
+.interface-b .product-form-card {
+  background: #fdf5f9 !important;
+  border: 1px solid #e8c8d8 !important;
+  border-radius: 12px !important;
+}
+.interface-b .btn-add-product {
+  background: linear-gradient(135deg, #b85888 0%, #ab4e79 100%) !important;
+  border: none !important;
+  color: #ffffff !important;
+  border-radius: 20px !important;
+  font-weight: 600 !important;
+  font-size: 13px !important;
+  box-shadow: 0 3px 8px rgba(171,78,121,0.25) !important;
+}
+.interface-b .btn-add-product:hover {
+  background: linear-gradient(135deg, #ab4e79 0%, #8e3d62 100%) !important;
+  color: #ffffff !important;
+}
+.interface-b .btn-table-edit {
+  background-color: #e2e8f0 !important;
+  color: #334155 !important;
+  border: 1px solid #cbd5e1 !important;
+  border-radius: 6px !important;
+  padding: 5px 12px !important;
+  font-weight: 600 !important;
+  font-size: 12px !important;
+}
+.interface-b .btn-table-edit:hover {
+  background-color: #cbd5e1 !important;
+  color: #1e293b !important;
+}
+.interface-b .btn-table-delete {
+  background-color: #fee2e2 !important;
+  color: #ef4444 !important;
+  border: 1px solid #fca5a5 !important;
+  border-radius: 6px !important;
+  padding: 5px 12px !important;
+  font-weight: 600 !important;
+  font-size: 12px !important;
+}
+.interface-b .btn-table-delete:hover {
+  background-color: #fca5a5 !important;
+  color: #991b1b !important;
+}
+.interface-b .section-header-row { align-items: center !important; }
+.interface-b .section-subtitle {
+  font-weight: 700 !important;
+  color: #1e293b !important;
+  font-size: 18px !important;
+}
+.interface-b .seller-empty-card {
+  background: #fdf5f9 !important;
+  border: 1px dashed #d8b2c6 !important;
+  border-radius: 8px !important;
+  color: #64748b !important;
+}
+.interface-b .modal-error { color: #ef4444 !important; font-size: 13px !important; }
+
 
 /* ==========================================================================
-   INTERFACE C: ACCESIBILIDAD Y ALTO CONTRASTE EXTREMO (WCAG AAA)
+   INTERFACE C: ALTO CONTRASTE â€” WCAG AAA (ACCESIBILIDAD MÃXIMA)
+   FilosofÃ­a: MÃ¡ximo contraste, texto grande, sin ambigÃ¼edad, bordes gruesos.
+   Negro puro + blanco puro + rosa #ff66cc como seÃ±alizador de acciÃ³n.
    ========================================================================== */
+
+/* Contenedor base */
 .app-container.interface-c {
-  background-color: #000000 !important; /* Fondo Negro Puro */
-  border: 4px solid #ff66cc !important; /* Borde grueso rosa de alto contraste */
+  background-color: #0a0a0a !important;
+  border: 3px solid #ff66cc !important;
   box-shadow: none !important;
   color: #ffffff !important;
-}
-.interface-c .app-logo-header {
-  border: 2.5px solid #ff66cc !important;
-}
-.interface-c .app-title {
-  color: #ff66cc !important; /* Rosa de alta visibilidad */
-  font-weight: 900 !important;
-  text-transform: uppercase !important;
-  font-size: 28px !important;
-  letter-spacing: 0.05em !important;
-}
-.interface-c .app-subtitle {
-  color: #ffffff !important;
-  font-weight: bold !important;
-  letter-spacing: 0.02em !important;
-}
-.interface-c h1, .interface-c h2, .interface-c h3, .interface-c h4, .interface-c h5, .interface-c h6, .interface-c .welcome-text {
-  color: #ff66cc !important;
-  text-shadow: none !important;
-}
-.interface-c p, .interface-c span, .interface-c label, .interface-c td, .interface-c th, .interface-c strong, .interface-c .table-item-name {
-  color: #ffffff !important;
-  font-weight: bold !important;
-  font-size: 15px !important; /* Mayor legibilidad */
+  border-radius: 4px !important;
 }
 
-/* Fix para el selector debug de interfaces en modo C */
-.interface-c .interface-selector-debug {
+/* Header alto contraste */
+.interface-c .app-header {
   background-color: #000000 !important;
+  border-bottom: 3px solid #ff66cc !important;
+  padding-bottom: 20px !important;
+}
+.interface-c .app-logo-header {
+  border: 3px solid #ff66cc !important;
+  border-radius: 50% !important;
+}
+.interface-c .app-title {
+  color: #ff66cc !important;
+  font-weight: 900 !important;
+  text-transform: uppercase !important;
+  font-size: 26px !important;
+  letter-spacing: 0.05em !important;
+  text-shadow: 0 0 20px rgba(255,102,204,0.3) !important;
+}
+.interface-c .app-subtitle {
+  color: #cccccc !important;
+  font-weight: 700 !important;
+  font-size: 12px !important;
+  letter-spacing: 0.05em !important;
+  text-transform: uppercase !important;
+}
+.interface-c .welcome-text {
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  font-size: 14px !important;
+}
+
+/* Selector debug en C */
+.interface-c .interface-selector-debug {
+  background-color: #0a0a0a !important;
   border: 2px solid #ff66cc !important;
+  border-radius: 0 !important;
 }
 .interface-c .debug-label {
   color: #ff66cc !important;
+  font-weight: 900 !important;
 }
-
-/* Fix para tarjetas de especificaciones y alertas en modo C (evitar blanco sobre crema) */
-.interface-c .spec-card, .interface-c .visitor-action-alert {
-  background-color: #000000 !important;
-  border: 2px solid #ffffff !important;
+.interface-c .btn-debug-toggle {
+  color: #ffffff !important;
   border-radius: 0 !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  border: 1px solid transparent !important;
 }
-.interface-c .spec-title {
-  color: #ff66cc !important;
+.interface-c .btn-debug-toggle.active {
+  background-color: #ff66cc !important;
+  color: #000000 !important;
+  font-weight: 900 !important;
 }
-.interface-c .spec-value {
-  color: #ffffff !important;
-}
-.interface-c .visitor-action-alert p, .interface-c .visitor-action-alert span {
-  color: #ffffff !important;
+.interface-c .btn-debug-toggle:hover {
+  border-color: #ff66cc !important;
+  background-color: rgba(255,102,204,0.1) !important;
 }
 
-/* Botones del header */
-.interface-c .btn-header-nav, .interface-c .btn-header-register {
+/* Botones de navegaciÃ³n â€” bordes blancos gruesos, uppercase */
+.interface-c .btn-header-nav {
   background-color: #000000 !important;
-  color: #ffffff !important; /* Texto blanco de alto contraste */
+  color: #ffffff !important;
   border: 2px solid #ffffff !important;
   border-radius: 0 !important;
   font-weight: 900 !important;
+  font-size: 13px !important;
+  text-transform: uppercase !important;
+  min-height: 44px !important;
+  letter-spacing: 0.04em !important;
 }
-.interface-c .btn-header-nav.active, .interface-c .btn-header-nav:hover {
+.interface-c .btn-header-nav:hover,
+.interface-c .btn-header-nav.active {
   background-color: #ff66cc !important;
-  color: #000000 !important; /* Contraste negro sobre rosa */
+  color: #000000 !important;
   border-color: #ff66cc !important;
 }
-
-/* Catálogo y filtros */
-.interface-c .product-card {
+.interface-c .btn-header-logout {
   background-color: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #999999 !important;
+  border-radius: 0 !important;
+  font-weight: 700 !important;
+  font-size: 12px !important;
+  text-transform: uppercase !important;
+  min-height: 44px !important;
+}
+.interface-c .btn-header-logout:hover {
+  border-color: #ff4444 !important;
+  color: #ff4444 !important;
+  background: #0a0a0a !important;
+}
+.interface-c .btn-header-register {
+  background-color: #ff66cc !important;
+  color: #000000 !important;
+  border: 2px solid #ff66cc !important;
+  border-radius: 0 !important;
+  font-weight: 900 !important;
+  font-size: 13px !important;
+  text-transform: uppercase !important;
+  min-height: 44px !important;
+}
+.interface-c .btn-header-register:hover {
+  background-color: #000000 !important;
+  color: #ff66cc !important;
+}
+
+/* Textos generales en C */
+.interface-c h1, .interface-c h2, .interface-c h3,
+.interface-c h4, .interface-c h5, .interface-c h6 {
+  color: #ff66cc !important;
+  font-weight: 900 !important;
+}
+.interface-c p, .interface-c span:not(.btn-debug-toggle),
+.interface-c label, .interface-c strong {
+  color: #ffffff !important;
+  font-weight: 700 !important;
+}
+.interface-c td, .interface-c th { color: #ffffff !important; font-weight: 700 !important; }
+
+/* Filtros */
+.interface-c .filter-search-input {
+  background-color: #0a0a0a !important;
+  color: #ffffff !important;
   border: 2px solid #ffffff !important;
   border-radius: 0 !important;
-  padding: 15px !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+}
+.interface-c .filter-search-input::placeholder { color: #888888 !important; }
+.interface-c .filter-search-input:focus {
+  border-color: #ff66cc !important;
+  outline: none !important;
+}
+.interface-c .filter-select {
+  background-color: #0a0a0a !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+  border-radius: 0 !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+}
+.interface-c .filter-select:focus { border-color: #ff66cc !important; }
+.interface-c select option {
+  background-color: #0a0a0a !important;
+  color: #ffffff !important;
+}
+
+/* Tarjetas del catÃ¡logo */
+.interface-c .product-card {
+  background-color: #0a0a0a !important;
+  border: 2px solid #ffffff !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  box-shadow: none !important;
 }
 .interface-c .product-card:hover {
   border-color: #ff66cc !important;
+  box-shadow: 0 0 0 1px #ff66cc !important;
   transform: none !important;
+}
+.interface-c .product-image-container {
+  background-color: #111111 !important;
+  border-radius: 0 !important;
+}
+.interface-c .product-card-info { background-color: #0a0a0a !important; }
+.interface-c .product-card-tag {
+  background-color: #ff66cc !important;
+  color: #000000 !important;
+  border-radius: 0 !important;
+  font-weight: 900 !important;
+  font-size: 11px !important;
+}
+.interface-c .product-card-title {
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  font-size: 14px !important;
+}
+.interface-c .product-card-brand {
+  color: #aaaaaa !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.04em !important;
 }
 .interface-c .product-card-price {
   color: #ff66cc !important;
   font-size: 22px !important;
   font-weight: 900 !important;
 }
+.interface-c .product-card-size {
+  background-color: #0a0a0a !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+  border-radius: 0 !important;
+  font-weight: 900 !important;
+  font-size: 12px !important;
+  padding: 3px 8px !important;
+}
 .interface-c .btn-product-card-view {
   background-color: #000000 !important;
-  color: #ff66cc !important; /* Texto rosa */
+  color: #ff66cc !important;
   border: 2px solid #ff66cc !important;
   border-radius: 0 !important;
   font-weight: 900 !important;
+  font-size: 12px !important;
   text-transform: uppercase !important;
+  letter-spacing: 0.06em !important;
+  padding: 10px !important;
+  min-height: 44px !important;
 }
 .interface-c .btn-product-card-view:hover {
   background-color: #ff66cc !important;
   color: #000000 !important;
 }
-.interface-c .btn-comprar-now {
+
+/* Detalle de producto */
+.interface-c .btn-back {
+  background-color: #0a0a0a !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+  border-radius: 0 !important;
+  font-weight: 900 !important;
+  text-transform: uppercase !important;
+  font-size: 12px !important;
+  min-height: 44px !important;
+}
+.interface-c .btn-back:hover {
+  border-color: #ff66cc !important;
+  color: #ff66cc !important;
+  background: #0a0a0a !important;
+}
+.interface-c .product-detail-image-box {
+  background-color: #111111 !important;
+  border: 2px solid #333333 !important;
+  border-radius: 0 !important;
+}
+.interface-c .product-detail-badge {
+  background-color: #0a0a0a !important;
+  border: 2px solid #ffffff !important;
+  color: #ffffff !important;
+  border-radius: 0 !important;
+  font-weight: 900 !important;
+  font-size: 12px !important;
+  text-transform: uppercase !important;
+}
+.interface-c .product-detail-title {
+  color: #ffffff !important;
+  font-weight: 900 !important;
+  font-size: 26px !important;
+}
+.interface-c .product-detail-brand {
+  color: #aaaaaa !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+}
+.interface-c .product-detail-divider {
+  border-top: 2px solid #333333 !important;
+}
+.interface-c .price-label {
+  color: #aaaaaa !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+}
+.interface-c .price-value {
+  color: #ff66cc !important;
+  font-size: 32px !important;
+  font-weight: 900 !important;
+}
+.interface-c .product-detail-spec-grid {
+  gap: 8px !important;
+}
+.interface-c .spec-card {
+  background-color: #0a0a0a !important;
+  border: 2px solid #333333 !important;
+  border-radius: 0 !important;
+  padding: 12px !important;
+}
+.interface-c .spec-title {
+  color: #ff66cc !important;
+  font-size: 10px !important;
+  font-weight: 900 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.06em !important;
+}
+.interface-c .spec-value {
+  color: #ffffff !important;
+  font-size: 16px !important;
+  font-weight: 900 !important;
+}
+.interface-c .product-detail-description {
+  color: #cccccc !important;
+  font-size: 15px !important;
+  font-weight: 400 !important;
+  line-height: 1.7 !important;
+}
+.interface-c .visitor-action-alert {
+  background-color: #0a0a0a !important;
+  border: 2px solid #ffffff !important;
+  border-radius: 0 !important;
+}
+.interface-c .visitor-action-alert p { color: #ffffff !important; font-weight: 700 !important; }
+.interface-c .btn-login-redirect {
   background-color: #ff66cc !important;
-  color: #000000 !important; /* Texto negro sobre fondo rosa */
+  color: #000000 !important;
   border: 2px solid #ff66cc !important;
   border-radius: 0 !important;
   font-weight: 900 !important;
   text-transform: uppercase !important;
-}
-.interface-c .btn-comprar-now:hover {
-  background-color: #ffffff !important;
-  color: #000000 !important;
-  border-color: #ffffff !important;
+  min-height: 44px !important;
 }
 .interface-c .btn-apartar-now {
   background-color: #000000 !important;
-  color: #ffffff !important; /* Texto blanco */
+  color: #ffffff !important;
   border: 2px solid #ffffff !important;
   border-radius: 0 !important;
   font-weight: 900 !important;
   text-transform: uppercase !important;
+  font-size: 14px !important;
+  letter-spacing: 0.08em !important;
+  min-height: 48px !important;
 }
 .interface-c .btn-apartar-now:hover {
+  background-color: #ff66cc !important;
+  color: #000000 !important;
+  border-color: #ff66cc !important;
+}
+
+/* Modal alto contraste */
+.interface-c .modal-card {
+  background-color: #0a0a0a !important;
+  border: 3px solid #ff66cc !important;
+  border-radius: 0 !important;
+  box-shadow: 0 0 0 2px #000000, 0 0 30px rgba(255,102,204,0.2) !important;
+  padding: 28px !important;
+}
+.interface-c .modal-title {
+  color: #ff66cc !important;
+  font-weight: 900 !important;
+  font-size: 20px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.06em !important;
+}
+.interface-c .modal-subtitle { color: #cccccc !important; font-size: 14px !important; font-weight: 700 !important; }
+.interface-c .modal-label {
+  color: #ff66cc !important;
+  font-size: 12px !important;
+  font-weight: 900 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.06em !important;
+}
+.interface-c .modal-input,
+.interface-c .modal-select {
+  background-color: #0a0a0a !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+  border-radius: 0 !important;
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  padding: 12px !important;
+  min-height: 48px !important;
+}
+.interface-c .modal-input:focus,
+.interface-c .modal-select:focus {
+  border-color: #ff66cc !important;
+  outline: none !important;
+}
+.interface-c .modal-input::-webkit-calendar-picker-indicator {
+  filter: invert(1) !important;
+  cursor: pointer !important;
+  transform: scale(1.3) !important;
+}
+.interface-c .modal-summary-box {
+  background-color: #111111 !important;
+  border: 2px solid #333333 !important;
+  border-radius: 0 !important;
+  padding: 14px !important;
+}
+.interface-c .summary-row,
+.interface-c .summary-row.total {
+  color: #ffffff !important;
+  font-weight: 700 !important;
+}
+.interface-c .summary-row.total {
+  color: #ff66cc !important;
+  font-size: 18px !important;
+  font-weight: 900 !important;
+  border-top: 2px dashed #333333 !important;
+}
+.interface-c .btn-modal-cancel {
+  background-color: #0a0a0a !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+  border-radius: 0 !important;
+  font-weight: 900 !important;
+  text-transform: uppercase !important;
+  min-height: 48px !important;
+  font-size: 13px !important;
+}
+.interface-c .btn-modal-cancel:hover {
   background-color: #ffffff !important;
   color: #000000 !important;
 }
-.interface-c .auth-card {
-  background-color: #000000 !important;
-  border: 2.5px solid #ffffff !important;
+.interface-c .btn-modal-submit {
+  background-color: #ff66cc !important;
+  color: #000000 !important;
+  border: 2px solid #ff66cc !important;
   border-radius: 0 !important;
+  font-weight: 900 !important;
+  font-size: 13px !important;
+  text-transform: uppercase !important;
+  min-height: 48px !important;
+}
+.interface-c .btn-modal-submit:hover {
+  background-color: #000000 !important;
+  color: #ff66cc !important;
+}
+.interface-c .modal-error {
+  background-color: #1a0000 !important;
+  border: 2px solid #ff4444 !important;
+  color: #ff4444 !important;
+  border-radius: 0 !important;
+  padding: 8px 12px !important;
+  font-weight: 900 !important;
 }
 
-/* Fix para inputs y filtros en modo C */
-.interface-c .filter-select, .interface-c .filter-search-input {
-  background-color: #000000 !important;
+/* Auth Login/Registro */
+.interface-c .auth-card {
+  background-color: #0a0a0a !important;
+  border: 2.5px solid #ffffff !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 30px !important;
+}
+.interface-c .auth-title {
+  color: #ff66cc !important;
+  font-weight: 900 !important;
+  font-size: 22px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.06em !important;
+}
+.interface-c .auth-subtitle { color: #cccccc !important; font-weight: 700 !important; }
+.interface-c .auth-label {
+  color: #ff66cc !important;
+  font-weight: 900 !important;
+  font-size: 12px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.06em !important;
+}
+.interface-c .auth-input,
+.interface-c .auth-select {
+  background-color: #0a0a0a !important;
   color: #ffffff !important;
   border: 2px solid #ffffff !important;
   border-radius: 0 !important;
-  padding: 10px !important;
-  font-weight: bold !important;
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  padding: 12px !important;
+  min-height: 48px !important;
 }
-.interface-c select option {
-  background-color: #000000 !important;
-  color: #ffffff !important;
-}
-.interface-c .auth-input, .interface-c .auth-select {
-  background-color: #000000 !important;
-  color: #ffffff !important;
-  border: 2px solid #ffffff !important;
-  border-radius: 0 !important;
-  padding: 10px !important;
-}
-.interface-c .auth-input::placeholder {
-  color: #a1a1aa !important;
-}
-.interface-c .auth-input:focus, .interface-c .auth-select:focus {
+.interface-c .auth-input::placeholder { color: #666666 !important; }
+.interface-c .auth-input:focus,
+.interface-c .auth-select:focus {
   border-color: #ff66cc !important;
   outline: none !important;
 }
 .interface-c .btn-auth-submit {
   background-color: #ff66cc !important;
-  color: #000000 !important; /* Texto negro sobre rosa */
+  color: #000000 !important;
+  border: 2px solid #ff66cc !important;
   border-radius: 0 !important;
   font-weight: 900 !important;
+  font-size: 15px !important;
   text-transform: uppercase !important;
+  letter-spacing: 0.08em !important;
+  min-height: 52px !important;
 }
-.interface-c .dashboard-empty-card, .interface-c .seller-empty-card {
+.interface-c .btn-auth-submit:hover {
   background-color: #000000 !important;
+  color: #ff66cc !important;
+}
+.interface-c .btn-auth-toggle {
+  color: #ff66cc !important;
+  font-weight: 900 !important;
+  font-size: 14px !important;
+}
+.interface-c .auth-footer { color: #aaaaaa !important; font-weight: 700 !important; }
+
+/* Dashboard cliente */
+.interface-c .dashboard-title {
+  color: #ff66cc !important;
+  font-weight: 900 !important;
+  font-size: 24px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.04em !important;
+}
+.interface-c .dashboard-subtitle {
+  color: #cccccc !important;
+  font-weight: 700 !important;
+}
+.interface-c .dashboard-empty-card,
+.interface-c .seller-empty-card {
+  background-color: #0a0a0a !important;
   border: 2px dashed #ffffff !important;
   border-radius: 0 !important;
+  color: #cccccc !important;
+  font-weight: 700 !important;
+  font-size: 15px !important;
 }
 .interface-c .apartado-card {
-  background-color: #000000 !important;
+  background-color: #0a0a0a !important;
   border: 2px solid #ffffff !important;
   border-radius: 0 !important;
   margin-bottom: 12px !important;
 }
+.interface-c .apartado-card-title {
+  color: #ffffff !important;
+  font-weight: 900 !important;
+  font-size: 16px !important;
+}
+.interface-c .apartado-card-meta {
+  color: #aaaaaa !important;
+  font-weight: 700 !important;
+}
 .interface-c .apartado-card-price {
   color: #ff66cc !important;
-}
-.interface-c .catalog-filter-select, .interface-c .filter-select {
-  background-color: #000000 !important;
-  color: #ffffff !important;
-  border: 2px solid #ffffff !important;
-  border-radius: 0 !important;
-  padding: 8px !important;
-}
-.interface-c .catalog-search-input {
-  background-color: #000000 !important;
-  color: #ffffff !important;
-  border: 2px solid #ffffff !important;
-  border-radius: 0 !important;
-  padding: 8px !important;
-}
-.interface-c .seller-table th {
-  background-color: #1e1e1e !important;
-  border: 2px solid #ffffff !important;
-  color: #ff66cc !important;
-}
-.interface-c .seller-table td {
-  border: 2px solid #ffffff !important;
-}
-.interface-c .modal-content {
-  background-color: #000000 !important;
-  border: 4px solid #ff66cc !important;
-  border-radius: 0 !important;
-}
-.interface-c .modal-input, .interface-c .modal-select {
-  background-color: #000000 !important;
-  color: #ffffff !important;
-  border: 2px solid #ffffff !important;
-}
-.interface-c .btn-modal-submit {
-  background-color: #ff66cc !important;
-  color: #000000 !important;
-}
-.interface-c .btn-modal-cancel {
-  background-color: #000000 !important;
-  color: #ffffff !important;
-  border: 2px solid #ffffff !important;
-}
-.interface-c .btn-debug-toggle {
-  border: 1.5px solid #ff66cc !important;
-  color: #ffffff !important;
-  border-radius: 0 !important;
-}
-.interface-c .btn-debug-toggle.active {
-  background-color: #ff66cc !important;
-  color: #000000 !important;
+  font-weight: 900 !important;
+  font-size: 18px !important;
 }
 .interface-c .status-badge-active {
-  background-color: #1e1e1e !important;
+  background-color: #111111 !important;
   color: #ff66cc !important;
-  border: 1px solid #ff66cc !important;
+  border: 2px solid #ff66cc !important;
   border-radius: 0 !important;
+  font-weight: 900 !important;
+  font-size: 10px !important;
+  text-transform: uppercase !important;
 }
-.interface-c .table-badge-1, .interface-c .table-badge-2, .interface-c .table-badge-3 {
-  border-radius: 0 !important;
-  border: 1.5px solid #ffffff !important;
+.interface-c .limite-date {
+  color: #ff4444 !important;
+  font-weight: 900 !important;
+}
+.interface-c .btn-whatsapp-contact {
   background-color: #000000 !important;
   color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+  border-radius: 0 !important;
+  font-weight: 900 !important;
+  font-size: 13px !important;
+  text-transform: uppercase !important;
+  min-height: 44px !important;
+  padding: 10px 14px !important;
+  box-shadow: none !important;
+}
+.interface-c .btn-whatsapp-contact:hover {
+  background-color: #ff66cc !important;
+  color: #000000 !important;
+  border-color: #ff66cc !important;
+}
+
+/* Dashboard vendedor */
+.interface-c .seller-section,
+.interface-c .table-responsive,
+.interface-c .product-form-card {
+  background-color: #0a0a0a !important;
+  border-color: #333333 !important;
+}
+.interface-c .seller-section-divider {
+  background-color: #333333 !important;
+  height: 2px !important;
+}
+.interface-c .product-form-card {
+  border: 2px solid #333333 !important;
+  border-radius: 0 !important;
+  padding: 20px !important;
+}
+.interface-c .section-subtitle {
+  color: #ff66cc !important;
+  font-weight: 900 !important;
+  text-transform: uppercase !important;
+  font-size: 16px !important;
+  letter-spacing: 0.06em !important;
+}
+.interface-c .btn-add-product {
+  background-color: #ff66cc !important;
+  color: #000000 !important;
+  border: 2px solid #ff66cc !important;
+  border-radius: 0 !important;
+  font-weight: 900 !important;
+  font-size: 13px !important;
+  text-transform: uppercase !important;
+  min-height: 44px !important;
+}
+.interface-c .btn-add-product:hover {
+  background-color: #000000 !important;
+  color: #ff66cc !important;
+}
+.interface-c .auth-input.text-area,
+.interface-c .auth-input,
+.interface-c .auth-select {
+  background-color: #0a0a0a !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+  border-radius: 0 !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  min-height: 44px !important;
+}
+.interface-c .auth-input::placeholder { color: #555555 !important; }
+.interface-c .auth-input:focus,
+.interface-c .auth-select:focus {
+  border-color: #ff66cc !important;
+  outline: none !important;
+}
+.interface-c .auth-label {
+  color: #ff66cc !important;
+  font-weight: 900 !important;
+  font-size: 12px !important;
+  text-transform: uppercase !important;
+}
+.interface-c .seller-table {
+  background-color: #0a0a0a !important;
+  color: #ffffff !important;
+}
+.interface-c .seller-table th {
+  background-color: #111111 !important;
+  border: 2px solid #333333 !important;
+  color: #ff66cc !important;
+  font-weight: 900 !important;
+  text-transform: uppercase !important;
+  font-size: 11px !important;
+  letter-spacing: 0.06em !important;
+}
+.interface-c .seller-table td {
+  border: 1px solid #222222 !important;
+  background-color: #0a0a0a !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+}
+.interface-c .seller-table tr:hover td {
+  background-color: #111111 !important;
+}
+.interface-c .table-thumbnail {
+  border: 2px solid #333333 !important;
+  border-radius: 0 !important;
+  background-color: #111111 !important;
+}
+.interface-c .table-item-name { color: #ffffff !important; font-weight: 900 !important; }
+.interface-c .table-badge-1 {
+  background-color: #003300 !important;
+  color: #00ff88 !important;
+  border: 2px solid #00ff88 !important;
+  border-radius: 0 !important;
+  font-weight: 900 !important;
+}
+.interface-c .table-badge-2 {
+  background-color: #1a0a00 !important;
+  color: #ff9900 !important;
+  border: 2px solid #ff9900 !important;
+  border-radius: 0 !important;
+  font-weight: 900 !important;
+}
+.interface-c .table-badge-3 {
+  background-color: #0a0a0a !important;
+  color: #aaaaaa !important;
+  border: 2px solid #555555 !important;
+  border-radius: 0 !important;
+  font-weight: 900 !important;
 }
 .interface-c .btn-table-edit {
   background-color: #ff66cc !important;
   color: #000000 !important;
+  border: 2px solid #ff66cc !important;
   border-radius: 0 !important;
+  font-weight: 900 !important;
+  font-size: 12px !important;
+  text-transform: uppercase !important;
+  min-height: 36px !important;
+}
+.interface-c .btn-table-edit:hover {
+  background-color: #000000 !important;
+  color: #ff66cc !important;
 }
 .interface-c .btn-table-delete {
-  background-color: #000000 !important;
-  color: #ffffff !important;
-  border: 1.5px solid #ffffff !important;
+  background-color: #0a0a0a !important;
+  color: #ff4444 !important;
+  border: 2px solid #ff4444 !important;
   border-radius: 0 !important;
+  font-weight: 900 !important;
+  font-size: 12px !important;
+  text-transform: uppercase !important;
+  min-height: 36px !important;
 }
-
+.interface-c .btn-table-delete:hover {
+  background-color: #ff4444 !important;
+  color: #000000 !important;
+  border-color: #ff4444 !important;
+}
+.interface-c .seller-loading {
+  color: #cccccc !important;
+  font-weight: 700 !important;
+  font-size: 15px !important;
+}
+.interface-c .seller-error {
+  color: #ff4444 !important;
+  font-weight: 900 !important;
+  font-size: 15px !important;
+  border: 2px solid #ff4444 !important;
+  padding: 10px !important;
+}
 /* ==========================================================================
    PREVENIR RECORTES DE FOTOS EN TODAS LAS INTERFACES (ISO 9241 USABILITY)
    ========================================================================== */
@@ -2058,7 +3359,7 @@ input, select, textarea, button {
 .apartado-card-image, 
 .table-thumbnail {
   object-fit: contain !important; /* Ajustar imagen completa sin recortar en el detalle/dashboard */
-  background-color: #faf9f6; /* Fondo neutro para rellenar espacios vacíos */
+  background-color: #faf9f6; /* Fondo neutro para rellenar espacios vacÃ­os */
 }
 .interface-c .product-card-image,
 .interface-c .product-detail-image,
@@ -2067,7 +3368,7 @@ input, select, textarea, button {
   background-color: #000000 !important; /* Fondo negro en alto contraste */
 }
 
-/* Asegurar visibilidad del botón de registro en Interfaz A */
+/* Asegurar visibilidad del botÃ³n de registro en Interfaz A */
 .interface-a .btn-header-register {
   border: 1.5px solid #ab4e79 !important;
   color: #ab4e79 !important;
@@ -2097,7 +3398,7 @@ input, select, textarea, button {
 }
 
 /* ==========================================================================
-   ESTILOS DE ADMINISTRACIÓN ADICIONALES (CONTROL DE INVENTARIO Y APARTADOS)
+   ESTILOS DE ADMINISTRACIÃ“N ADICIONALES (CONTROL DE INVENTARIO Y APARTADOS)
    ========================================================================== */
 /* Interfaz A: Minimalista (Botones planos de tabla sin bordes, solo subrayado) */
 .interface-a .btn-table-edit {
@@ -2175,7 +3476,7 @@ input, select, textarea, button {
   background-color: #000000 !important;
 }
 
-/* Override de alto contraste para el botón de WhatsApp en modo C */
+/* Override de alto contraste para el botÃ³n de WhatsApp en modo C */
 .interface-c .btn-whatsapp-contact {
   background-color: #000000 !important;
   color: #ffffff !important;
@@ -2250,16 +3551,16 @@ input, select, textarea, button {
   color: #ff66cc !important;
 }
 
-/* Color del ícono del calendario en inputs tipo date para alto contraste */
+/* Color del Ã­cono del calendario en inputs tipo date para alto contraste */
 .interface-c .modal-input::-webkit-calendar-picker-indicator {
   filter: invert(1) !important;
   cursor: pointer !important;
 }
 
 /* ==========================================================================
-   MEJORAS DE USABILIDAD TÁCTIL EN MÓVIL
+   MEJORAS DE USABILIDAD TÃCTIL EN MÃ“VIL
    ========================================================================== */
-/* Botón de WhatsApp: ancho completo en pantallas pequeñas para facilitar el toque */
+/* BotÃ³n de WhatsApp: ancho completo en pantallas pequeÃ±as para facilitar el toque */
 @media (max-width: 480px) {
   .btn-whatsapp-contact {
     display: block !important;
@@ -2270,7 +3571,7 @@ input, select, textarea, button {
     box-sizing: border-box !important;
   }
 
-  /* Formulario de la prenda: botones de acción en columna */
+  /* Formulario de la prenda: botones de acciÃ³n en columna */
   .form-actions-row {
     flex-direction: column;
     gap: 8px;
