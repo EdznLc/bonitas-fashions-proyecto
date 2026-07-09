@@ -103,9 +103,9 @@ export default function Register({ API_URL, onRegisterSuccess, onNavigateToLogin
 
       const data = await res.json();
       if (res.ok) {
-        setExito('¡Registro exitoso! Ya puedes iniciar sesión.');
+        setExito('¡Registro exitoso! Iniciando sesión automáticamente...');
         setTimeout(() => {
-          onRegisterSuccess();
+          onRegisterSuccess(data);
         }, 1500);
       } else {
         setError(data.error || 'Ocurrió un error al registrar tu cuenta.');

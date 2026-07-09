@@ -202,7 +202,11 @@ export default function App() {
         {view === 'register' && (
           <Register
             API_URL={API_URL}
-            onRegisterSuccess={() => setView('login')}
+            onRegisterSuccess={(userData) => {
+              setUser(userData);
+              localStorage.setItem('user', JSON.stringify(userData));
+              setView('catalog');
+            }}
             onNavigateToLogin={() => setView('login')}
           />
         )}
