@@ -1928,3 +1928,64 @@ input, select, textarea, button {
   color: #000000 !important;
   border-color: #ff66cc !important;
 }
+
+/* Modales de Alto Contraste (Modo C) */
+.interface-c .modal-card {
+  background-color: #000000 !important;
+  border: 3px solid #ff66cc !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+.interface-c .modal-title {
+  color: #ff66cc !important;
+}
+.interface-c .modal-subtitle {
+  color: #ffffff !important;
+}
+.interface-c .modal-label {
+  color: #ff66cc !important;
+}
+.interface-c .modal-input,
+.interface-c .modal-select {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+  border-radius: 0 !important;
+}
+.interface-c .modal-input:focus,
+.interface-c .modal-select:focus {
+  border-color: #ff66cc !important;
+}
+.interface-c .modal-summary-box {
+  background-color: #000000 !important;
+  border: 2px solid #ffffff !important;
+  border-radius: 0 !important;
+}
+.interface-c .summary-row,
+.interface-c .summary-row.total {
+  color: #ffffff !important;
+}
+.interface-c .summary-row.total {
+  border-top: 2px dashed #ffffff !important;
+}
+.interface-c .btn-modal-cancel {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+  border-radius: 0 !important;
+}
+.interface-c .btn-modal-cancel:hover {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+}
+.interface-c .btn-modal-submit {
+  background-color: #ff66cc !important;
+  color: #000000 !important;
+  border: 2px solid #ff66cc !important;
+  border-radius: 0 !important;
+  font-weight: bold !important;
+}
+.interface-c .btn-modal-submit:hover {
+  background-color: #000000 !important;
+  color: #ff66cc !important;
+}
