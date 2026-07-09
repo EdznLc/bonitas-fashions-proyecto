@@ -33,8 +33,8 @@ export default function Register({ API_URL, onRegisterSuccess, onNavigateToLogin
       return;
     }
 
-    const { nombre, correo, password, rol } = formData;
-    if (!nombre || !correo || !password || !rol) {
+    const { nombre, correo, password, rol, apellido_p, telefono } = formData;
+    if (!nombre || !correo || !password || !rol || !apellido_p || !telefono) {
       setError('Por favor, completa los campos obligatorios (*).');
       return;
     }
@@ -51,20 +51,18 @@ export default function Register({ API_URL, onRegisterSuccess, onNavigateToLogin
       return;
     }
 
-    // 2. Validar Primer Apellido (si se ingresa)
-    if (formData.apellido_p && formData.apellido_p.trim() !== '') {
-      const cleanApP = formData.apellido_p.trim();
-      if (cleanApP.length < 2 || cleanApP.length > 50) {
-        setError('El primer apellido debe tener entre 2 y 50 caracteres.');
-        return;
-      }
-      if (!lettersRegex.test(cleanApP)) {
-        setError('El primer apellido solo puede contener letras y espacios.');
-        return;
-      }
+    // 2. Validar Primer Apellido (obligatorio)
+    const cleanApP = apellido_p.trim();
+    if (cleanApP.length < 2 || cleanApP.length > 50) {
+      setError('El primer apellido debe tener entre 2 y 50 caracteres.');
+      return;
+    }
+    if (!lettersRegex.test(cleanApP)) {
+      setError('El primer apellido solo puede contener letras y espacios.');
+      return;
     }
 
-    // 3. Validar Segundo Apellido (si se ingresa)
+    // 3. Validar Segundo Apellido (opcional)
     if (formData.apellido_m && formData.apellido_m.trim() !== '') {
       const cleanApM = formData.apellido_m.trim();
       if (cleanApM.length < 2 || cleanApM.length > 50) {
@@ -83,18 +81,16 @@ export default function Register({ API_URL, onRegisterSuccess, onNavigateToLogin
       return;
     }
 
-    // 5. Validar Teléfono (si se ingresa, debe ser numérico de exactamente 10 dígitos)
-    if (formData.telefono && formData.telefono.trim() !== '') {
-      const cleanPhone = formData.telefono.trim();
-      const phoneRegex = /^\d+$/;
-      if (!phoneRegex.test(cleanPhone)) {
-        setError('El teléfono solo puede contener números (dígitos).');
-        return;
-      }
-      if (cleanPhone.length !== 10) {
-        setError('El teléfono debe tener exactamente 10 dígitos.');
-        return;
-      }
+    // 5. Validar Teléfono (obligatorio, numérico de exactamente 10 dígitos)
+    const cleanPhone = telefono.trim();
+    const phoneRegex = /^\d+$/;
+    if (!phoneRegex.test(cleanPhone)) {
+      setError('El teléfono solo puede contener números (dígitos).');
+      return;
+    }
+    if (cleanPhone.length !== 10) {
+      setError('El teléfono debe tener exactamente 10 dígitos.');
+      return;
     }
 
     setCargando(true);
@@ -147,7 +143,7 @@ export default function Register({ API_URL, onRegisterSuccess, onNavigateToLogin
 
           <div className="auth-form-row">
             <div className="auth-input-group">
-              <label className="auth-label">Primer Apellido</label>
+              <label className="auth-label">Primer Apellido *</label>
               <input
                 type="text"
                 name="apellido_p"
@@ -155,6 +151,7 @@ export default function Register({ API_URL, onRegisterSuccess, onNavigateToLogin
                 onChange={handleChange}
                 placeholder="Apellido Paterno"
                 className="auth-input"
+                required
               />
             </div>
             <div className="auth-input-group">
@@ -197,7 +194,7 @@ export default function Register({ API_URL, onRegisterSuccess, onNavigateToLogin
           </div>
 
           <div className="auth-input-group">
-            <label className="auth-label">Teléfono de Contacto</label>
+            <label className="auth-label">Teléfono de Contacto *</label>
             <input
               type="tel"
               name="telefono"
@@ -205,6 +202,7 @@ export default function Register({ API_URL, onRegisterSuccess, onNavigateToLogin
               onChange={handleChange}
               placeholder="10 dígitos"
               className="auth-input"
+              required
             />
           </div>
 
