@@ -161,8 +161,9 @@ export default function SellerDashboard({ API_URL }) {
 
   const handleGuardarProducto = async (e) => {
     e.preventDefault();
-    if (!formProducto.nombre || formProducto.precio === '' || !formProducto.talla) {
-      alert('Nombre, precio y talla son obligatorios.');
+    const { nombre, precio, talla, marca, url_imagen, descripcion } = formProducto;
+    if (!nombre || precio === '' || !talla || !marca || !marca.trim() || !url_imagen || !url_imagen.trim() || !descripcion || !descripcion.trim()) {
+      alert('Por favor completa todos los campos obligatorios: Nombre, Marca, Precio, Talla, Imagen y Descripción.');
       return;
     }
 
@@ -247,7 +248,7 @@ export default function SellerDashboard({ API_URL }) {
                   />
                 </div>
                 <div className="auth-input-group">
-                  <label className="auth-label">Marca</label>
+                  <label className="auth-label">Marca *</label>
                   <input
                     type="text"
                     name="marca"
@@ -255,6 +256,7 @@ export default function SellerDashboard({ API_URL }) {
                     onChange={handleInputChange}
                     placeholder="Ej. Zara, Gucci, etc."
                     className="auth-input"
+                    required
                   />
                 </div>
               </div>
@@ -361,13 +363,14 @@ export default function SellerDashboard({ API_URL }) {
               </div>
 
               <div className="auth-input-group">
-                <label className="auth-label">Descripción</label>
+                <label className="auth-label">Descripción *</label>
                 <textarea
                   name="descripcion"
                   value={formProducto.descripcion}
                   onChange={handleInputChange}
                   placeholder="Detalles sobre textil, corte, etc."
                   className="auth-input text-area"
+                  required
                 />
               </div>
 
