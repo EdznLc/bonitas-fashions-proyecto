@@ -54,7 +54,7 @@ input, select, textarea {
 .app-header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   border-bottom: 2px solid #cbd5e1;
   padding-bottom: 20px;
   margin-bottom: 25px;
@@ -923,6 +923,12 @@ input, select, textarea {
   flex-direction: column;
   gap: 15px;
 }
+.form-actions-row {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
 .text-area {
   min-height: 80px;
   resize: vertical;
@@ -1023,69 +1029,311 @@ input, select, textarea {
 
 /* --- Responsive Media Queries --- */
 
+/* ===== TABLET: max-width 768px ===== */
 @media (max-width: 768px) {
   .app-container {
     margin: 15px auto;
-    padding: 24px 16px;
+    padding: 20px 14px;
     border-radius: 12px;
-    width: 95%;
+    width: 96%;
   }
+
+  /* Header: apila todo verticalmente */
   .app-header {
     flex-direction: column;
     align-items: stretch;
-    text-align: center;
-    gap: 15px;
+    gap: 12px;
+  }
+
+  /* Bloque izquierdo: logo + selectores A/B/C + encuestas */
+  .header-brand-container {
+    width: 100%;
+  }
+  .header-title-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .logo-title-group {
+    gap: 10px;
+  }
+  .app-logo-header {
+    width: 40px;
+    height: 40px;
+  }
+  .app-title {
+    font-size: 22px !important;
+  }
+  .app-subtitle {
+    font-size: 11px;
+  }
+
+  /* Selectores A/B/C y Encuestas: misma fila en tablet, apilados en móvil */
+  .interface-selector-debug {
+    flex-wrap: wrap;
+  }
+
+  /* Botones de usuario (Mis Apartados, Salir, etc.) */
+  .header-user-nav {
+    width: 100%;
   }
   .user-welcome-row {
     flex-direction: column;
     width: 100%;
     align-items: stretch;
+    gap: 10px;
+  }
+  .welcome-text {
+    font-size: 13px;
+    text-align: left;
   }
   .nav-action-links {
-    flex-direction: column;
+    display: flex;
+    flex-wrap: wrap;
     gap: 8px;
   }
   .btn-header-nav, .btn-header-logout, .btn-header-register {
-    width: 100%;
+    flex: 1;
+    min-width: 100px;
     text-align: center;
+    font-size: 12px;
+    padding: 8px 10px;
   }
+
+  /* Detalle de producto en 1 columna */
   .product-detail-layout {
     grid-template-columns: 1fr;
     gap: 20px;
   }
   .product-detail-image-box {
-    height: 300px;
+    height: 260px;
   }
+
+  /* Dashboard grid */
   .dashboard-grid {
     grid-template-columns: 1fr;
-    gap: 30px;
+    gap: 25px;
+  }
+
+  /* Seller section-header-row: apila botón debajo del título */
+  .section-header-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .btn-add-product, .btn-add-card {
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Formulario de producto: 2 cols → 1 col */
+  .auth-form-row {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .auth-form-row .auth-input-group {
+    width: 100%;
+    flex: none;
+  }
+
+  /* Modal: padding más ajustado */
+  .modal-card {
+    padding: 20px 16px;
+    width: 94%;
+  }
+
+  /* Apartado-card: permite contenido más estrecho */
+  .apartado-card {
+    flex-wrap: wrap;
+  }
+  .apartado-card-image-box {
+    width: 70px;
+    height: 70px;
+  }
+
+  /* Tabla: scroll horizontal garantizado */
+  .table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .seller-table {
+    min-width: 700px; /* Fuerza scroll si no cabe */
+  }
+  .seller-table th,
+  .seller-table td {
+    padding: 10px 12px;
+    font-size: 12px;
+    white-space: nowrap;
   }
 }
 
+/* ===== MÓVIL: max-width 480px ===== */
 @media (max-width: 480px) {
   .app-container {
-    margin: 8px auto;
-    padding: 16px 12px;
+    margin: 6px auto;
+    padding: 14px 10px;
     border-radius: 8px;
-    width: 96%;
+    width: 98%;
   }
-  .catalog-filters-bar {
-    flex-direction: column;
+
+  /* Header compacto en móvil */
+  .app-title {
+    font-size: 18px !important;
+  }
+  .app-logo-header {
+    width: 34px;
+    height: 34px;
+  }
+
+  /* Selectores A/B/C en fila compacta */
+  .header-title-row {
+    gap: 8px;
+  }
+  .interface-selector-debug {
+    padding: 3px;
+  }
+  .btn-debug-toggle {
+    font-size: 10px;
+    padding: 3px 8px;
+  }
+  .debug-label {
+    font-size: 9px;
+    margin-right: 4px;
+  }
+
+  /* Botones de navegación en 2 columnas */
+  .nav-action-links {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+  }
+  .btn-header-nav, .btn-header-logout, .btn-header-register {
+    font-size: 11px;
+    padding: 7px 6px;
+  }
+  /* Si hay 3 botones (Catálogo, Iniciar Sesión, Crear Cuenta), el 3ro ocupa 2 cols */
+  .nav-action-links .btn-header-register:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+
+  /* Catálogo: 2 columnas en lugar de 1 para mejor aprovechamiento */
+  .catalog-grid {
+    grid-template-columns: repeat(2, 1fr);
     gap: 12px;
   }
-  .filter-selects {
+  .product-image-container {
+    height: 160px;
+  }
+  .product-card-name {
+    font-size: 12px;
+  }
+  .product-card-price {
+    font-size: 15px;
+  }
+
+  /* Filtros del catálogo */
+  .catalog-filters-bar {
     flex-direction: column;
+    gap: 10px;
+  }
+  .filter-selects {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     width: 100%;
+    gap: 8px;
   }
   .filter-select {
     width: 100%;
+    font-size: 13px;
+    padding: 8px 10px;
   }
-  .catalog-grid {
-    grid-template-columns: 1fr;
+  .filter-search-input {
+    min-width: unset;
+    width: 100%;
+  }
+
+  /* Detalle de producto */
+  .product-detail-image-box {
+    height: 210px;
+  }
+  .product-detail-title {
+    font-size: 20px;
+  }
+  .product-detail-spec-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Formulario de registro/login */
+  .auth-card {
+    padding: 20px 14px !important;
+    margin: 10px auto !important;
   }
   .auth-form-row {
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
+  }
+
+  /* Modal: pantallas muy pequeñas */
+  .modal-card {
+    padding: 16px 12px;
+    width: 96%;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+  .modal-actions-row {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .btn-modal-cancel, .btn-modal-submit {
+    width: 100%;
+  }
+
+  /* Tabla del vendedor */
+  .seller-table {
+    min-width: 600px;
+  }
+  .seller-table th,
+  .seller-table td {
+    padding: 8px 10px;
+    font-size: 11px;
+  }
+  .table-thumbnail {
+    width: 36px;
+    height: 36px;
+  }
+
+  /* Acciones en tabla: apiladas */
+  .table-actions {
+    flex-direction: column;
+    gap: 4px;
+  }
+  .btn-table-edit, .btn-table-delete {
+    font-size: 10px;
+    padding: 3px 6px;
+  }
+
+  /* Form de agregar prenda */
+  .product-form-card {
+    padding: 14px 10px;
+  }
+
+  /* Apartado card adaptado */
+  .apartado-card {
+    flex-direction: row;
+    gap: 10px;
+  }
+  .apartado-card-image-box {
+    width: 60px;
+    height: 60px;
+    flex-shrink: 0;
+  }
+  .apartado-card-title {
+    font-size: 13px;
+  }
+  .apartado-card-status-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3px;
   }
 }
 
@@ -1253,6 +1501,16 @@ input, select, textarea, button {
   box-shadow: none !important;
   border: none !important;
   padding: 50px 40px !important;
+}
+@media (max-width: 768px) {
+  .app-container.interface-a {
+    padding: 20px 14px !important;
+  }
+}
+@media (max-width: 480px) {
+  .app-container.interface-a {
+    padding: 14px 10px !important;
+  }
 }
 .interface-a .app-logo-header {
   border: 1.5px solid #382a4b !important;
@@ -1997,3 +2255,41 @@ input, select, textarea, button {
   filter: invert(1) !important;
   cursor: pointer !important;
 }
+
+/* ==========================================================================
+   MEJORAS DE USABILIDAD TÁCTIL EN MÓVIL
+   ========================================================================== */
+/* Botón de WhatsApp: ancho completo en pantallas pequeñas para facilitar el toque */
+@media (max-width: 480px) {
+  .btn-whatsapp-contact {
+    display: block !important;
+    width: 100% !important;
+    text-align: center !important;
+    padding: 10px !important;
+    font-size: 13px !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Formulario de la prenda: botones de acción en columna */
+  .form-actions-row {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .form-actions-row .btn-modal-cancel,
+  .form-actions-row .btn-modal-submit {
+    width: 100%;
+  }
+
+  /* Prevenir que el modal desborde verticalmente */
+  .modal-overlay {
+    align-items: flex-start;
+    padding: 16px 0;
+    overflow-y: auto;
+  }
+
+  /* Interfaz A: ocultar padding excesivo */
+  .interface-a .app-container {
+    padding: 14px 10px !important;
+  }
+}
+
