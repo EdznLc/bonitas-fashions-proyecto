@@ -273,19 +273,19 @@ export default function SellerDashboard({ API_URL }) {
           className={`seller-tab-btn ${activeTab === 'prendas' ? 'active' : ''}`}
           onClick={() => setActiveTab('prendas')}
         >
-          👕 Prendas e Inventario
+          Prendas e Inventario
         </button>
         <button 
           className={`seller-tab-btn ${activeTab === 'apartados' ? 'active' : ''}`}
           onClick={() => setActiveTab('apartados')}
         >
-          📅 Apartados y Reservaciones
+          Apartados y Reservaciones
         </button>
         <button 
           className={`seller-tab-btn ${activeTab === 'ventas' ? 'active' : ''}`}
           onClick={() => setActiveTab('ventas')}
         >
-          💰 Historial de Ventas
+          Historial de Ventas
         </button>
       </div>
 
