@@ -114,6 +114,42 @@ router.get('/admin', async (req, res) => {
     }
 });
 
+// 5b. Consultar todas las ventas registradas (Administrador/Vendedor)
+router.get('/ventas/admin', async (req, res) => {
+    try {
+        const query = `
+            SELECT v.*, u.nombre as usuario_nombre, u.correo, u.telefono,
+                   mp.nombre as metodo_pago_nombre, te.nombre as tipo_entrega_nombre,
+                   COALESCE(
+                       json_agg(
+                           json_build_object(
+                               'id_producto', p.id_producto,
+                               'nombre', p.nombre,
+                               'precio_final', vp.precio_final,
+                               'talla', p.talla,
+                               'marca', p.marca,
+                               'url_imagen', p.url_imagen
+                           )
+                       ) FILTER (WHERE p.id_producto IS NOT NULL),
+                       '[]'
+                   ) as productos
+            FROM venta v
+            JOIN usuario u ON v.id_usuario = u.id_usuario
+            JOIN metodo_pago mp ON v.id_metodo_pago = mp.id_metodo_pago
+            JOIN tipo_entrega te ON v.id_tipo_entrega = te.id_tipo_entrega
+            LEFT JOIN venta_producto vp ON v.id_venta = vp.id_venta
+            LEFT JOIN producto p ON vp.id_producto = p.id_producto
+            GROUP BY v.id_venta, u.nombre, u.correo, u.telefono, mp.nombre, te.nombre
+            ORDER BY v.id_venta DESC;
+        `;
+        const resultado = await pool.query(query);
+        res.json(resultado.rows);
+    } catch (error) {
+        console.error('Error al obtener ventas:', error);
+        res.status(500).json({ error: 'No se pudieron obtener las ventas registradas.' });
+    }
+});
+
 // 6. Registrar una venta formal (Checkout final)
 router.post('/checkout', async (req, res) => {
     const { id_usuario, id_metodo_pago, id_tipo_entrega, detalles_entrega, total_final, productos } = req.body;
@@ -196,6 +232,97 @@ router.delete('/:id', async (req, res) => {
         await client.query('ROLLBACK');
         console.error('Error al eliminar apartado:', error);
         res.status(500).json({ error: 'No se pudo eliminar el apartado.' });
+    } finally {
+        client.release();
+    }
+});
+
+// 8. Completar compra a partir de un apartado (Administrador/Vendedor)
+router.post('/:id/completar', async (req, res) => {
+    const { id } = req.params;
+    const client = await pool.connect();
+    try {
+        await client.query('BEGIN');
+
+        // 1. Obtener el apartado
+        const resApartado = await client.query('SELECT * FROM apartado WHERE id_apartado = $1', [parseInt(id, 10)]);
+        if (resApartado.rows.length === 0) {
+            await client.query('ROLLBACK');
+            return res.status(404).json({ error: 'No se encontró el apartado especificado.' });
+        }
+        const apartado = resApartado.rows[0];
+
+        if (apartado.estatus === 'Completado') {
+            await client.query('ROLLBACK');
+            return res.status(400).json({ error: 'Este apartado ya ha sido completado como venta previamente.' });
+        }
+
+        // 2. Obtener el producto asociado
+        const resProducto = await client.query('SELECT * FROM producto WHERE id_producto = $1', [apartado.id_producto]);
+        if (resProducto.rows.length === 0) {
+            await client.query('ROLLBACK');
+            return res.status(404).json({ error: 'No se encontró el producto asociado a este apartado.' });
+        }
+        const producto = resProducto.rows[0];
+
+        // 3. Resolver método de pago
+        let metodoPagoId = apartado.id_metodo_pago;
+        if (!metodoPagoId) {
+            const defMetodo = await client.query('SELECT id_metodo_pago FROM metodo_pago LIMIT 1');
+            if (defMetodo.rows.length > 0) {
+                metodoPagoId = defMetodo.rows[0].id_metodo_pago;
+            } else {
+                await client.query('ROLLBACK');
+                return res.status(400).json({ error: 'No hay métodos de pago configurados en el sistema.' });
+            }
+        }
+
+        // 4. Resolver tipo de entrega
+        let tipoEntregaId = apartado.id_tipo_entrega;
+        if (!tipoEntregaId) {
+            const defEntrega = await client.query('SELECT id_tipo_entrega FROM tipo_entrega LIMIT 1');
+            if (defEntrega.rows.length > 0) {
+                tipoEntregaId = defEntrega.rows[0].id_tipo_entrega;
+            } else {
+                await client.query('ROLLBACK');
+                return res.status(400).json({ error: 'No hay tipos de entrega configurados en el sistema.' });
+            }
+        }
+
+        // 5. Crear la venta
+        const queryVenta = `
+            INSERT INTO venta (id_usuario, id_metodo_pago, id_tipo_entrega, detalles_entrega, total_final)
+            VALUES ($1, $2, $3, $4, $5)
+            RETURNING id_venta;
+        `;
+        const resVenta = await client.query(queryVenta, [
+            apartado.id_usuario,
+            metodoPagoId,
+            tipoEntregaId,
+            `Completado desde apartado #${id}`,
+            producto.precio
+        ]);
+        const id_venta = resVenta.rows[0].id_venta;
+
+        // 6. Insertar en venta_producto
+        const queryVentaProd = `
+            INSERT INTO venta_producto (id_venta, id_producto, precio_final)
+            VALUES ($1, $2, $3);
+        `;
+        await client.query(queryVentaProd, [id_venta, apartado.id_producto, producto.precio]);
+
+        // 7. Cambiar estado de la prenda a Vendida (id_estado = 3)
+        await client.query('UPDATE producto SET id_estado = 3 WHERE id_producto = $1', [apartado.id_producto]);
+
+        // 8. Actualizar estatus del apartado a 'Completado'
+        await client.query("UPDATE apartado SET estatus = 'Completado' WHERE id_apartado = $1", [parseInt(id, 10)]);
+
+        await client.query('COMMIT');
+        res.json({ message: 'Compra completada con éxito. Registrada en la tabla de venta.', id_venta });
+    } catch (error) {
+        await client.query('ROLLBACK');
+        console.error('Error al completar compra desde apartado:', error);
+        res.status(500).json({ error: 'No se pudo registrar la venta.' });
     } finally {
         client.release();
     }

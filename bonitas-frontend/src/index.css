@@ -1,4 +1,4 @@
-﻿/* Global Baseline for Bonitas Fashions */
+/* Global Baseline for Bonitas Fashions */
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
 
 html, body {
@@ -697,6 +697,35 @@ input, select, textarea {
   font-size: 14px;
   color: #64748b;
   margin-bottom: 30px;
+}
+.seller-tabs-container {
+  display: flex;
+  gap: 12px;
+  border-bottom: 2px solid #cbd5e1;
+  margin-bottom: 25px;
+  padding-bottom: 2px;
+  flex-wrap: wrap;
+}
+.seller-tab-btn {
+  padding: 10px 20px;
+  background-color: transparent;
+  border: none;
+  border-bottom: 3px solid transparent;
+  font-size: 14px;
+  font-weight: 600;
+  color: #64748b;
+  cursor: pointer;
+  transition: all 0.2s;
+  border-radius: 6px 6px 0 0;
+}
+.seller-tab-btn:hover {
+  background-color: #f1f5f9;
+  color: #1e293b;
+}
+.seller-tab-btn.active {
+  color: #115e59;
+  border-bottom-color: #115e59;
+  background-color: #f1f5f9;
 }
 .dashboard-grid {
   display: grid;
@@ -1513,6 +1542,31 @@ input, select, textarea, button {
   .app-container.interface-a { padding: 14px 10px !important; }
 }
 
+/* Tabs en Interfaz A */
+.interface-a .seller-tabs-container {
+  border-bottom: 1px solid #e2e8f0 !important;
+}
+.interface-a .seller-tab-btn {
+  border-radius: 0 !important;
+  font-size: 11px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.08em !important;
+  font-weight: 400 !important;
+  color: #94a3b8 !important;
+  border-bottom: 2px solid transparent !important;
+  padding: 8px 16px !important;
+}
+.interface-a .seller-tab-btn:hover {
+  background: none !important;
+  color: #1a1a2e !important;
+}
+.interface-a .seller-tab-btn.active {
+  background: none !important;
+  color: #1a1a2e !important;
+  border-bottom-color: #1a1a2e !important;
+  font-weight: 500 !important;
+}
+
 /* Header â€” sin fondo, lÃ­nea divisoria minimalista */
 .interface-a .app-header {
   background: none !important;
@@ -2143,6 +2197,16 @@ input, select, textarea, button {
   margin: 0 auto !important;
 }
 
+/* Tabs en Interfaz B */
+.interface-b .seller-tab-btn.active {
+  color: #ab4e79 !important;
+  border-bottom-color: #ab4e79 !important;
+  background-color: #fdf5f9 !important;
+}
+.interface-b .seller-tab-btn:hover {
+  background-color: #fdf5f9 !important;
+}
+
 /* Header oscuro estilo e-commerce */
 .interface-b .app-header {
   background: linear-gradient(135deg, #2e1f3b 0%, #3d2251 100%) !important;
@@ -2636,6 +2700,31 @@ input, select, textarea, button {
   box-shadow: none !important;
   color: #ffffff !important;
   border-radius: 4px !important;
+}
+
+/* Tabs en Interfaz C */
+.interface-c .seller-tabs-container {
+  border-bottom: 3px solid #ff66cc !important;
+  gap: 6px !important;
+}
+.interface-c .seller-tab-btn {
+  border: 2px solid #ffffff !important;
+  border-bottom: none !important;
+  border-radius: 0 !important;
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  font-weight: 900 !important;
+  text-transform: uppercase !important;
+  font-size: 13px !important;
+}
+.interface-c .seller-tab-btn:hover {
+  background-color: #111111 !important;
+  border-color: #ff66cc !important;
+}
+.interface-c .seller-tab-btn.active {
+  background-color: #ff66cc !important;
+  color: #000000 !important;
+  border-color: #ff66cc !important;
 }
 
 /* Header alto contraste */
