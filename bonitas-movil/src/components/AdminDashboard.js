@@ -427,13 +427,13 @@ export default function AdminDashboard({ user, onLogout, apiUrl }) {
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
-    backgroundColor: COLORS.background,
-    paddingTop: Platform.OS === 'android' ? 24 : 44,
+    backgroundColor: COLORS.secondary,
   },
   header: {
     backgroundColor: COLORS.secondary,
     paddingHorizontal: 16,
-    paddingVertical: 14,
+    paddingTop: Platform.OS === 'android' ? (StatusBar.currentHeight || 28) : 50,
+    paddingBottom: 14,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -490,6 +490,7 @@ const styles = StyleSheet.create({
   },
   sectionContainer: {
     flex: 1,
+    backgroundColor: COLORS.background,
   },
   sectionHeaderRow: {
     flexDirection: 'row',
