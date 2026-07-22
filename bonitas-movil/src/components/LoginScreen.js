@@ -6,7 +6,6 @@ import {
   TextInput,
   TouchableOpacity,
   ActivityIndicator,
-  Alert,
   ScrollView,
   KeyboardAvoidingView,
   Platform,
@@ -14,17 +13,13 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { COLORS, SHADOWS } from '../styles/theme';
-import { loginAdmin, DEFAULT_API_URL } from '../services/api';
+import { loginAdmin } from '../services/api';
 
-export default function LoginScreen({ onLoginSuccess, currentApiUrl, onSaveApiUrl }) {
+export default function LoginScreen({ onLoginSuccess, currentApiUrl }) {
   const [correo, setCorreo] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
-  
-  // Ajuste de servidor API
-  const [showApiConfig, setShowApiConfig] = useState(false);
-  const [tempApiUrl, setTempApiUrl] = useState(currentApiUrl || DEFAULT_API_URL);
 
   const handleLogin = async () => {
     setErrorMsg('');
@@ -45,16 +40,6 @@ export default function LoginScreen({ onLoginSuccess, currentApiUrl, onSaveApiUr
     }
   };
 
-  const handleSaveUrl = () => {
-    let clean = tempApiUrl.trim().replace(/\/$/, '');
-    if (!clean.startsWith('http://') && !clean.startsWith('https://')) {
-      clean = 'http://' + clean;
-    }
-    onSaveApiUrl(clean);
-    setShowApiConfig(false);
-    Alert.alert('Servidor Actualizado', `La app ahora se conectará a: ${clean}`);
-  };
-
   return (
     <KeyboardAvoidingView
       style={{ flex: 1, backgroundColor: COLORS.background }}
@@ -73,7 +58,6 @@ export default function LoginScreen({ onLoginSuccess, currentApiUrl, onSaveApiUr
           <View style={styles.badgeAdmin}>
             <Text style={styles.badgeAdminText}>PANEL DE VENDEDOR</Text>
           </View>
-          <Text style={styles.appSubtitle}>Acceso exclusivo para administración de inventario</Text>
         </View>
 
         {/* Tarjeta de Inicio de Sesión */}
@@ -137,40 +121,6 @@ export default function LoginScreen({ onLoginSuccess, currentApiUrl, onSaveApiUr
           </TouchableOpacity>
         </View>
 
-        {/* Configuración de Servidor API */}
-        <View style={styles.configContainer}>
-          <TouchableOpacity
-            style={styles.btnToggleConfig}
-            onPress={() => setShowApiConfig(!showApiConfig)}
-          >
-            <Ionicons name="hardware-chip-outline" size={16} color={COLORS.secondary} />
-            <Text style={styles.btnToggleConfigText}>
-              {showApiConfig ? ' Ocultar servidor API' : ' Configurar dirección del servidor API'}
-            </Text>
-          </TouchableOpacity>
-
-          {showApiConfig && (
-            <View style={styles.configBox}>
-              <Text style={styles.configLabel}>URL Servidor (Render o IP Local):</Text>
-              <TextInput
-                style={styles.configInput}
-                value={tempApiUrl}
-                onChangeText={setTempApiUrl}
-                placeholder="https://bonitas-fashions-proyecto.onrender.com"
-                autoCapitalize="none"
-              />
-              <View style={styles.configActions}>
-                <TouchableOpacity style={styles.btnResetUrl} onPress={() => setTempApiUrl(DEFAULT_API_URL)}>
-                  <Text style={styles.btnResetUrlText}>Usar Render</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.btnSaveUrl} onPress={handleSaveUrl}>
-                  <Text style={styles.btnSaveUrlText}>Guardar URL</Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-          )}
-        </View>
-
       </ScrollView>
     </KeyboardAvoidingView>
   );
@@ -206,19 +156,12 @@ const styles = StyleSheet.create({
     paddingVertical: 4,
     borderRadius: 12,
     marginTop: 6,
-    marginBottom: 8,
   },
   badgeAdminText: {
     color: COLORS.white,
     fontSize: 11,
     fontWeight: '700',
     letterSpacing: 0.5,
-  },
-  appSubtitle: {
-    fontSize: 13,
-    color: COLORS.textSecondary,
-    textAlign: 'center',
-    maxWidth: 280,
   },
   card: {
     backgroundColor: COLORS.cardBg,
@@ -290,7 +233,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 10,
-    marginBottom: 8,
   },
   btnDisabled: {
     opacity: 0.7,
@@ -299,71 +241,5 @@ const styles = StyleSheet.create({
     color: COLORS.white,
     fontSize: 15,
     fontWeight: '700',
-  },
-  configContainer: {
-    marginTop: 25,
-    width: '100%',
-    maxWidth: 420,
-    alignItems: 'center',
-  },
-  btnToggleConfig: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingVertical: 8,
-  },
-  btnToggleConfigText: {
-    fontSize: 12,
-    color: COLORS.secondary,
-    fontWeight: '600',
-  },
-  configBox: {
-    backgroundColor: COLORS.white,
-    padding: 14,
-    borderRadius: 10,
-    width: '100%',
-    marginTop: 10,
-    borderWidth: 1,
-    borderColor: COLORS.border,
-  },
-  configLabel: {
-    fontSize: 12,
-    fontWeight: '600',
-    color: COLORS.secondary,
-    marginBottom: 6,
-  },
-  configInput: {
-    backgroundColor: COLORS.grayBackground,
-    borderRadius: 8,
-    paddingHorizontal: 10,
-    height: 40,
-    fontSize: 13,
-    marginBottom: 10,
-    color: COLORS.textMain,
-  },
-  configActions: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  btnResetUrl: {
-    paddingVertical: 6,
-    paddingHorizontal: 12,
-    backgroundColor: COLORS.grayBackground,
-    borderRadius: 6,
-  },
-  btnResetUrlText: {
-    fontSize: 12,
-    color: COLORS.secondary,
-    fontWeight: '600',
-  },
-  btnSaveUrl: {
-    paddingVertical: 6,
-    paddingHorizontal: 12,
-    backgroundColor: COLORS.secondary,
-    borderRadius: 6,
-  },
-  btnSaveUrlText: {
-    fontSize: 12,
-    color: COLORS.white,
-    fontWeight: '600',
   },
 });
