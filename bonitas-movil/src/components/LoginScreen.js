@@ -1,0 +1,369 @@
+import React, { useState } from 'react';
+import {
+  StyleSheet,
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  ActivityIndicator,
+  Alert,
+  ScrollView,
+  KeyboardAvoidingView,
+  Platform,
+} from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import { COLORS, SHADOWS } from '../styles/theme';
+import { loginAdmin, DEFAULT_API_URL } from '../services/api';
+
+export default function LoginScreen({ onLoginSuccess, currentApiUrl, onSaveApiUrl }) {
+  const [correo, setCorreo] = useState('');
+  const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
+  
+  // Ajuste de servidor API
+  const [showApiConfig, setShowApiConfig] = useState(false);
+  const [tempApiUrl, setTempApiUrl] = useState(currentApiUrl || DEFAULT_API_URL);
+
+  const handleLogin = async () => {
+    setErrorMsg('');
+    if (!correo.trim() || !password.trim()) {
+      setErrorMsg('Por favor ingresa tu correo y contraseña de vendedor.');
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const data = await loginAdmin(currentApiUrl, correo.trim(), password.trim());
+      const userData = data.user || data;
+      onLoginSuccess(userData);
+    } catch (err) {
+      setErrorMsg(err.message || 'Error al conectar con el servidor.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleSaveUrl = () => {
+    let clean = tempApiUrl.trim().replace(/\/$/, '');
+    if (!clean.startsWith('http://') && !clean.startsWith('https://')) {
+      clean = 'http://' + clean;
+    }
+    onSaveApiUrl(clean);
+    setShowApiConfig(false);
+    Alert.alert('Servidor Actualizado', `La app ahora se conectará a: ${clean}`);
+  };
+
+  return (
+    <KeyboardAvoidingView
+      style={{ flex: 1, backgroundColor: COLORS.background }}
+      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+    >
+      <ScrollView contentContainerStyle={styles.scrollContainer} keyboardShouldPersistTaps="handled">
+        
+        {/* Cabecera del Bazar */}
+        <View style={styles.headerContainer}>
+          <View style={styles.logoBadge}>
+            <Ionicons name="storefront" size={40} color={COLORS.primary} />
+          </View>
+          <Text style={styles.appTitle}>Bonitas Fashions</Text>
+          <View style={styles.badgeAdmin}>
+            <Text style={styles.badgeAdminText}>PANEL DE VENDEDOR</Text>
+          </View>
+          <Text style={styles.appSubtitle}>Acceso exclusivo para administración de inventario</Text>
+        </View>
+
+        {/* Tarjeta de Inicio de Sesión */}
+        <View style={[styles.card, SHADOWS.card]}>
+          <Text style={styles.cardTitle}>Iniciar Sesión</Text>
+          <Text style={styles.cardDesc}>Ingresa con tus credenciales de vendedor</Text>
+
+          {errorMsg ? (
+            <View style={styles.errorContainer}>
+              <Ionicons name="alert-circle" size={20} color={COLORS.danger} />
+              <Text style={styles.errorText}>{errorMsg}</Text>
+            </View>
+          ) : null}
+
+          <View style={styles.inputGroup}>
+            <Text style={styles.label}>Correo Electrónico</Text>
+            <View style={styles.inputWrapper}>
+              <Ionicons name="mail-outline" size={20} color={COLORS.textLight} style={styles.inputIcon} />
+              <TextInput
+                style={styles.input}
+                placeholder="vendedor@bonitasfashions.com"
+                placeholderTextColor={COLORS.textLight}
+                value={correo}
+                onChangeText={setCorreo}
+                keyboardType="email-address"
+                autoCapitalize="none"
+                autoCorrect={false}
+              />
+            </View>
+          </View>
+
+          <View style={styles.inputGroup}>
+            <Text style={styles.label}>Contraseña</Text>
+            <View style={styles.inputWrapper}>
+              <Ionicons name="lock-closed-outline" size={20} color={COLORS.textLight} style={styles.inputIcon} />
+              <TextInput
+                style={styles.input}
+                placeholder="••••••••"
+                placeholderTextColor={COLORS.textLight}
+                value={password}
+                onChangeText={setPassword}
+                secureTextEntry
+              />
+            </View>
+          </View>
+
+          <TouchableOpacity
+            style={[styles.btnSubmit, loading && styles.btnDisabled]}
+            onPress={handleLogin}
+            disabled={loading}
+            activeOpacity={0.8}
+          >
+            {loading ? (
+              <ActivityIndicator color={COLORS.white} />
+            ) : (
+              <>
+                <Text style={styles.btnSubmitText}>Ingresar al Sistema</Text>
+                <Ionicons name="arrow-forward" size={18} color={COLORS.white} style={{ marginLeft: 6 }} />
+              </>
+            )}
+          </TouchableOpacity>
+        </View>
+
+        {/* Configuración de Servidor API */}
+        <View style={styles.configContainer}>
+          <TouchableOpacity
+            style={styles.btnToggleConfig}
+            onPress={() => setShowApiConfig(!showApiConfig)}
+          >
+            <Ionicons name="hardware-chip-outline" size={16} color={COLORS.secondary} />
+            <Text style={styles.btnToggleConfigText}>
+              {showApiConfig ? ' Ocultar servidor API' : ' Configurar dirección del servidor API'}
+            </Text>
+          </TouchableOpacity>
+
+          {showApiConfig && (
+            <View style={styles.configBox}>
+              <Text style={styles.configLabel}>URL Servidor (Render o IP Local):</Text>
+              <TextInput
+                style={styles.configInput}
+                value={tempApiUrl}
+                onChangeText={setTempApiUrl}
+                placeholder="https://bonitas-fashions-proyecto.onrender.com"
+                autoCapitalize="none"
+              />
+              <View style={styles.configActions}>
+                <TouchableOpacity style={styles.btnResetUrl} onPress={() => setTempApiUrl(DEFAULT_API_URL)}>
+                  <Text style={styles.btnResetUrlText}>Usar Render</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.btnSaveUrl} onPress={handleSaveUrl}>
+                  <Text style={styles.btnSaveUrlText}>Guardar URL</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          )}
+        </View>
+
+      </ScrollView>
+    </KeyboardAvoidingView>
+  );
+}
+
+const styles = StyleSheet.create({
+  scrollContainer: {
+    padding: 20,
+    paddingTop: Platform.OS === 'ios' ? 60 : 40,
+    alignItems: 'center',
+  },
+  headerContainer: {
+    alignItems: 'center',
+    marginBottom: 25,
+  },
+  logoBadge: {
+    width: 72,
+    height: 72,
+    borderRadius: 36,
+    backgroundColor: COLORS.primaryLight,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 12,
+    borderWidth: 2,
+    borderColor: COLORS.primary,
+  },
+  appTitle: {
+    fontSize: 26,
+    fontWeight: '800',
+    color: COLORS.secondary,
+    letterSpacing: -0.5,
+  },
+  badgeAdmin: {
+    backgroundColor: COLORS.primary,
+    paddingHorizontal: 12,
+    paddingVertical: 4,
+    borderRadius: 12,
+    marginTop: 6,
+    marginBottom: 8,
+  },
+  badgeAdminText: {
+    color: COLORS.white,
+    fontSize: 11,
+    fontWeight: '700',
+    letterSpacing: 0.5,
+  },
+  appSubtitle: {
+    fontSize: 13,
+    color: COLORS.textSecondary,
+    textAlign: 'center',
+    maxWidth: 280,
+  },
+  card: {
+    backgroundColor: COLORS.cardBg,
+    borderRadius: 16,
+    padding: 24,
+    width: '100%',
+    maxWidth: 420,
+    borderWidth: 1,
+    borderColor: COLORS.border,
+  },
+  cardTitle: {
+    fontSize: 20,
+    fontWeight: '700',
+    color: COLORS.secondary,
+    marginBottom: 4,
+  },
+  cardDesc: {
+    fontSize: 13,
+    color: COLORS.textSecondary,
+    marginBottom: 20,
+  },
+  errorContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: COLORS.dangerBg,
+    padding: 12,
+    borderRadius: 8,
+    marginBottom: 16,
+  },
+  errorText: {
+    color: COLORS.danger,
+    fontSize: 13,
+    fontWeight: '600',
+    marginLeft: 8,
+    flex: 1,
+  },
+  inputGroup: {
+    marginBottom: 16,
+  },
+  label: {
+    fontSize: 13,
+    fontWeight: '600',
+    color: COLORS.secondary,
+    marginBottom: 6,
+  },
+  inputWrapper: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: COLORS.grayBackground,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: COLORS.border,
+    paddingHorizontal: 12,
+  },
+  inputIcon: {
+    marginRight: 8,
+  },
+  input: {
+    flex: 1,
+    height: 46,
+    fontSize: 14,
+    color: COLORS.textMain,
+  },
+  btnSubmit: {
+    backgroundColor: COLORS.primary,
+    borderRadius: 10,
+    height: 48,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 10,
+    marginBottom: 8,
+  },
+  btnDisabled: {
+    opacity: 0.7,
+  },
+  btnSubmitText: {
+    color: COLORS.white,
+    fontSize: 15,
+    fontWeight: '700',
+  },
+  configContainer: {
+    marginTop: 25,
+    width: '100%',
+    maxWidth: 420,
+    alignItems: 'center',
+  },
+  btnToggleConfig: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 8,
+  },
+  btnToggleConfigText: {
+    fontSize: 12,
+    color: COLORS.secondary,
+    fontWeight: '600',
+  },
+  configBox: {
+    backgroundColor: COLORS.white,
+    padding: 14,
+    borderRadius: 10,
+    width: '100%',
+    marginTop: 10,
+    borderWidth: 1,
+    borderColor: COLORS.border,
+  },
+  configLabel: {
+    fontSize: 12,
+    fontWeight: '600',
+    color: COLORS.secondary,
+    marginBottom: 6,
+  },
+  configInput: {
+    backgroundColor: COLORS.grayBackground,
+    borderRadius: 8,
+    paddingHorizontal: 10,
+    height: 40,
+    fontSize: 13,
+    marginBottom: 10,
+    color: COLORS.textMain,
+  },
+  configActions: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  btnResetUrl: {
+    paddingVertical: 6,
+    paddingHorizontal: 12,
+    backgroundColor: COLORS.grayBackground,
+    borderRadius: 6,
+  },
+  btnResetUrlText: {
+    fontSize: 12,
+    color: COLORS.secondary,
+    fontWeight: '600',
+  },
+  btnSaveUrl: {
+    paddingVertical: 6,
+    paddingHorizontal: 12,
+    backgroundColor: COLORS.secondary,
+    borderRadius: 6,
+  },
+  btnSaveUrlText: {
+    fontSize: 12,
+    color: COLORS.white,
+    fontWeight: '600',
+  },
+});

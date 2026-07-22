@@ -1,0 +1,11 @@
+# Dependencias instaladas (10k+ archivos)
+node_modules/
+
+# Caché de Expo y Metro
+.expo/
+dist/
+
+# Archivos de depuración y logs
+npm-debug.*
+*.log
+.DS_Store
