@@ -55,9 +55,6 @@ export default function LoginScreen({ onLoginSuccess, currentApiUrl }) {
             resizeMode="cover"
           />
           <Text style={styles.appTitle}>Bonitas Fashions</Text>
-          <View style={styles.badgeAdmin}>
-            <Text style={styles.badgeAdminText}>BONITAS FASHIONS</Text>
-          </View>
         </View>
 
         {/* Tarjeta de Inicio de Sesión */}
