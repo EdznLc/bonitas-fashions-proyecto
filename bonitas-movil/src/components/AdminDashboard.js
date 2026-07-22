@@ -236,13 +236,22 @@ export default function AdminDashboard({ user, onLogout, apiUrl }) {
     );
   };
 
-  // Render Venta (Igual a la sección 3 de la web)
+  // Render Venta (Igual a la sección 3 de la web con fotos de las prendas)
   const renderVentaCard = ({ item }) => {
     const fecha = item.fecha_venta
       ? new Date(item.fecha_venta).toLocaleDateString('es-MX', {
           day: '2-digit', month: '2-digit', year: 'numeric'
         })
       : 'Recientemente';
+
+    const productosLista = item.productos && item.productos.length > 0
+      ? item.productos
+      : [{
+          nombre: item.producto_nombre || item.nombre_producto || 'Prenda Adquirida',
+          talla: item.talla || 'M',
+          precio_final: item.precio || item.total_final || 0,
+          url_imagen: item.url_imagen
+        }];
 
     return (
       <View style={[styles.cardItem, SHADOWS.card]}>
@@ -258,6 +267,23 @@ export default function AdminDashboard({ user, onLogout, apiUrl }) {
           <Text style={styles.itemMeta}>Contacto: {item.correo}</Text>
           <Text style={styles.itemMeta}>Método Pago: {item.metodo_pago_nombre || 'Efectivo/Digital'}</Text>
           <Text style={styles.itemMeta}>Tipo Entrega: {item.tipo_entrega_nombre || 'En Tienda'}</Text>
+
+          <View style={styles.divider} />
+
+          <Text style={[styles.itemMeta, { fontWeight: '700', marginBottom: 4 }]}>Prendas Adquiridas:</Text>
+          {productosLista.map((prod, idx) => (
+            <View key={idx} style={styles.ventaProdRow}>
+              <Image
+                source={{ uri: prod.url_imagen || 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=100&q=80' }}
+                style={styles.ventaProdImg}
+                resizeMode="cover"
+              />
+              <Text style={styles.ventaProdText}>
+                {prod.nombre} {prod.talla ? `(${prod.talla})` : ''} - <Text style={{ fontWeight: '700', color: COLORS.primary }}>${parseFloat(prod.precio_final || prod.precio || 0).toFixed(2)}</Text>
+              </Text>
+            </View>
+          ))}
+
           <Text style={styles.itemDates}>Fecha: {fecha}</Text>
         </View>
       </View>
@@ -277,7 +303,7 @@ export default function AdminDashboard({ user, onLogout, apiUrl }) {
             resizeMode="cover"
           />
           <View style={{ flex: 1 }}>
-            <Text style={styles.dashboardTitle}>Panel de Vendedor</Text>
+            <Text style={styles.dashboardTitle}>Bonitas Fashions</Text>
             <Text style={styles.dashboardSubtitle}>
               Administración de inventario, catálogo y control de apartados de clientes.
             </Text>
@@ -444,6 +470,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    borderBottomWidth: 3,
+    borderBottomColor: '#ab4e79',
   },
   headerTitleRow: {
     flexDirection: 'row',
@@ -681,6 +709,26 @@ const styles = StyleSheet.create({
     fontSize: 11,
     fontWeight: '700',
     color: COLORS.danger,
+  },
+  ventaProdRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 6,
+    backgroundColor: COLORS.grayBackground,
+    padding: 6,
+    borderRadius: 6,
+  },
+  ventaProdImg: {
+    width: 32,
+    height: 38,
+    borderRadius: 4,
+    marginRight: 8,
+    backgroundColor: COLORS.white,
+  },
+  ventaProdText: {
+    fontSize: 12,
+    color: COLORS.secondary,
+    flex: 1,
   },
   emptyCard: {
     backgroundColor: COLORS.white,
