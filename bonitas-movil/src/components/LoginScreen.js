@@ -112,7 +112,6 @@ export default function LoginScreen({ onLoginSuccess, currentApiUrl }) {
             ) : (
               <>
                 <Text style={styles.btnSubmitText}>Ingresar al Sistema</Text>
-                <Ionicons name="arrow-forward" size={18} color={COLORS.white} style={{ marginLeft: 6 }} />
               </>
             )}
           </TouchableOpacity>
