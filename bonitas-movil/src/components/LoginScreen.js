@@ -10,6 +10,7 @@ import {
   ScrollView,
   KeyboardAvoidingView,
   Platform,
+  Image,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { COLORS, SHADOWS } from '../styles/theme';
@@ -61,11 +62,13 @@ export default function LoginScreen({ onLoginSuccess, currentApiUrl, onSaveApiUr
     >
       <ScrollView contentContainerStyle={styles.scrollContainer} keyboardShouldPersistTaps="handled">
         
-        {/* Cabecera del Bazar */}
+        {/* Cabecera del Bazar con Logo Oficial */}
         <View style={styles.headerContainer}>
-          <View style={styles.logoBadge}>
-            <Ionicons name="storefront" size={40} color={COLORS.primary} />
-          </View>
+          <Image
+            source={require('../../assets/logo.jpg')}
+            style={styles.logoImage}
+            resizeMode="cover"
+          />
           <Text style={styles.appTitle}>Bonitas Fashions</Text>
           <View style={styles.badgeAdmin}>
             <Text style={styles.badgeAdminText}>PANEL DE VENDEDOR</Text>
@@ -183,16 +186,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 25,
   },
-  logoBadge: {
+  logoImage: {
     width: 72,
     height: 72,
     borderRadius: 36,
-    backgroundColor: COLORS.primaryLight,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 12,
     borderWidth: 2,
     borderColor: COLORS.primary,
+    marginBottom: 12,
   },
   appTitle: {
     fontSize: 26,

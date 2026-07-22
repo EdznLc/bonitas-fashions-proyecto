@@ -268,13 +268,20 @@ export default function AdminDashboard({ user, onLogout, apiUrl }) {
     <View style={styles.mainContainer}>
       <StatusBar barStyle="light-content" backgroundColor={COLORS.secondary} />
       
-      {/* Cabecera Principal */}
+      {/* Cabecera Principal con Logo Oficial */}
       <View style={styles.header}>
-        <View style={{ flex: 1 }}>
-          <Text style={styles.dashboardTitle}>Panel de Vendedor</Text>
-          <Text style={styles.dashboardSubtitle}>
-            Administración de inventario, catálogo y control de apartados de clientes.
-          </Text>
+        <View style={styles.headerTitleRow}>
+          <Image
+            source={require('../../assets/logo.jpg')}
+            style={styles.headerLogo}
+            resizeMode="cover"
+          />
+          <View style={{ flex: 1 }}>
+            <Text style={styles.dashboardTitle}>Panel de Vendedor</Text>
+            <Text style={styles.dashboardSubtitle}>
+              Administración de inventario, catálogo y control de apartados de clientes.
+            </Text>
+          </View>
         </View>
 
         <TouchableOpacity style={styles.btnLogout} onPress={onLogout}>
@@ -437,6 +444,20 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+  },
+  headerTitleRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    flex: 1,
+    marginRight: 8,
+  },
+  headerLogo: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    borderWidth: 1.5,
+    borderColor: COLORS.white,
+    marginRight: 10,
   },
   dashboardTitle: {
     fontSize: 20,
