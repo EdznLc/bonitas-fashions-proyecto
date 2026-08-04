@@ -221,16 +221,16 @@ export default function AdminDashboard({ user, onLogout, apiUrl }) {
 
           <Text style={styles.itemDates}>Registro: {reg} | Límite: {lim}</Text>
 
-          <View style={styles.tableActions}>
-            {item.estatus === 'Activo' && (
+          {item.estatus === 'Activo' && (
+            <View style={styles.tableActions}>
               <TouchableOpacity style={styles.btnEdit} onPress={() => handleCompletarCompra(item.id_apartado)}>
                 <Text style={styles.btnEditText}>Completar Compra</Text>
               </TouchableOpacity>
-            )}
-            <TouchableOpacity style={styles.btnDelete} onPress={() => handleQuitarApartado(item.id_apartado, item.id_producto)}>
-              <Text style={styles.btnDeleteText}>Quitar</Text>
-            </TouchableOpacity>
-          </View>
+              <TouchableOpacity style={styles.btnDelete} onPress={() => handleQuitarApartado(item.id_apartado, item.id_producto)}>
+                <Text style={styles.btnDeleteText}>Quitar</Text>
+              </TouchableOpacity>
+            </View>
+          )}
         </View>
       </View>
     );
