@@ -191,7 +191,7 @@ router.post('/checkout', async (req, res) => {
     }
 });
 
-// 7. Liberar / Marcar apartado como expirado (Administrador/Vendedor)
+// 7. Liberar / Cancelar apartado activo (Administrador/Vendedor)
 router.delete('/:id', async (req, res) => {
     const { id } = req.params;
     const { id_producto } = req.query;
@@ -200,21 +200,28 @@ router.delete('/:id', async (req, res) => {
     try {
         await client.query('BEGIN');
 
-        // 1. Actualizar el apartado a 'Expirado' para conservar el registro histórico en la base de datos
-        const updateQuery = "UPDATE apartado SET estatus = 'Expirado' WHERE id_apartado = $1 RETURNING *;";
-        const updateRes = await client.query(updateQuery, [parseInt(id, 10)]);
-
-        if (updateRes.rows.length === 0) {
+        // 1. Obtener el apartado
+        const resApartado = await client.query('SELECT * FROM apartado WHERE id_apartado = $1', [parseInt(id, 10)]);
+        if (resApartado.rows.length === 0) {
             await client.query('ROLLBACK');
             return res.status(404).json({ error: 'No se encontró el apartado a procesar.' });
         }
+        const apartado = resApartado.rows[0];
 
-        // 2. Liberar la prenda (cambiar su estado a 1 - Disponible para que vuelva a estar a la venta)
-        const targetProdId = id_producto ? parseInt(id_producto, 10) : updateRes.rows[0].id_producto;
+        if (apartado.estatus !== 'Activo') {
+            await client.query('ROLLBACK');
+            return res.status(400).json({ error: 'Este apartado ya ha sido procesado o finalizado previamente.' });
+        }
+
+        // 2. Marcar el apartado como 'Expirado' para conservar el registro histórico en la base de datos
+        await client.query("UPDATE apartado SET estatus = 'Expirado' WHERE id_apartado = $1", [parseInt(id, 10)]);
+
+        // 3. Liberar la prenda (cambiar su estado a 1 - Disponible)
+        const targetProdId = id_producto ? parseInt(id_producto, 10) : apartado.id_producto;
         await client.query('UPDATE producto SET id_estado = 1 WHERE id_producto = $1', [targetProdId]);
 
         await client.query('COMMIT');
-        res.json({ message: 'Apartado marcado como expirado y prenda liberada para venta con éxito.' });
+        res.json({ message: 'Apartado cancelado y prenda liberada para venta con éxito.' });
     } catch (error) {
         await client.query('ROLLBACK');
         console.error('Error al procesar apartado:', error);

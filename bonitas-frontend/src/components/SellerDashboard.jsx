@@ -116,7 +116,7 @@ export default function SellerDashboard({ API_URL }) {
   };
 
   const handleQuitarApartado = async (idApartado, idProducto) => {
-    if (!window.confirm('¿Estás seguro de que deseas cancelar y eliminar este apartado? La prenda volverá a estar disponible de inmediato en la tienda.')) {
+    if (!window.confirm('¿Estás seguro de que deseas cancelar este apartado activo? La prenda volverá a estar disponible de inmediato en la tienda.')) {
       return;
     }
     
@@ -126,17 +126,17 @@ export default function SellerDashboard({ API_URL }) {
       });
       
       if (res.ok) {
-        alert('Apartado eliminado y prenda liberada con éxito.');
+        alert('Apartado cancelado y prenda liberada con éxito.');
         cargarApartados();
         cargarProductos();
         cargarVentas();
       } else {
         const errorData = await res.json();
-        alert(`Error: ${errorData.error || 'No se pudo eliminar el apartado.'}`);
+        alert(`Error: ${errorData.error || 'No se pudo cancelar el apartado.'}`);
       }
     } catch (err) {
       console.error(err);
-      alert('Error al intentar eliminar el apartado.');
+      alert('Error al intentar cancelar el apartado.');
     }
   };
 
@@ -577,8 +577,8 @@ export default function SellerDashboard({ API_URL }) {
                           </span>
                         </td>
                         <td>
-                          <div className="table-actions">
-                            {a.estatus === 'Activo' && (
+                          {a.estatus === 'Activo' ? (
+                            <div className="table-actions">
                               <button 
                                 onClick={() => handleCompletarCompra(a.id_apartado)} 
                                 className="btn-table-edit"
@@ -586,15 +586,17 @@ export default function SellerDashboard({ API_URL }) {
                               >
                                 Completar Compra
                               </button>
-                            )}
-                            <button 
-                              onClick={() => handleQuitarApartado(a.id_apartado, a.id_producto)} 
-                              className="btn-table-delete"
-                              title="Eliminar o cancelar este apartado"
-                            >
-                              Quitar
-                            </button>
-                          </div>
+                              <button 
+                                onClick={() => handleQuitarApartado(a.id_apartado, a.id_producto)} 
+                                className="btn-table-delete"
+                                title="Cancelar este apartado activo y liberar prenda"
+                              >
+                                Cancelar
+                              </button>
+                            </div>
+                          ) : (
+                            <span style={{ fontSize: '12px', color: '#94a3b8', fontStyle: 'italic' }}>-</span>
+                          )}
                         </td>
                       </tr>
                     );
