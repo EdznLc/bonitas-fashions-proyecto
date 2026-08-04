@@ -69,7 +69,7 @@ export default function ClientDashboard({ API_URL, user }) {
                     <p className="apartado-card-meta">Talla: {a.talla} | Marca: {a.marca || 'N/A'}</p>
                     <p className="apartado-card-price">Precio: ${parseFloat(a.precio).toFixed(2)}</p>
                     <div className="apartado-card-status-row">
-                      <span className="status-badge-active">{a.estatus}</span>
+                      <span className={`status-badge-${a.estatus ? a.estatus.toLowerCase() : 'activo'}`}>{a.estatus}</span>
                       <span className="limite-date">Límite: {limite}</span>
                     </div>
                     <div style={{ marginTop: '12px' }}>

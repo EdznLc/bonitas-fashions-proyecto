@@ -198,11 +198,7 @@ async function main() {
         console.log('Iniciando limpieza y repoblación de base de datos...');
         await client.query('BEGIN');
 
-        // 1. Eliminar detalles de ventas
-        console.log('Limpiando tabla venta_producto...');
-        await client.query('DELETE FROM venta_producto;');
-
-        // 2. Eliminar ventas
+        // 1. Eliminar ventas
         console.log('Limpiando tabla venta...');
         await client.query('DELETE FROM venta;');
 

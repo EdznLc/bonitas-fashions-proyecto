@@ -572,7 +572,7 @@ export default function SellerDashboard({ API_URL }) {
                         <td>{reg}</td>
                         <td>{lim}</td>
                         <td>
-                          <span className="status-badge-active">
+                          <span className={`status-badge-${a.estatus ? a.estatus.toLowerCase() : 'activo'}`}>
                             {a.estatus}
                           </span>
                         </td>

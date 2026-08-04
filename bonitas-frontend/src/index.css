@@ -803,11 +803,27 @@ input, select, textarea {
   align-items: center;
   margin-top: 4px;
 }
-.status-badge-active {
+.status-badge-active, .status-badge-activo {
   font-size: 10px;
   font-weight: 700;
   background-color: #ffedd5;
   color: #c2410c;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+.status-badge-expirado {
+  font-size: 10px;
+  font-weight: 700;
+  background-color: #fee2e2;
+  color: #991b1b;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+.status-badge-completado {
+  font-size: 10px;
+  font-weight: 700;
+  background-color: #d1fae5;
+  color: #065f46;
   padding: 2px 8px;
   border-radius: 4px;
 }

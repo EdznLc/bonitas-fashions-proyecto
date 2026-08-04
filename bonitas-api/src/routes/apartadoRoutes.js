@@ -120,26 +120,21 @@ router.get('/ventas/admin', async (req, res) => {
         const query = `
             SELECT v.*, u.nombre as usuario_nombre, u.correo, u.telefono,
                    mp.nombre as metodo_pago_nombre, te.nombre as tipo_entrega_nombre,
-                   COALESCE(
-                       json_agg(
-                           json_build_object(
-                               'id_producto', p.id_producto,
-                               'nombre', p.nombre,
-                               'precio_final', vp.precio_final,
-                               'talla', p.talla,
-                               'marca', p.marca,
-                               'url_imagen', p.url_imagen
-                           )
-                       ) FILTER (WHERE p.id_producto IS NOT NULL),
-                       '[]'
+                   json_build_array(
+                       json_build_object(
+                           'id_producto', p.id_producto,
+                           'nombre', p.nombre,
+                           'precio_final', v.total_final,
+                           'talla', p.talla,
+                           'marca', p.marca,
+                           'url_imagen', p.url_imagen
+                       )
                    ) as productos
             FROM venta v
             JOIN usuario u ON v.id_usuario = u.id_usuario
             JOIN metodo_pago mp ON v.id_metodo_pago = mp.id_metodo_pago
             JOIN tipo_entrega te ON v.id_tipo_entrega = te.id_tipo_entrega
-            LEFT JOIN venta_producto vp ON v.id_venta = vp.id_venta
-            LEFT JOIN producto p ON vp.id_producto = p.id_producto
-            GROUP BY v.id_venta, u.nombre, u.correo, u.telefono, mp.nombre, te.nombre
+            JOIN producto p ON v.id_producto = p.id_producto
             ORDER BY v.id_venta DESC;
         `;
         const resultado = await pool.query(query);
@@ -162,39 +157,31 @@ router.post('/checkout', async (req, res) => {
     try {
         await client.query('BEGIN');
 
-        // 1. Insertar venta principal
-        const queryVenta = `
-            INSERT INTO venta (id_usuario, id_metodo_pago, id_tipo_entrega, detalles_entrega, total_final)
-            VALUES ($1, $2, $3, $4, $5)
-            RETURNING id_venta;
-        `;
-        const resVenta = await client.query(queryVenta, [
-            id_usuario,
-            id_metodo_pago,
-            id_tipo_entrega,
-            detalles_entrega || null,
-            parseFloat(total_final)
-        ]);
-        const id_venta = resVenta.rows[0].id_venta;
-
-        // 2. Insertar productos de la venta & Actualizar estados de productos
         for (const item of productos) {
-            // Insertar en tabla de rompimiento
-            const queryVentaProd = `
-                INSERT INTO venta_producto (id_venta, id_producto, precio_final)
-                VALUES ($1, $2, $3);
+            // Insertar directamente en la tabla 'venta' relacionando el id_producto
+            const queryVenta = `
+                INSERT INTO venta (id_usuario, id_metodo_pago, id_tipo_entrega, detalles_entrega, total_final, id_producto)
+                VALUES ($1, $2, $3, $4, $5, $6)
+                RETURNING id_venta;
             `;
-            await client.query(queryVentaProd, [id_venta, item.id_producto, parseFloat(item.precio)]);
+            await client.query(queryVenta, [
+                id_usuario,
+                id_metodo_pago,
+                id_tipo_entrega,
+                detalles_entrega || null,
+                parseFloat(item.precio || total_final),
+                item.id_producto
+            ]);
 
             // Actualizar producto a estado 3 (Vendido)
             await client.query('UPDATE producto SET id_estado = 3 WHERE id_producto = $1', [item.id_producto]);
 
-            // Desactivar apartado previo si existía
+            // Marcar apartado previo como completado si existía
             await client.query("UPDATE apartado SET estatus = 'Completado' WHERE id_producto = $1 AND id_usuario = $2", [item.id_producto, id_usuario]);
         }
 
         await client.query('COMMIT');
-        res.status(201).json({ id_venta, message: 'Venta registrada con éxito.' });
+        res.status(201).json({ message: 'Venta registrada con éxito.' });
     } catch (error) {
         await client.query('ROLLBACK');
         console.error('Error al registrar venta:', error);
@@ -204,7 +191,7 @@ router.post('/checkout', async (req, res) => {
     }
 });
 
-// 7. Eliminar/Quitar apartado (Administrador/Vendedor)
+// 7. Liberar / Marcar apartado como expirado (Administrador/Vendedor)
 router.delete('/:id', async (req, res) => {
     const { id } = req.params;
     const { id_producto } = req.query;
@@ -213,25 +200,25 @@ router.delete('/:id', async (req, res) => {
     try {
         await client.query('BEGIN');
 
-        // 1. Eliminar el apartado
-        const deleteQuery = 'DELETE FROM apartado WHERE id_apartado = $1 RETURNING *;';
-        const deleteRes = await client.query(deleteQuery, [parseInt(id, 10)]);
+        // 1. Actualizar el apartado a 'Expirado' para conservar el registro histórico en la base de datos
+        const updateQuery = "UPDATE apartado SET estatus = 'Expirado' WHERE id_apartado = $1 RETURNING *;";
+        const updateRes = await client.query(updateQuery, [parseInt(id, 10)]);
 
-        if (deleteRes.rows.length === 0) {
+        if (updateRes.rows.length === 0) {
             await client.query('ROLLBACK');
-            return res.status(404).json({ error: 'No se encontró el apartado a eliminar.' });
+            return res.status(404).json({ error: 'No se encontró el apartado a procesar.' });
         }
 
-        // 2. Liberar el producto (cambiar su estado a 1 - Disponible)
-        const targetProdId = id_producto ? parseInt(id_producto, 10) : deleteRes.rows[0].id_producto;
+        // 2. Liberar la prenda (cambiar su estado a 1 - Disponible para que vuelva a estar a la venta)
+        const targetProdId = id_producto ? parseInt(id_producto, 10) : updateRes.rows[0].id_producto;
         await client.query('UPDATE producto SET id_estado = 1 WHERE id_producto = $1', [targetProdId]);
 
         await client.query('COMMIT');
-        res.json({ message: 'Apartado eliminado y prenda liberada con éxito.' });
+        res.json({ message: 'Apartado marcado como expirado y prenda liberada para venta con éxito.' });
     } catch (error) {
         await client.query('ROLLBACK');
-        console.error('Error al eliminar apartado:', error);
-        res.status(500).json({ error: 'No se pudo eliminar el apartado.' });
+        console.error('Error al procesar apartado:', error);
+        res.status(500).json({ error: 'No se pudo procesar el apartado.' });
     } finally {
         client.release();
     }
@@ -265,6 +252,11 @@ router.post('/:id/completar', async (req, res) => {
         }
         const producto = resProducto.rows[0];
 
+        if (producto.id_estado === 3) {
+            await client.query('ROLLBACK');
+            return res.status(400).json({ error: 'La prenda ya ha sido vendida previamente.' });
+        }
+
         // 3. Resolver método de pago
         let metodoPagoId = apartado.id_metodo_pago;
         if (!metodoPagoId) {
@@ -289,10 +281,10 @@ router.post('/:id/completar', async (req, res) => {
             }
         }
 
-        // 5. Crear la venta
+        // 5. Crear la venta directa con id_producto en la tabla 'venta'
         const queryVenta = `
-            INSERT INTO venta (id_usuario, id_metodo_pago, id_tipo_entrega, detalles_entrega, total_final)
-            VALUES ($1, $2, $3, $4, $5)
+            INSERT INTO venta (id_usuario, id_metodo_pago, id_tipo_entrega, detalles_entrega, total_final, id_producto)
+            VALUES ($1, $2, $3, $4, $5, $6)
             RETURNING id_venta;
         `;
         const resVenta = await client.query(queryVenta, [
@@ -300,21 +292,15 @@ router.post('/:id/completar', async (req, res) => {
             metodoPagoId,
             tipoEntregaId,
             `Completado desde apartado #${id}`,
-            producto.precio
+            producto.precio,
+            apartado.id_producto
         ]);
         const id_venta = resVenta.rows[0].id_venta;
 
-        // 6. Insertar en venta_producto
-        const queryVentaProd = `
-            INSERT INTO venta_producto (id_venta, id_producto, precio_final)
-            VALUES ($1, $2, $3);
-        `;
-        await client.query(queryVentaProd, [id_venta, apartado.id_producto, producto.precio]);
-
-        // 7. Cambiar estado de la prenda a Vendida (id_estado = 3)
+        // 6. Cambiar estado de la prenda a Vendida (id_estado = 3)
         await client.query('UPDATE producto SET id_estado = 3 WHERE id_producto = $1', [apartado.id_producto]);
 
-        // 8. Actualizar estatus del apartado a 'Completado'
+        // 7. Actualizar estatus del apartado a 'Completado'
         await client.query("UPDATE apartado SET estatus = 'Completado' WHERE id_apartado = $1", [parseInt(id, 10)]);
 
         await client.query('COMMIT');

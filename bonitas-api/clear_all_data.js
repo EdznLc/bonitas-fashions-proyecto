@@ -48,9 +48,6 @@ async function main() {
     try {
         await mainClient.query('BEGIN');
 
-        console.log('Eliminando detalles de ventas anteriores (venta_producto)...');
-        await mainClient.query('DELETE FROM venta_producto;');
-
         console.log('Eliminando registros de ventas (venta)...');
         await mainClient.query('DELETE FROM venta;');
 
