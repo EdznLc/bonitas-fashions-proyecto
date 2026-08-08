@@ -1,15 +1,17 @@
 import { useState, useEffect } from 'react';
+import { SERVICES_CONFIG } from '../config/servicesConfig';
 
 export default function ClientDashboard({ API_URL, user }) {
+  const APAR_URL = SERVICES_CONFIG.APARTADOS || API_URL;
+
   const [apartados, setApartados] = useState([]);
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState('');
   
 
-
   const cargarApartados = async () => {
     try {
-      const res = await fetch(`${API_URL}/api/apartados/usuario/${user.id_usuario}`);
+      const res = await fetch(`${APAR_URL}/api/apartados/usuario/${user.id_usuario}`);
       if (res.ok) {
         const data = await res.json();
         setApartados(data);

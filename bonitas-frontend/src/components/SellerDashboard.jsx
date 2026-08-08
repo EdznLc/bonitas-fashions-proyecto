@@ -1,6 +1,10 @@
 import { useState, useEffect } from 'react';
+import { SERVICES_CONFIG } from '../config/servicesConfig';
 
 export default function SellerDashboard({ API_URL }) {
+  const PROD_URL = SERVICES_CONFIG.PRODUCTOS;
+  const APAR_URL = SERVICES_CONFIG.APARTADOS;
+
   const [productos, setProductos] = useState([]);
   const [apartados, setApartados] = useState([]);
   const [ventas, setVentas] = useState([]);
@@ -29,7 +33,7 @@ export default function SellerDashboard({ API_URL }) {
 
   const cargarProductos = async () => {
     try {
-      const res = await fetch(`${API_URL}/api/productos/admin`);
+      const res = await fetch(`${PROD_URL}/api/productos/admin`);
       if (res.ok) {
         const data = await res.json();
         setProductos(data);
@@ -46,7 +50,7 @@ export default function SellerDashboard({ API_URL }) {
 
   const cargarApartados = async () => {
     try {
-      const res = await fetch(`${API_URL}/api/apartados/admin`);
+      const res = await fetch(`${APAR_URL}/api/apartados/admin`);
       if (res.ok) {
         const data = await res.json();
         setApartados(data);
@@ -63,7 +67,7 @@ export default function SellerDashboard({ API_URL }) {
 
   const cargarEstados = async () => {
     try {
-      const res = await fetch(`${API_URL}/api/productos/estados`);
+      const res = await fetch(`${PROD_URL}/api/productos/estados`);
       if (res.ok) {
         const data = await res.json();
         setEstados(data);
@@ -75,7 +79,7 @@ export default function SellerDashboard({ API_URL }) {
 
   const cargarVentas = async () => {
     try {
-      const res = await fetch(`${API_URL}/api/apartados/ventas/admin`);
+      const res = await fetch(`${APAR_URL}/api/apartados/ventas/admin`);
       if (res.ok) {
         const data = await res.json();
         setVentas(data);
@@ -96,7 +100,7 @@ export default function SellerDashboard({ API_URL }) {
     }
 
     try {
-      const res = await fetch(`${API_URL}/api/apartados/${idApartado}/completar`, {
+      const res = await fetch(`${APAR_URL}/api/apartados/${idApartado}/completar`, {
         method: 'POST'
       });
 
@@ -121,7 +125,7 @@ export default function SellerDashboard({ API_URL }) {
     }
     
     try {
-      const res = await fetch(`${API_URL}/api/apartados/${idApartado}?id_producto=${idProducto}`, {
+      const res = await fetch(`${APAR_URL}/api/apartados/${idApartado}?id_producto=${idProducto}`, {
         method: 'DELETE'
       });
       
@@ -215,8 +219,8 @@ export default function SellerDashboard({ API_URL }) {
 
     try {
       const url = editandoId 
-        ? `${API_URL}/api/productos/${editandoId}` 
-        : `${API_URL}/api/productos`;
+        ? `${PROD_URL}/api/productos/${editandoId}` 
+        : `${PROD_URL}/api/productos`;
       const method = editandoId ? 'PUT' : 'POST';
 
       const res = await fetch(url, {
@@ -245,7 +249,7 @@ export default function SellerDashboard({ API_URL }) {
     }
 
     try {
-      const res = await fetch(`${API_URL}/api/productos/${id}`, {
+      const res = await fetch(`${PROD_URL}/api/productos/${id}`, {
         method: 'DELETE'
       });
 

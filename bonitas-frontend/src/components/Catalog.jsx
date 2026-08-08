@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react';
+import { SERVICES_CONFIG } from '../config/servicesConfig';
 
 export default function Catalog({ API_URL, onSelectProduct }) {
+  const PROD_URL = SERVICES_CONFIG.PRODUCTOS || API_URL;
+
   const [productos, setProductos] = useState([]);
   const [filtroTalla, setFiltroTalla] = useState('');
   const [filtroCondicion, setFiltroCondicion] = useState('');
@@ -10,7 +13,7 @@ export default function Catalog({ API_URL, onSelectProduct }) {
 
   const cargarProductos = async () => {
     try {
-      const res = await fetch(`${API_URL}/api/productos`);
+      const res = await fetch(`${PROD_URL}/api/productos`);
       if (res.ok) {
         const data = await res.json();
         setProductos(data);

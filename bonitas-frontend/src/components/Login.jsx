@@ -1,6 +1,9 @@
 import { useState } from 'react';
+import { SERVICES_CONFIG } from '../config/servicesConfig';
 
 export default function Login({ API_URL, onLoginSuccess, onNavigateToRegister }) {
+  const AUTH_URL = SERVICES_CONFIG.AUTH || API_URL;
+
   const [correo, setCorreo] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -17,7 +20,7 @@ export default function Login({ API_URL, onLoginSuccess, onNavigateToRegister })
 
     setCargando(true);
     try {
-      const res = await fetch(`${API_URL}/api/auth/login`, {
+      const res = await fetch(`${AUTH_URL}/api/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ correo, password })

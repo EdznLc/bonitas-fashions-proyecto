@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react';
+import { SERVICES_CONFIG } from '../config/servicesConfig';
 
 export default function ProductDetail({ API_URL, producto, user, onBack, onNavigateToLogin, onReservationSuccess }) {
+  const APAR_URL = SERVICES_CONFIG.APARTADOS || API_URL;
+
   const [showReservaModal, setShowReservaModal] = useState(false);
   const [cargandoModal, setCargandoModal] = useState(false);
   
@@ -24,8 +27,8 @@ export default function ProductDetail({ API_URL, producto, user, onBack, onNavig
     const cargarCatalogos = async () => {
       try {
         const [resPago, resEntrega] = await Promise.all([
-          fetch(`${API_URL}/api/apartados/metodos-pago`),
-          fetch(`${API_URL}/api/apartados/tipos-entrega`)
+          fetch(`${APAR_URL}/api/apartados/metodos-pago`),
+          fetch(`${APAR_URL}/api/apartados/tipos-entrega`)
         ]);
         
         if (resPago.ok && resEntrega.ok) {
@@ -53,7 +56,7 @@ export default function ProductDetail({ API_URL, producto, user, onBack, onNavig
     setCargandoModal(true);
 
     try {
-      const res = await fetch(`${API_URL}/api/apartados`, {
+      const res = await fetch(`${APAR_URL}/api/apartados`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

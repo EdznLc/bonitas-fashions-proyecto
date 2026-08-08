@@ -27,8 +27,8 @@ export default function CuestionarioLikert() {
   const [cargandoParticipantes, setCargandoParticipantes] = useState(false);
   const [guardando, setGuardando] = useState(false);
 
-  // API base URL
-  const API_URL = (import.meta.env.VITE_API_URL || 'https://bonitas-fashions-proyecto.onrender.com') + '/api/recoleccion';
+  // API base URL pointing to Encuestas Microservice on Render
+  const API_URL = (import.meta.env.VITE_ENCUESTAS_SERVICE_URL || 'https://bonitas-encuestas-service.onrender.com') + '/api/recoleccion';
 
   // Cargar participantes
   const cargarParticipantes = async () => {

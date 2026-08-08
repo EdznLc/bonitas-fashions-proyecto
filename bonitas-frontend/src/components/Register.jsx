@@ -1,6 +1,8 @@
 import { useState } from 'react';
+import { SERVICES_CONFIG } from '../config/servicesConfig';
 
 export default function Register({ API_URL, onRegisterSuccess, onNavigateToLogin }) {
+  const AUTH_URL = SERVICES_CONFIG.AUTH || API_URL;
   const [formData, setFormData] = useState({
     nombre: '',
     apellido_p: '',
@@ -95,7 +97,7 @@ export default function Register({ API_URL, onRegisterSuccess, onNavigateToLogin
 
     setCargando(true);
     try {
-      const res = await fetch(`${API_URL}/api/auth/register`, {
+      const res = await fetch(`${AUTH_URL}/api/auth/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
