@@ -6,8 +6,8 @@ import pg from 'pg';
 
 dotenv.config();
 
-const JWT_SECRET = process.env.JWT_SECRET || 'bonitas_fashions_jwt_secret_key_2026';
-const SERVICE_SECRET_KEY = process.env.SERVICE_SECRET_KEY || 'bonitas_internal_service_key_2026';
+const JWT_SECRET = process.env.JWT_SECRET;
+const SERVICE_SECRET_KEY = process.env.SERVICE_SECRET_KEY;
 
 const { Pool } = pg;
 const pool = new Pool({
