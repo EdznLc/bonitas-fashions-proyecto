@@ -126,17 +126,17 @@ export default function AdminDashboard({ user, onLogout, apiUrl }) {
 
   const handleQuitarApartado = (idApartado, idProducto) => {
     Alert.alert(
-      'Quitar Apartado',
-      '¿Estás seguro de que deseas cancelar y eliminar este apartado? La prenda volverá a estar disponible de inmediato en la tienda.',
+      'Cancelar Apartado',
+      '¿Estás seguro de que deseas cancelar este apartado activo? La prenda volverá a estar disponible de inmediato en la tienda.',
       [
-        { text: 'Cancelar', style: 'cancel' },
+        { text: 'No, conservar', style: 'cancel' },
         {
-          text: 'Quitar',
+          text: 'Sí, cancelar',
           style: 'destructive',
           onPress: async () => {
             try {
               await cancelarApartado(apiUrl, idApartado, idProducto);
-              Alert.alert('¡Éxito!', 'Apartado eliminado y prenda liberada con éxito.');
+              Alert.alert('¡Éxito!', 'Apartado cancelado y prenda liberada con éxito.');
               cargarDatos();
             } catch (err) {
               Alert.alert('Error', err.message);
@@ -173,10 +173,7 @@ export default function AdminDashboard({ user, onLogout, apiUrl }) {
             ID: #{item.id_producto} • Marca: {item.marca || '-'} • Talla: {item.talla}
           </Text>
 
-          <View style={styles.priceRow}>
-            <Text style={styles.itemPrice}>${parseFloat(item.precio).toFixed(2)}</Text>
-            <Text style={styles.itemCondicion}>{item.condicion}</Text>
-          </View>
+          <Text style={styles.itemPrice}>${parseFloat(item.precio || 0).toFixed(2)}</Text>
 
           <View style={styles.tableActions}>
             <TouchableOpacity style={styles.btnEdit} onPress={() => handleEditar(item)}>
@@ -196,14 +193,24 @@ export default function AdminDashboard({ user, onLogout, apiUrl }) {
   const renderApartadoCard = ({ item }) => {
     const reg = item.fecha_apartado ? new Date(item.fecha_apartado).toLocaleDateString('es-MX') : '-';
     const lim = item.fecha_limite ? new Date(item.fecha_limite).toLocaleDateString('es-MX') : '-';
+    const isExpirado = item.estatus === 'Expirado';
+    const isCompletado = item.estatus === 'Completado';
 
     return (
       <View style={[styles.cardItem, SHADOWS.card]}>
         <View style={styles.cardContentFull}>
           <View style={styles.cardHeaderRow}>
             <Text style={styles.itemName}>Apartado #{item.id_apartado}</Text>
-            <View style={styles.badgeStateActive}>
-              <Text style={styles.badgeStateActiveText}>{item.estatus || 'Activo'}</Text>
+            <View style={
+              isExpirado ? styles.badgeStateExpired :
+              isCompletado ? styles.badgeStateCompleted :
+              styles.badgeStateActive
+            }>
+              <Text style={
+                isExpirado ? styles.badgeStateExpiredText :
+                isCompletado ? styles.badgeStateCompletedText :
+                styles.badgeStateActiveText
+              }>{item.estatus || 'Activo'}</Text>
             </View>
           </View>
 
@@ -227,7 +234,7 @@ export default function AdminDashboard({ user, onLogout, apiUrl }) {
                 <Text style={styles.btnEditText}>Completar Compra</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.btnDelete} onPress={() => handleQuitarApartado(item.id_apartado, item.id_producto)}>
-                <Text style={styles.btnDeleteText}>Quitar</Text>
+                <Text style={styles.btnDeleteText}>Cancelar</Text>
               </TouchableOpacity>
             </View>
           )}
@@ -631,7 +638,7 @@ const styles = StyleSheet.create({
     color: COLORS.primary,
   },
   badgeStateActive: {
-    backgroundColor: COLORS.apartadoBg,
+    backgroundColor: COLORS.apartadoBg || '#ffedd5',
     paddingHorizontal: 8,
     paddingVertical: 2,
     borderRadius: 6,
@@ -639,7 +646,29 @@ const styles = StyleSheet.create({
   badgeStateActiveText: {
     fontSize: 11,
     fontWeight: '700',
-    color: COLORS.apartado,
+    color: COLORS.apartado || '#c2410c',
+  },
+  badgeStateExpired: {
+    backgroundColor: '#fee2e2',
+    paddingHorizontal: 8,
+    paddingVertical: 2,
+    borderRadius: 6,
+  },
+  badgeStateExpiredText: {
+    fontSize: 11,
+    fontWeight: '700',
+    color: '#991b1b',
+  },
+  badgeStateCompleted: {
+    backgroundColor: '#d1fae5',
+    paddingHorizontal: 8,
+    paddingVertical: 2,
+    borderRadius: 6,
+  },
+  badgeStateCompletedText: {
+    fontSize: 11,
+    fontWeight: '700',
+    color: '#065f46',
   },
   itemMeta: {
     fontSize: 12,

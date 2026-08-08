@@ -1,9 +1,14 @@
-export const DEFAULT_API_URL = 'https://bonitas-fashions-proyecto.onrender.com';
+// Configuración de URLs de Microservicios Independientes (SOA) para la App Móvil
+export const DEFAULT_AUTH_URL = 'https://bonitas-auth-service.onrender.com';
+export const DEFAULT_PRODUCTOS_URL = 'https://bonitas-productos-service.onrender.com';
+export const DEFAULT_APARTADOS_URL = 'https://bonitas-apartados-service.onrender.com';
 
-// 1. Autenticación de Administrador
+const SERVICE_KEY = 'bonitas_internal_service_key_2026';
+
+// 1. Autenticación de Administrador (Auth Service - Puerto 5001)
 export const loginAdmin = async (apiUrl, correo, password) => {
-  const cleanUrl = (apiUrl || DEFAULT_API_URL).replace(/\/$/, '');
-  const response = await fetch(`${cleanUrl}/api/auth/login`, {
+  const baseUrl = apiUrl ? apiUrl.replace(/\/$/, '') : DEFAULT_AUTH_URL;
+  const response = await fetch(`${baseUrl}/api/auth/login`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ correo, password }),
@@ -25,60 +30,70 @@ export const loginAdmin = async (apiUrl, correo, password) => {
   return data;
 };
 
-// 2. Obtener lista de productos en modo administración
+// 2. Obtener lista de productos en modo administración (Productos Service - Puerto 5002)
 export const fetchProductosAdmin = async (apiUrl) => {
-  const cleanUrl = (apiUrl || DEFAULT_API_URL).replace(/\/$/, '');
-  const response = await fetch(`${cleanUrl}/api/productos/admin`);
+  const baseUrl = apiUrl ? apiUrl.replace(/\/$/, '') : DEFAULT_PRODUCTOS_URL;
+  const response = await fetch(`${baseUrl}/api/productos/admin`, {
+    headers: { 'X-Service-API-Key': SERVICE_KEY }
+  });
   if (!response.ok) {
     throw new Error('Error al cargar la lista de prendas del inventario.');
   }
   return await response.json();
 };
 
-// 3. Obtener apartados activos
+// 3. Obtener apartados registrados (Apartados Service - Puerto 5003)
 export const fetchApartadosAdmin = async (apiUrl) => {
-  const cleanUrl = (apiUrl || DEFAULT_API_URL).replace(/\/$/, '');
-  const response = await fetch(`${cleanUrl}/api/apartados/admin`);
+  const baseUrl = apiUrl ? apiUrl.replace(/\/$/, '') : DEFAULT_APARTADOS_URL;
+  const response = await fetch(`${baseUrl}/api/apartados/admin`);
   if (!response.ok) {
-    throw new Error('Error al cargar los apartados activos.');
+    throw new Error('Error al cargar los apartados registrados.');
   }
   return await response.json();
 };
 
-// 4. Obtener histórico de ventas
+// 4. Obtener histórico de ventas (Apartados Service - Puerto 5003)
 export const fetchVentasAdmin = async (apiUrl) => {
-  const cleanUrl = (apiUrl || DEFAULT_API_URL).replace(/\/$/, '');
-  const response = await fetch(`${cleanUrl}/api/apartados/ventas/admin`);
+  const baseUrl = apiUrl ? apiUrl.replace(/\/$/, '') : DEFAULT_APARTADOS_URL;
+  const response = await fetch(`${baseUrl}/api/apartados/ventas/admin`);
   if (!response.ok) {
     throw new Error('Error al cargar el histórico de ventas.');
   }
   return await response.json();
 };
 
-// 5. Obtener estados de productos
+// 5. Obtener estados de productos (Productos Service - Puerto 5002)
 export const fetchEstados = async (apiUrl) => {
-  const cleanUrl = (apiUrl || DEFAULT_API_URL).replace(/\/$/, '');
-  const response = await fetch(`${cleanUrl}/api/productos/estados`);
-  if (!response.ok) {
-    return [
-      { id_estado: 1, nombre_estado: 'Disponible' },
-      { id_estado: 2, nombre_estado: 'Apartado' },
-      { id_estado: 3, nombre_estado: 'Vendido' },
-    ];
+  const baseUrl = apiUrl ? apiUrl.replace(/\/$/, '') : DEFAULT_PRODUCTOS_URL;
+  try {
+    const response = await fetch(`${baseUrl}/api/productos/estados`);
+    if (response.ok) {
+      return await response.json();
+    }
+  } catch (e) {
+    console.error('Error al conectar con Productos Service:', e);
   }
-  return await response.json();
+
+  return [
+    { id_estado: 1, nombre_estado: 'Disponible' },
+    { id_estado: 2, nombre_estado: 'Apartado' },
+    { id_estado: 3, nombre_estado: 'Vendido' },
+  ];
 };
 
-// 6. Guardar producto (Crear o Editar)
+// 6. Guardar producto (Productos Service - Puerto 5002)
 export const saveProducto = async (apiUrl, idProducto, productoData) => {
-  const cleanUrl = (apiUrl || DEFAULT_API_URL).replace(/\/$/, '');
+  const baseUrl = apiUrl ? apiUrl.replace(/\/$/, '') : DEFAULT_PRODUCTOS_URL;
   const isEdit = !!idProducto;
-  const url = isEdit ? `${cleanUrl}/api/productos/${idProducto}` : `${cleanUrl}/api/productos`;
+  const url = isEdit ? `${baseUrl}/api/productos/${idProducto}` : `${baseUrl}/api/productos`;
   const method = isEdit ? 'PUT' : 'POST';
 
   const response = await fetch(url, {
     method,
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 
+      'Content-Type': 'application/json',
+      'X-Service-API-Key': SERVICE_KEY
+    },
     body: JSON.stringify(productoData),
   });
 
@@ -89,11 +104,12 @@ export const saveProducto = async (apiUrl, idProducto, productoData) => {
   return data;
 };
 
-// 7. Eliminar producto
+// 7. Eliminar producto (Productos Service - Puerto 5002)
 export const deleteProducto = async (apiUrl, idProducto) => {
-  const cleanUrl = (apiUrl || DEFAULT_API_URL).replace(/\/$/, '');
-  const response = await fetch(`${cleanUrl}/api/productos/${idProducto}`, {
+  const baseUrl = apiUrl ? apiUrl.replace(/\/$/, '') : DEFAULT_PRODUCTOS_URL;
+  const response = await fetch(`${baseUrl}/api/productos/${idProducto}`, {
     method: 'DELETE',
+    headers: { 'X-Service-API-Key': SERVICE_KEY }
   });
 
   const data = await response.json();
@@ -103,10 +119,10 @@ export const deleteProducto = async (apiUrl, idProducto) => {
   return data;
 };
 
-// 8. Completar apartado (marcar como compra concretada)
+// 8. Completar apartado (Apartados Service - Puerto 5003)
 export const completarApartado = async (apiUrl, idApartado) => {
-  const cleanUrl = (apiUrl || DEFAULT_API_URL).replace(/\/$/, '');
-  const response = await fetch(`${cleanUrl}/api/apartados/${idApartado}/completar`, {
+  const baseUrl = apiUrl ? apiUrl.replace(/\/$/, '') : DEFAULT_APARTADOS_URL;
+  const response = await fetch(`${baseUrl}/api/apartados/${idApartado}/completar`, {
     method: 'POST',
   });
 
@@ -117,10 +133,10 @@ export const completarApartado = async (apiUrl, idApartado) => {
   return data;
 };
 
-// 9. Cancelar / Liberar apartado
+// 9. Cancelar / Liberar apartado activo (Apartados Service - Puerto 5003)
 export const cancelarApartado = async (apiUrl, idApartado, idProducto) => {
-  const cleanUrl = (apiUrl || DEFAULT_API_URL).replace(/\/$/, '');
-  const response = await fetch(`${cleanUrl}/api/apartados/${idApartado}?id_producto=${idProducto}`, {
+  const baseUrl = apiUrl ? apiUrl.replace(/\/$/, '') : DEFAULT_APARTADOS_URL;
+  const response = await fetch(`${baseUrl}/api/apartados/${idApartado}?id_producto=${idProducto}`, {
     method: 'DELETE',
   });
 
