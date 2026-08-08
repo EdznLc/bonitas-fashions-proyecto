@@ -12,7 +12,7 @@ Esta documentación define formalmente los contratos públicos expuestos por cad
      ```http
      Authorization: Bearer <token_jwt>
      ```
-2. **Manejo Explícito de Fallos de Seguridad (Cumplimiento de Rúbrica 10%):**
+2. **Manejo Explícito de Fallos de Seguridad:**
    * **`401 Unauthorized`**: Retornado cuando no se provee el encabezado `Authorization: Bearer` o el token JWT está expirado/manipulado.
    * **`403 Forbidden`**: Retornado cuando el token pertenece a un rol no autorizado (ej: un usuario con rol `cliente` intentando acceder a rutas administrativas reservadas para `vendedor`).
 
@@ -51,7 +51,8 @@ Esta documentación define formalmente los contratos públicos expuestos por cad
       "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6..."
     }
     ```
-  * `400 Bad Request`: Faltan datos requeridos o el correo ya existe.
+  * `400 Bad Request`: Faltan datos requeridos (nombre, correo o contraseña).
+  * `409 Conflict`: El correo electrónico ya está registrado.
 
 #### `POST /api/auth/login`
 * **Descripción:** Autentica a un usuario y emite un token JWT con la firma del perfil.

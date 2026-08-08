@@ -23,7 +23,7 @@ app.use(cors({
 }));
 app.use(express.json());
 
-// Middleware de Seguridad Stateless 100% JWT (Rúbrica 10%)
+// Middleware de Autenticación y Autorización JWT
 const verifyAuthAndRole = (requiredRole = null) => {
     return (req, res, next) => {
         const authHeader = req.headers['authorization'];

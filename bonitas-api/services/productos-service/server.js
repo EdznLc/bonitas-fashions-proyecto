@@ -23,7 +23,7 @@ app.use(cors({
 }));
 app.use(express.json());
 
-// Middleware de Seguridad Stateless 100% JWT (Rúbrica 10%)
+// Middleware de Autenticación y Autorización JWT
 const verifyAuthAndRole = (requiredRole = null) => {
     return (req, res, next) => {
         // Permitir catálogo público GET /api/productos sin restricciones
@@ -35,7 +35,7 @@ const verifyAuthAndRole = (requiredRole = null) => {
         const token = authHeader && authHeader.startsWith('Bearer ') ? authHeader.split(' ')[1] : null;
 
         if (!token) {
-            // Manejo explícito de fallo de autenticación (Rúbrica 10%)
+            // Validación de presencia de token
             return res.status(401).json({ error: 'Acceso Denegado: Token JWT no provisto en encabezado Authorization (401 Unauthorized)' });
         }
 

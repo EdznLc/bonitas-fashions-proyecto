@@ -44,7 +44,7 @@ app.post('/api/auth/register', async (req, res) => {
     try {
         const checkEmail = await pool.query('SELECT id_usuario FROM usuario WHERE correo = $1', [correo]);
         if (checkEmail.rows.length > 0) {
-            return res.status(400).json({ error: 'El correo electrónico ya está registrado.' });
+            return res.status(409).json({ error: 'El correo electrónico ya está registrado.' });
         }
 
         const passwordHash = hashPassword(password);
