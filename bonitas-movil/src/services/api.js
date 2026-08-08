@@ -3,8 +3,6 @@ export const DEFAULT_AUTH_URL = 'https://bonitas-auth-service.onrender.com';
 export const DEFAULT_PRODUCTOS_URL = 'https://bonitas-productos-service.onrender.com';
 export const DEFAULT_APARTADOS_URL = 'https://bonitas-apartados-service.onrender.com';
 
-const SERVICE_KEY = 'bonitas_internal_service_key_2026';
-
 // 1. Autenticación de Administrador (Auth Service - Puerto 5001)
 export const loginAdmin = async (apiUrl, correo, password) => {
   const baseUrl = apiUrl ? apiUrl.replace(/\/$/, '') : DEFAULT_AUTH_URL;
@@ -33,7 +31,7 @@ export const loginAdmin = async (apiUrl, correo, password) => {
 // 2. Obtener lista de productos en modo administración (Productos Service - Puerto 5002)
 export const fetchProductosAdmin = async (apiUrl, token = null) => {
   const baseUrl = apiUrl ? apiUrl.replace(/\/$/, '') : DEFAULT_PRODUCTOS_URL;
-  const headers = { 'X-Service-API-Key': SERVICE_KEY };
+  const headers = {};
   if (token) headers['Authorization'] = `Bearer ${token}`;
 
   const response = await fetch(`${baseUrl}/api/productos/admin`, { headers });
@@ -89,18 +87,18 @@ export const fetchEstados = async (apiUrl) => {
 };
 
 // 6. Guardar producto (Productos Service - Puerto 5002)
-export const saveProducto = async (apiUrl, idProducto, productoData) => {
+export const saveProducto = async (apiUrl, idProducto, productoData, token = null) => {
   const baseUrl = apiUrl ? apiUrl.replace(/\/$/, '') : DEFAULT_PRODUCTOS_URL;
   const isEdit = !!idProducto;
   const url = isEdit ? `${baseUrl}/api/productos/${idProducto}` : `${baseUrl}/api/productos`;
   const method = isEdit ? 'PUT' : 'POST';
 
+  const headers = { 'Content-Type': 'application/json' };
+  if (token) headers['Authorization'] = `Bearer ${token}`;
+
   const response = await fetch(url, {
     method,
-    headers: { 
-      'Content-Type': 'application/json',
-      'X-Service-API-Key': SERVICE_KEY
-    },
+    headers,
     body: JSON.stringify(productoData),
   });
 
@@ -112,11 +110,14 @@ export const saveProducto = async (apiUrl, idProducto, productoData) => {
 };
 
 // 7. Eliminar producto (Productos Service - Puerto 5002)
-export const deleteProducto = async (apiUrl, idProducto) => {
+export const deleteProducto = async (apiUrl, idProducto, token = null) => {
   const baseUrl = apiUrl ? apiUrl.replace(/\/$/, '') : DEFAULT_PRODUCTOS_URL;
+  const headers = {};
+  if (token) headers['Authorization'] = `Bearer ${token}`;
+
   const response = await fetch(`${baseUrl}/api/productos/${idProducto}`, {
     method: 'DELETE',
-    headers: { 'X-Service-API-Key': SERVICE_KEY }
+    headers
   });
 
   const data = await response.json();

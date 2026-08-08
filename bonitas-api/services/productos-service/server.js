@@ -7,7 +7,6 @@ import pg from 'pg';
 dotenv.config();
 
 const JWT_SECRET = process.env.JWT_SECRET;
-const SERVICE_SECRET_KEY = process.env.SERVICE_SECRET_KEY;
 
 const { Pool } = pg;
 const pool = new Pool({
@@ -20,20 +19,15 @@ const app = express();
 app.use(cors({
   origin: '*',
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Service-API-Key', 'Accept']
+  allowedHeaders: ['Content-Type', 'Authorization', 'Accept']
 }));
 app.use(express.json());
 
-// Middleware de Seguridad Stateless con JWT y API Key Inter-Servicios (Rúbrica 10%)
+// Middleware de Seguridad Stateless 100% JWT (Rúbrica 10%)
 const verifyAuthAndRole = (requiredRole = null) => {
     return (req, res, next) => {
         // Permitir catálogo público GET /api/productos sin restricciones
         if (req.method === 'GET' && req.path === '/api/productos') {
-            return next();
-        }
-
-        const apiKey = req.headers['x-service-api-key'];
-        if (apiKey === SERVICE_SECRET_KEY) {
             return next();
         }
 

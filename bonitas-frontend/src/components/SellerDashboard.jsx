@@ -32,16 +32,12 @@ export default function SellerDashboard({ API_URL }) {
   });
 
   const getAuthHeaders = () => {
-    const headers = { 'X-Service-API-Key': 'bonitas_internal_service_key_2026' };
     try {
       const user = JSON.parse(localStorage.getItem('user') || '{}');
-      if (user.token) {
-        headers['Authorization'] = `Bearer ${user.token}`;
-      }
-    } catch (e) {
-      console.error(e);
+      return user.token ? { 'Authorization': `Bearer ${user.token}` } : {};
+    } catch {
+      return {};
     }
-    return headers;
   };
 
   const cargarProductos = async () => {
