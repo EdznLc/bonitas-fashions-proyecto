@@ -45,10 +45,11 @@ export default function AdminDashboard({ user, onLogout, apiUrl }) {
   const cargarDatos = useCallback(async () => {
     try {
       setLoading(true);
+      const token = user?.token;
       const [prodsData, apartsData, ventasData, estsData] = await Promise.allSettled([
-        fetchProductosAdmin(apiUrl),
-        fetchApartadosAdmin(apiUrl),
-        fetchVentasAdmin(apiUrl),
+        fetchProductosAdmin(apiUrl, token),
+        fetchApartadosAdmin(apiUrl, token),
+        fetchVentasAdmin(apiUrl, token),
         fetchEstados(apiUrl),
       ]);
 
@@ -62,7 +63,7 @@ export default function AdminDashboard({ user, onLogout, apiUrl }) {
       setLoading(false);
       setRefreshing(false);
     }
-  }, [apiUrl]);
+  }, [apiUrl, user]);
 
   useEffect(() => {
     cargarDatos();

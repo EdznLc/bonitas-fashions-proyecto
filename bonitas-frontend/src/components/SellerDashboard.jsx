@@ -31,9 +31,22 @@ export default function SellerDashboard({ API_URL }) {
     id_estado: '1' // Disponible
   });
 
+  const getAuthHeaders = () => {
+    const headers = { 'X-Service-API-Key': 'bonitas_internal_service_key_2026' };
+    try {
+      const user = JSON.parse(localStorage.getItem('user') || '{}');
+      if (user.token) {
+        headers['Authorization'] = `Bearer ${user.token}`;
+      }
+    } catch (e) {
+      console.error(e);
+    }
+    return headers;
+  };
+
   const cargarProductos = async () => {
     try {
-      const res = await fetch(`${PROD_URL}/api/productos/admin`);
+      const res = await fetch(`${PROD_URL}/api/productos/admin`, { headers: getAuthHeaders() });
       if (res.ok) {
         const data = await res.json();
         setProductos(data);
@@ -50,7 +63,7 @@ export default function SellerDashboard({ API_URL }) {
 
   const cargarApartados = async () => {
     try {
-      const res = await fetch(`${APAR_URL}/api/apartados/admin`);
+      const res = await fetch(`${APAR_URL}/api/apartados/admin`, { headers: getAuthHeaders() });
       if (res.ok) {
         const data = await res.json();
         setApartados(data);
@@ -79,7 +92,7 @@ export default function SellerDashboard({ API_URL }) {
 
   const cargarVentas = async () => {
     try {
-      const res = await fetch(`${APAR_URL}/api/apartados/ventas/admin`);
+      const res = await fetch(`${APAR_URL}/api/apartados/ventas/admin`, { headers: getAuthHeaders() });
       if (res.ok) {
         const data = await res.json();
         setVentas(data);
