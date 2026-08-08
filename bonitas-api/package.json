@@ -3,10 +3,8 @@
   "version": "1.0.0",
   "type": "module",
   "description": "",
-  "main": "server.js",
+  "main": "services/auth-service/server.js",
   "scripts": {
-    "start": "node server.js",
-    "start:services": "node start_all_services.js",
     "start:auth": "node services/auth-service/server.js",
     "start:productos": "node services/productos-service/server.js",
     "start:apartados": "node services/apartados-service/server.js",
