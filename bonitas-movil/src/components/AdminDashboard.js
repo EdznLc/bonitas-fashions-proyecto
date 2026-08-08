@@ -210,7 +210,7 @@ export default function AdminDashboard({ user, onLogout, apiUrl }) {
                 isExpirado ? styles.badgeStateExpiredText :
                 isCompletado ? styles.badgeStateCompletedText :
                 styles.badgeStateActiveText
-              }>{item.estatus || 'Activo'}</Text>
+              }>{isExpirado ? 'Cancelado' : (item.estatus || 'Activo')}</Text>
             </View>
           </View>
 
