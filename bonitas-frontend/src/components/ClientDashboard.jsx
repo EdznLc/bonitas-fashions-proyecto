@@ -69,6 +69,7 @@ export default function ClientDashboard({ API_URL, user }) {
                   <div className="apartado-card-info">
                     <h4 className="apartado-card-title">{a.nombre}</h4>
                     <p className="apartado-card-meta">Talla: {a.talla} | Marca: {a.marca || 'N/A'}</p>
+                    <p className="apartado-card-meta">Pago: {a.metodo_pago_nombre || 'Por acordar'} | Entrega: {a.tipo_entrega_nombre || 'Por acordar'}</p>
                     <p className="apartado-card-price">Precio: ${parseFloat(a.precio).toFixed(2)}</p>
                     <div className="apartado-card-status-row">
                       <span className={`status-badge-${a.estatus ? a.estatus.toLowerCase() : 'activo'}`}>
@@ -84,7 +85,7 @@ export default function ClientDashboard({ API_URL, user }) {
                             `• Precio: $${parseFloat(a.precio).toFixed(2)}\n` +
                             `• Método de Pago: ${a.metodo_pago_nombre || 'Por acordar'}\n` +
                             `• Tipo de Entrega: ${a.tipo_entrega_nombre || 'Por acordar'}`;
-                          const phone = import.meta.env.VITE_WHATSAPP_NUMBER || '5216183647752';
+                          const phone = import.meta.env.VITE_WHATSAPP_NUMBER || '526183647752';
                           const waUrl = `https://wa.me/${phone}?text=${encodeURIComponent(mensajeWS)}`;
 
                           return (

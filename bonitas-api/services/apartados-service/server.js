@@ -129,9 +129,20 @@ app.get('/api/apartados/usuario/:id_usuario', async (req, res) => {
     const { id_usuario } = req.params;
     try {
         const query = `
-            SELECT a.*, p.nombre, p.descripcion, p.precio, p.talla, p.marca, p.url_imagen
+            SELECT 
+                a.*, 
+                p.nombre, 
+                p.descripcion, 
+                p.precio, 
+                p.talla, 
+                p.marca, 
+                p.url_imagen,
+                mp.nombre AS metodo_pago_nombre,
+                te.nombre AS tipo_entrega_nombre
             FROM apartado a
             JOIN producto p ON a.id_producto = p.id_producto
+            LEFT JOIN metodo_pago mp ON a.id_metodo_pago = mp.id_metodo_pago
+            LEFT JOIN tipo_entrega te ON a.id_tipo_entrega = te.id_tipo_entrega
             WHERE a.id_usuario = $1
             ORDER BY a.id_apartado DESC;
         `;
