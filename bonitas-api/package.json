@@ -6,6 +6,11 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
+    "start:services": "node start_all_services.js",
+    "start:auth": "node services/auth-service/server.js",
+    "start:productos": "node services/productos-service/server.js",
+    "start:apartados": "node services/apartados-service/server.js",
+    "start:encuestas": "node services/encuestas-service/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

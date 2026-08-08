@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 
 export default function ProductDetail({ API_URL, producto, user, onBack, onNavigateToLogin, onReservationSuccess }) {
   const [showReservaModal, setShowReservaModal] = useState(false);
-  const [showCompraModal, setShowCompraModal] = useState(false);
   const [cargandoModal, setCargandoModal] = useState(false);
   
   // Catálogos cargados de base de datos
@@ -16,10 +15,8 @@ export default function ProductDetail({ API_URL, producto, user, onBack, onNavig
     return defaultDate.toISOString().substring(0, 10);
   });
   
-  // Formulario Compra/Checkout
   const [idMetodoPago, setIdMetodoPago] = useState('');
   const [idTipoEntrega, setIdTipoEntrega] = useState('');
-  const [detallesEntrega, setDetallesEntrega] = useState('');
   const [errorModal, setErrorModal] = useState('');
 
   // Cargar métodos y formas de entrega desde la API
