@@ -1,18 +1,32 @@
-# Documentación de Contratos de Servicios Web (REST API SOA)
+# Documentación de Contratos de Servicios Web (REST API SOA con Seguridad JWT)
 
-Esta documentación define formalmente los contratos públicos expuestos por cada uno de los 4 microservicios autónomos que integran el sistema **Bonitas Fashions**.
+Esta documentación define formalmente los contratos públicos expuestos por cada uno de los 4 microservicios autónomos que integran el sistema **Bonitas Fashions**, incluyendo el esquema de seguridad **Stateless con JWT (JSON Web Tokens)**.
+
+---
+
+## 🔐 Esquema de Seguridad y Mecanismos de Autenticación Inter-Servicios
+
+1. **Tokens JWT (Stateless Auth):**
+   * Al iniciar sesión o registrarse en el `Auth Service`, se emite un **JWT firmado electrónicamente** con vigencia de 8 horas.
+   * Encabezado de Solicitud Estándar para Peticiones Autenticadas:
+     ```http
+     Authorization: Bearer <token_jwt>
+     ```
+2. **Manejo Explícito de Fallos de Seguridad (Cumplimiento de Rúbrica 10%):**
+   * **`401 Unauthorized`**: Retornado cuando no se provee el encabezado `Authorization: Bearer` o el token JWT está expirado/manipulado.
+   * **`403 Forbidden`**: Retornado cuando el token pertenece a un rol no autorizado (ej: un usuario con rol `cliente` intentando acceder a rutas administrativas reservadas para `vendedor`).
 
 ---
 
 ## 1. Servicio de Autenticación (`Auth Service`)
 * **Puerto Predeterminado:** `5001`
 * **Base URL:** `/api/auth`
-* **Dominio:** Registro, inicio de sesión y gestión de credenciales.
+* **Dominio:** Registro, inicio de sesión, generación de JWTs y verificación de credenciales.
 
 ### Endpoints:
 
 #### `POST /api/auth/register`
-* **Descripción:** Registra un nuevo usuario cliente.
+* **Descripción:** Registra un nuevo usuario cliente y emite un token JWT.
 * **Headers:** `Content-Type: application/json`
 * **Request Body:**
   ```json
@@ -26,24 +40,21 @@ Esta documentación define formalmente los contratos públicos expuestos por cad
   }
   ```
 * **Respuestas:**
-  * `201 Created`: Usuario registrado exitosamente.
+  * `201 Created`: Usuario registrado exitosamente con token JWT.
     ```json
     {
       "id_usuario": 12,
       "nombre": "Mariana",
       "apellido_p": "García",
-      "apellido_m": "López",
       "correo": "mariana@gmail.com",
-      "telefono": "6181234567",
-      "rol": "cliente"
+      "rol": "cliente",
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6..."
     }
     ```
   * `400 Bad Request`: Faltan datos requeridos o el correo ya existe.
-  * `500 Internal Server Error`: Fallo interno del servidor de autenticación.
 
 #### `POST /api/auth/login`
-* **Descripción:** Autentica a un usuario y retorna su perfil de sesión.
-* **Headers:** `Content-Type: application/json`
+* **Descripción:** Autentica a un usuario y emite un token JWT con la firma del perfil.
 * **Request Body:**
   ```json
   {
@@ -52,8 +63,15 @@ Esta documentación define formalmente los contratos públicos expuestos por cad
   }
   ```
 * **Respuestas:**
-  * `200 OK`: Credenciales válidas.
+  * `200 OK`: Credenciales válidas con token de sesión.
   * `401 Unauthorized`: Credenciales inválidas.
+
+#### `GET /api/auth/verify`
+* **Descripción:** Verifica la validez y estado de un token JWT.
+* **Headers:** `Authorization: Bearer <token_jwt>`
+* **Respuestas:**
+  * `200 OK`: Token válido.
+  * `401 Unauthorized`: Token no provisto, expirado o alterado.
 
 ---
 

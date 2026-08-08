@@ -31,11 +31,12 @@ export const loginAdmin = async (apiUrl, correo, password) => {
 };
 
 // 2. Obtener lista de productos en modo administración (Productos Service - Puerto 5002)
-export const fetchProductosAdmin = async (apiUrl) => {
+export const fetchProductosAdmin = async (apiUrl, token = null) => {
   const baseUrl = apiUrl ? apiUrl.replace(/\/$/, '') : DEFAULT_PRODUCTOS_URL;
-  const response = await fetch(`${baseUrl}/api/productos/admin`, {
-    headers: { 'X-Service-API-Key': SERVICE_KEY }
-  });
+  const headers = { 'X-Service-API-Key': SERVICE_KEY };
+  if (token) headers['Authorization'] = `Bearer ${token}`;
+
+  const response = await fetch(`${baseUrl}/api/productos/admin`, { headers });
   if (!response.ok) {
     throw new Error('Error al cargar la lista de prendas del inventario.');
   }
@@ -43,9 +44,12 @@ export const fetchProductosAdmin = async (apiUrl) => {
 };
 
 // 3. Obtener apartados registrados (Apartados Service - Puerto 5003)
-export const fetchApartadosAdmin = async (apiUrl) => {
+export const fetchApartadosAdmin = async (apiUrl, token = null) => {
   const baseUrl = apiUrl ? apiUrl.replace(/\/$/, '') : DEFAULT_APARTADOS_URL;
-  const response = await fetch(`${baseUrl}/api/apartados/admin`);
+  const headers = {};
+  if (token) headers['Authorization'] = `Bearer ${token}`;
+
+  const response = await fetch(`${baseUrl}/api/apartados/admin`, { headers });
   if (!response.ok) {
     throw new Error('Error al cargar los apartados registrados.');
   }
@@ -53,9 +57,12 @@ export const fetchApartadosAdmin = async (apiUrl) => {
 };
 
 // 4. Obtener histórico de ventas (Apartados Service - Puerto 5003)
-export const fetchVentasAdmin = async (apiUrl) => {
+export const fetchVentasAdmin = async (apiUrl, token = null) => {
   const baseUrl = apiUrl ? apiUrl.replace(/\/$/, '') : DEFAULT_APARTADOS_URL;
-  const response = await fetch(`${baseUrl}/api/apartados/ventas/admin`);
+  const headers = {};
+  if (token) headers['Authorization'] = `Bearer ${token}`;
+
+  const response = await fetch(`${baseUrl}/api/apartados/ventas/admin`, { headers });
   if (!response.ok) {
     throw new Error('Error al cargar el histórico de ventas.');
   }

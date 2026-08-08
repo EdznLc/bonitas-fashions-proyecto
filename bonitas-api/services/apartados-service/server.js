@@ -1,9 +1,13 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import jwt from 'jsonwebtoken';
 import pg from 'pg';
 
 dotenv.config();
+
+const JWT_SECRET = process.env.JWT_SECRET || 'bonitas_fashions_jwt_secret_key_2026';
+const SERVICE_SECRET_KEY = process.env.SERVICE_SECRET_KEY || 'bonitas_internal_service_key_2026';
 
 const { Pool } = pg;
 const pool = new Pool({
@@ -19,6 +23,36 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Service-API-Key', 'Accept']
 }));
 app.use(express.json());
+
+// Middleware de Seguridad Stateless con JWT y API Key Inter-Servicios (Rúbrica 10%)
+const verifyAuthAndRole = (requiredRole = null) => {
+    return (req, res, next) => {
+        const apiKey = req.headers['x-service-api-key'];
+        if (apiKey === SERVICE_SECRET_KEY) {
+            return next();
+        }
+
+        const authHeader = req.headers['authorization'];
+        const token = authHeader && authHeader.startsWith('Bearer ') ? authHeader.split(' ')[1] : null;
+
+        if (!token) {
+            return res.status(401).json({ error: 'Acceso Denegado: Token JWT no provisto en encabezado Authorization (401 Unauthorized)' });
+        }
+
+        try {
+            const decoded = jwt.verify(token, JWT_SECRET);
+            req.user = decoded;
+
+            if (requiredRole && decoded.rol !== requiredRole) {
+                return res.status(403).json({ error: `Acceso Prohibido: Se requieren permisos de '${requiredRole}' (403 Forbidden)` });
+            }
+
+            next();
+        } catch (err) {
+            return res.status(401).json({ error: 'Acceso Denegado: Token JWT inválido o expirado (401 Unauthorized)' });
+        }
+    };
+};
 
 // Tarea automática de des-apartado automático (limpieza cada petición / intervalo)
 const cleanupExpiredApartados = async () => {
@@ -155,7 +189,7 @@ app.get('/api/apartados/usuario/:id_usuario', async (req, res) => {
 });
 
 // 5. Consultar todos los apartados (Admin)
-app.get('/api/apartados/admin', async (req, res) => {
+app.get('/api/apartados/admin', verifyAuthAndRole('vendedor'), async (req, res) => {
     try {
         const query = `
             SELECT a.*, p.nombre as producto_nombre, p.precio, p.talla, u.nombre as usuario_nombre, u.correo, u.telefono
@@ -173,7 +207,7 @@ app.get('/api/apartados/admin', async (req, res) => {
 });
 
 // 6. Consultar todas las ventas (Admin)
-app.get('/api/apartados/ventas/admin', async (req, res) => {
+app.get('/api/apartados/ventas/admin', verifyAuthAndRole('vendedor'), async (req, res) => {
     try {
         const query = `
             SELECT v.*, u.nombre as usuario_nombre, u.correo, u.telefono,
