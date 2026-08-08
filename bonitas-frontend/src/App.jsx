@@ -65,7 +65,12 @@ export default function App() {
         <div className="header-brand-container" onClick={() => { setView('catalog'); setSelectedProduct(null); }}>
           <div className="header-title-row">
             <div className="logo-title-group">
-              <img src="/logo.jpg" alt="Bonitas Fashions Logo" className="app-logo-header" />
+              <img 
+                src="/logo.jpg" 
+                alt="Bonitas Fashions Logo" 
+                className="app-logo-header" 
+                onError={(e) => { e.target.onerror = null; e.target.src = '/favicon.jpg'; }}
+              />
               <h1 className="app-title">Bonitas Fashions</h1>
             </div>
             
