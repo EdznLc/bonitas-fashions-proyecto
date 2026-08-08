@@ -58,6 +58,7 @@ app.get('/api/productos/admin', async (req, res) => {
             SELECT p.*, ep.nombre as estado_nombre 
             FROM producto p
             JOIN estado_producto ep ON p.id_estado = ep.id_estado
+            WHERE p.id_estado = 1
             ORDER BY p.id_producto DESC;
         `;
         const resultado = await pool.query(query);

@@ -485,7 +485,7 @@ export default function SellerDashboard({ API_URL }) {
                   </tr>
                 </thead>
                 <tbody>
-                  {productos.map(p => (
+                  {productos.filter(p => p.id_estado === 1 || p.id_estado === '1').map(p => (
                     <tr key={p.id_producto}>
                       <td>
                         <img

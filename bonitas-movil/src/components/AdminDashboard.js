@@ -377,7 +377,7 @@ export default function AdminDashboard({ user, onLogout, apiUrl }) {
             </View>
           ) : (
             <FlatList
-              data={productos}
+              data={productos.filter(p => p.id_estado === 1 || p.id_estado === '1')}
               keyExtractor={(item) => item.id_producto.toString()}
               renderItem={renderProductoCard}
               contentContainerStyle={styles.listPadding}
