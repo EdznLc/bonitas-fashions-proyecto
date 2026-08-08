@@ -25,6 +25,7 @@ export default function ProductDetail({ API_URL, producto, user, onBack, onNavig
   // Cargar métodos y formas de entrega desde la API
   useEffect(() => {
     const cargarCatalogos = async () => {
+      setErrorModal('');
       try {
         const [resPago, resEntrega] = await Promise.all([
           fetch(`${APAR_URL}/api/apartados/metodos-pago`),
@@ -39,9 +40,12 @@ export default function ProductDetail({ API_URL, producto, user, onBack, onNavig
           
           if (pagos.length > 0) setIdMetodoPago(pagos[0].id_metodo_pago.toString());
           if (entregas.length > 0) setIdTipoEntrega(entregas[0].id_tipo_entrega.toString());
+        } else {
+          setErrorModal('⚠️ El servidor de apartados no está disponible en este momento. No se pueden realizar reservaciones por ahora.');
         }
       } catch (err) {
         console.error('Error al cargar catálogos:', err);
+        setErrorModal('⚠️ No se pudo conectar con el servicio de apartados. El servidor se encuentra fuera de línea.');
       }
     };
     
@@ -234,8 +238,8 @@ export default function ProductDetail({ API_URL, producto, user, onBack, onNavig
                 <button type="button" onClick={() => setShowReservaModal(false)} className="btn-modal-cancel">
                   Cancelar
                 </button>
-                <button type="submit" disabled={cargandoModal} className="btn-modal-submit">
-                  {cargandoModal ? 'Registrando...' : 'Confirmar Apartado'}
+                <button type="submit" disabled={cargandoModal || !!errorModal || metodosPago.length === 0} className="btn-modal-submit">
+                  {cargandoModal ? 'Registrando...' : (errorModal || metodosPago.length === 0) ? 'Servicio No Disponible' : 'Confirmar Apartado'}
                 </button>
               </div>
             </form>
