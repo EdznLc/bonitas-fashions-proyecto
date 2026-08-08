@@ -193,7 +193,7 @@ export default function AdminDashboard({ user, onLogout, apiUrl }) {
   const renderApartadoCard = ({ item }) => {
     const reg = item.fecha_apartado ? new Date(item.fecha_apartado).toLocaleDateString('es-MX') : '-';
     const lim = item.fecha_limite ? new Date(item.fecha_limite).toLocaleDateString('es-MX') : '-';
-    const isExpirado = item.estatus === 'Expirado';
+    const isExpirado = item.estatus === 'Expirado' || item.estatus === 'Cancelado';
     const isCompletado = item.estatus === 'Completado';
 
     return (
@@ -224,6 +224,7 @@ export default function AdminDashboard({ user, onLogout, apiUrl }) {
 
           <Text style={styles.itemPrendaTitle}>Prenda: {item.producto_nombre || item.nombre_producto}</Text>
           <Text style={styles.itemMeta}>Talla: {item.talla}</Text>
+          <Text style={styles.itemMeta}>Pago: {item.metodo_pago_nombre || 'Por acordar'} • Entrega: {item.tipo_entrega_nombre || 'Por acordar'}</Text>
           <Text style={styles.itemPrice}>Monto: ${parseFloat(item.precio || 0).toFixed(2)}</Text>
 
           <Text style={styles.itemDates}>Registro: {reg} | Límite: {lim}</Text>
