@@ -76,41 +76,43 @@ export default function ClientDashboard({ API_URL, user }) {
                       </span>
                       <span className="limite-date">Límite: {limite}</span>
                     </div>
-                    <div style={{ marginTop: '12px' }}>
-                      {(() => {
-                        const mensajeWS = `Hola, quiero coordinar el pago de mi apartado #${a.id_apartado}:\n\n` +
-                          `• Prenda: ${a.nombre}\n` +
-                          `• Precio: $${parseFloat(a.precio).toFixed(2)}\n` +
-                          `• Método de Pago: ${a.metodo_pago_nombre || 'Por acordar'}\n` +
-                          `• Tipo de Entrega: ${a.tipo_entrega_nombre || 'Por acordar'}`;
-                        const phone = import.meta.env.VITE_WHATSAPP_NUMBER || '5216183647752';
-                        const waUrl = `https://wa.me/${phone}?text=${encodeURIComponent(mensajeWS)}`;
+                    {a.estatus === 'Activo' && (
+                      <div style={{ marginTop: '12px' }}>
+                        {(() => {
+                          const mensajeWS = `Hola, quiero coordinar el pago de mi apartado #${a.id_apartado}:\n\n` +
+                            `• Prenda: ${a.nombre}\n` +
+                            `• Precio: $${parseFloat(a.precio).toFixed(2)}\n` +
+                            `• Método de Pago: ${a.metodo_pago_nombre || 'Por acordar'}\n` +
+                            `• Tipo de Entrega: ${a.tipo_entrega_nombre || 'Por acordar'}`;
+                          const phone = import.meta.env.VITE_WHATSAPP_NUMBER || '5216183647752';
+                          const waUrl = `https://wa.me/${phone}?text=${encodeURIComponent(mensajeWS)}`;
 
-                        return (
-                          <a
-                            href={waUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="btn-whatsapp-contact"
-                            style={{
-                              display: 'inline-flex',
-                              alignItems: 'center',
-                              gap: '6px',
-                              backgroundColor: '#25d366',
-                              color: '#ffffff',
-                              padding: '6px 12px',
-                              borderRadius: '6px',
-                              textDecoration: 'none',
-                              fontSize: '11px',
-                              fontWeight: '700',
-                              boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
-                            }}
-                          >
-                            💬 Coordinar pago por WhatsApp
-                          </a>
-                        );
-                      })()}
-                    </div>
+                          return (
+                            <a
+                              href={waUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="btn-whatsapp-contact"
+                              style={{
+                                display: 'inline-flex',
+                                alignItems: 'center',
+                                gap: '6px',
+                                backgroundColor: '#25d366',
+                                color: '#ffffff',
+                                padding: '6px 12px',
+                                borderRadius: '6px',
+                                textDecoration: 'none',
+                                fontSize: '11px',
+                                fontWeight: '700',
+                                boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+                              }}
+                            >
+                              💬 Coordinar pago por WhatsApp
+                            </a>
+                          );
+                        })()}
+                      </div>
+                    )}
                   </div>
                 </div>
               );
