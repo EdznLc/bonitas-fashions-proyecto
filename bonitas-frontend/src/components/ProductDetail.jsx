@@ -41,11 +41,11 @@ export default function ProductDetail({ API_URL, producto, user, onBack, onNavig
           if (pagos.length > 0) setIdMetodoPago(pagos[0].id_metodo_pago.toString());
           if (entregas.length > 0) setIdTipoEntrega(entregas[0].id_tipo_entrega.toString());
         } else {
-          setErrorModal('⚠️ El servidor de apartados no está disponible en este momento. No se pueden realizar reservaciones por ahora.');
+          setErrorModal('El servidor de apartados no está disponible en este momento. No se pueden realizar reservaciones por ahora.');
         }
       } catch (err) {
         console.error('Error al cargar catálogos:', err);
-        setErrorModal('⚠️ No se pudo conectar con el servicio de apartados. El servidor se encuentra fuera de línea.');
+        setErrorModal('No se pudo conectar con el servicio de apartados. El servidor se encuentra fuera de línea.');
       }
     };
     
