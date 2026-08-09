@@ -20,7 +20,7 @@ const app = express();
 app.use(cors({
   origin: '*',
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Service-API-Key', 'Accept']
+  allowedHeaders: ['Content-Type', 'Authorization', 'Accept']
 }));
 app.use(express.json());
 
@@ -116,23 +116,6 @@ app.post('/api/auth/login', async (req, res) => {
     } catch (error) {
         console.error('Error en Auth Service (Login):', error);
         res.status(500).json({ error: 'Ocurrió un error en el servidor de autenticación.' });
-    }
-});
-
-// 3. Verificación de JWT Token
-app.get('/api/auth/verify', (req, res) => {
-    const authHeader = req.headers['authorization'];
-    const token = (authHeader && authHeader.split(' ')[1]) || req.query.token;
-
-    if (!token) {
-        return res.status(401).json({ error: 'Token no provisto (401 Unauthorized)' });
-    }
-
-    try {
-        const decoded = jwt.verify(token, JWT_SECRET);
-        return res.json({ valid: true, user: decoded });
-    } catch (err) {
-        return res.status(401).json({ error: 'Token inválido o expirado (401 Unauthorized)' });
     }
 });
 
