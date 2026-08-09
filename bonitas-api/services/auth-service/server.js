@@ -66,8 +66,7 @@ app.post('/api/auth/register', async (req, res) => {
 
         res.status(201).json({
             ...nuevoUsuario,
-            token,
-            usuario: nuevoUsuario
+            token
         });
     } catch (error) {
         console.error('Error en Auth Service (Register):', error);
@@ -112,8 +111,7 @@ app.post('/api/auth/login', async (req, res) => {
 
         res.json({
             ...usuarioInfo,
-            token,
-            usuario: usuarioInfo
+            token
         });
     } catch (error) {
         console.error('Error en Auth Service (Login):', error);
