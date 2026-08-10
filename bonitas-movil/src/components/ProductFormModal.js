@@ -26,6 +26,7 @@ export default function ProductFormModal({
   productoParaEditar,
   apiUrl,
   estadosList = [],
+  token,
 }) {
   const isEdit = !!productoParaEditar;
 
@@ -120,7 +121,7 @@ export default function ProductFormModal({
 
     setSaving(true);
     try {
-      await saveProducto(apiUrl, productoParaEditar?.id_producto, payload);
+      await saveProducto(apiUrl, productoParaEditar?.id_producto, payload, token);
       Alert.alert(
         '¡Éxito!',
         isEdit ? 'Prenda actualizada con éxito.' : 'Prenda agregada al catálogo.'

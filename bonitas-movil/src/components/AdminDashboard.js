@@ -91,7 +91,7 @@ export default function AdminDashboard({ user, onLogout, apiUrl }) {
           style: 'destructive',
           onPress: async () => {
             try {
-              await deleteProducto(apiUrl, idProducto);
+              await deleteProducto(apiUrl, idProducto, user?.token);
               Alert.alert('¡Éxito!', 'Prenda eliminada con éxito.');
               cargarDatos();
             } catch (err) {
@@ -113,7 +113,7 @@ export default function AdminDashboard({ user, onLogout, apiUrl }) {
           text: 'Completar Compra',
           onPress: async () => {
             try {
-              await completarApartado(apiUrl, idApartado);
+              await completarApartado(apiUrl, idApartado, user?.token);
               Alert.alert('¡Éxito!', '¡Compra completada con éxito! Registrada en la tabla de venta.');
               cargarDatos();
             } catch (err) {
@@ -136,7 +136,7 @@ export default function AdminDashboard({ user, onLogout, apiUrl }) {
           style: 'destructive',
           onPress: async () => {
             try {
-              await cancelarApartado(apiUrl, idApartado, idProducto);
+              await cancelarApartado(apiUrl, idApartado, idProducto, user?.token);
               Alert.alert('¡Éxito!', 'Apartado cancelado y prenda liberada con éxito.');
               cargarDatos();
             } catch (err) {
@@ -461,6 +461,7 @@ export default function AdminDashboard({ user, onLogout, apiUrl }) {
         productoParaEditar={productoEditar}
         apiUrl={apiUrl}
         estadosList={estados}
+        token={user?.token}
       />
     </View>
   );
