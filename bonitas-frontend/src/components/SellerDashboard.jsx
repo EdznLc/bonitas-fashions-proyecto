@@ -248,8 +248,19 @@ export default function SellerDashboard({ API_URL }) {
         setMostrarForm(false);
         cargarProductos();
       } else {
-        const data = await res.json();
-        alert(`Error al guardar: ${data.error}`);
+        const text = await res.text();
+        let errorMsg = 'Error al guardar la prenda.';
+        try {
+          const data = JSON.parse(text);
+          errorMsg = data.error || errorMsg;
+        } catch {
+          if (res.status === 413) {
+            errorMsg = 'El archivo o la imagen es demasiado grande (Excede el límite de peso del servidor HTTP 413).';
+          } else {
+            errorMsg = `Error del servidor (${res.status})`;
+          }
+        }
+        alert(`Error al guardar: ${errorMsg}`);
       }
     } catch (err) {
       console.error(err);
