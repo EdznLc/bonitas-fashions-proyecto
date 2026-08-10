@@ -128,10 +128,14 @@ export const deleteProducto = async (apiUrl, idProducto, token = null) => {
 };
 
 // 8. Completar apartado (Apartados Service - Puerto 5003)
-export const completarApartado = async (apiUrl, idApartado) => {
+export const completarApartado = async (apiUrl, idApartado, token = null) => {
   const baseUrl = apiUrl ? apiUrl.replace(/\/$/, '') : DEFAULT_APARTADOS_URL;
+  const headers = {};
+  if (token) headers['Authorization'] = `Bearer ${token}`;
+
   const response = await fetch(`${baseUrl}/api/apartados/${idApartado}/completar`, {
     method: 'POST',
+    headers
   });
 
   const data = await response.json();
@@ -142,10 +146,14 @@ export const completarApartado = async (apiUrl, idApartado) => {
 };
 
 // 9. Cancelar / Liberar apartado activo (Apartados Service - Puerto 5003)
-export const cancelarApartado = async (apiUrl, idApartado, idProducto) => {
+export const cancelarApartado = async (apiUrl, idApartado, idProducto, token = null) => {
   const baseUrl = apiUrl ? apiUrl.replace(/\/$/, '') : DEFAULT_APARTADOS_URL;
+  const headers = {};
+  if (token) headers['Authorization'] = `Bearer ${token}`;
+
   const response = await fetch(`${baseUrl}/api/apartados/${idApartado}?id_producto=${idProducto}`, {
     method: 'DELETE',
+    headers
   });
 
   const data = await response.json();

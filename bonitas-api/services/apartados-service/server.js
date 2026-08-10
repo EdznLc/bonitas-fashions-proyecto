@@ -102,8 +102,8 @@ app.get('/api/apartados/tipos-entrega', async (req, res) => {
     }
 });
 
-// 3. Crear nuevo apartado
-app.post('/api/apartados', async (req, res) => {
+// 3. Crear nuevo apartado (Requiere estar autenticado)
+app.post('/api/apartados', verifyAuthAndRole(), async (req, res) => {
     const { id_usuario, id_producto, fecha_limite, id_metodo_pago, id_tipo_entrega } = req.body;
 
     if (!id_usuario || !id_producto || !fecha_limite) {
@@ -152,8 +152,8 @@ app.post('/api/apartados', async (req, res) => {
     }
 });
 
-// 4. Consultar apartados del usuario
-app.get('/api/apartados/usuario/:id_usuario', async (req, res) => {
+// 4. Consultar apartados del usuario (Requiere estar autenticado)
+app.get('/api/apartados/usuario/:id_usuario', verifyAuthAndRole(), async (req, res) => {
     const { id_usuario } = req.params;
     try {
         const query = `
@@ -231,8 +231,8 @@ app.get('/api/apartados/ventas/admin', verifyAuthAndRole('vendedor'), async (req
     }
 });
 
-// 7. Liberar / Cancelar apartado activo
-app.delete('/api/apartados/:id', async (req, res) => {
+// 7. Liberar / Cancelar apartado activo (Requiere estar autenticado)
+app.delete('/api/apartados/:id', verifyAuthAndRole(), async (req, res) => {
     const { id } = req.params;
     const { id_producto } = req.query;
 
@@ -268,8 +268,8 @@ app.delete('/api/apartados/:id', async (req, res) => {
     }
 });
 
-// 8. Completar compra a partir de apartado
-app.post('/api/apartados/:id/completar', async (req, res) => {
+// 8. Completar compra a partir de apartado (Requiere rol vendedor/admin)
+app.post('/api/apartados/:id/completar', verifyAuthAndRole('vendedor'), async (req, res) => {
     const { id } = req.params;
     const client = await pool.connect();
     try {

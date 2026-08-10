@@ -100,8 +100,8 @@ app.get('/api/productos/estados', async (req, res) => {
     }
 });
 
-// 4. Agregar nueva prenda
-app.post('/api/productos', async (req, res) => {
+// 4. Agregar nueva prenda (Protegido para vendedores/admin)
+app.post('/api/productos', verifyAuthAndRole('vendedor'), async (req, res) => {
     const { nombre, descripcion, precio, talla, marca, condicion, url_imagen, id_estado } = req.body;
     
     if (!nombre || precio === undefined || !talla || !id_estado) {
@@ -132,8 +132,8 @@ app.post('/api/productos', async (req, res) => {
     }
 });
 
-// 5. Modificar prenda / Actualizar estado
-app.put('/api/productos/:id', async (req, res) => {
+// 5. Modificar prenda / Actualizar estado (Protegido para vendedores/admin)
+app.put('/api/productos/:id', verifyAuthAndRole('vendedor'), async (req, res) => {
     const { id } = req.params;
     const { nombre, descripcion, precio, talla, marca, condicion, url_imagen, id_estado } = req.body;
     
@@ -171,8 +171,8 @@ app.put('/api/productos/:id', async (req, res) => {
     }
 });
 
-// 6. Eliminar prenda
-app.delete('/api/productos/:id', async (req, res) => {
+// 6. Eliminar prenda (Protegido para vendedores/admin)
+app.delete('/api/productos/:id', verifyAuthAndRole('vendedor'), async (req, res) => {
     const { id } = req.params;
     try {
         const query = 'DELETE FROM producto WHERE id_producto = $1 RETURNING *;';

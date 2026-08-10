@@ -110,7 +110,8 @@ export default function SellerDashboard({ API_URL }) {
 
     try {
       const res = await fetch(`${APAR_URL}/api/apartados/${idApartado}/completar`, {
-        method: 'POST'
+        method: 'POST',
+        headers: getAuthHeaders()
       });
 
       if (res.ok) {
@@ -135,7 +136,8 @@ export default function SellerDashboard({ API_URL }) {
     
     try {
       const res = await fetch(`${APAR_URL}/api/apartados/${idApartado}?id_producto=${idProducto}`, {
-        method: 'DELETE'
+        method: 'DELETE',
+        headers: getAuthHeaders()
       });
       
       if (res.ok) {
@@ -234,7 +236,10 @@ export default function SellerDashboard({ API_URL }) {
 
       const res = await fetch(url, {
         method,
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Content-Type': 'application/json',
+          ...getAuthHeaders()
+        },
         body: JSON.stringify(formProducto)
       });
 
@@ -259,7 +264,8 @@ export default function SellerDashboard({ API_URL }) {
 
     try {
       const res = await fetch(`${PROD_URL}/api/productos/${id}`, {
-        method: 'DELETE'
+        method: 'DELETE',
+        headers: getAuthHeaders()
       });
 
       if (res.ok) {

@@ -60,9 +60,13 @@ export default function ProductDetail({ API_URL, producto, user, onBack, onNavig
     setCargandoModal(true);
 
     try {
+      const token = user?.token || JSON.parse(localStorage.getItem('user') || '{}')?.token;
       const res = await fetch(`${APAR_URL}/api/apartados`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Content-Type': 'application/json',
+          ...(token ? { 'Authorization': `Bearer ${token}` } : {})
+        },
         body: JSON.stringify({
           id_usuario: user.id_usuario,
           id_producto: producto.id_producto,

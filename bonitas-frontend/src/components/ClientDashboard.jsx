@@ -11,7 +11,10 @@ export default function ClientDashboard({ API_URL, user }) {
 
   const cargarApartados = async () => {
     try {
-      const res = await fetch(`${APAR_URL}/api/apartados/usuario/${user.id_usuario}`);
+      const token = user?.token || JSON.parse(localStorage.getItem('user') || '{}')?.token;
+      const res = await fetch(`${APAR_URL}/api/apartados/usuario/${user.id_usuario}`, {
+        headers: token ? { 'Authorization': `Bearer ${token}` } : {}
+      });
       if (res.ok) {
         const data = await res.json();
         setApartados(data);
